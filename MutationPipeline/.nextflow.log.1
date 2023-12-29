@@ -1,0 +1,65 @@
+Dec-29 14:28:34.769 [main] DEBUG nextflow.cli.Launcher - $> nextflow run MutationPipeline.nf
+Dec-29 14:28:34.912 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.0
+Dec-29 14:28:34.942 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/samuel/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.2,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.0
+Dec-29 14:28:34.958 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Dec-29 14:28:34.959 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Dec-29 14:28:34.964 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Dec-29 14:28:34.980 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Dec-29 14:28:35.092 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 by global default
+Dec-29 14:28:35.120 [main] INFO  nextflow.cli.CmdRun - Launching `MutationPipeline.nf` [elegant_colden] DSL2 - revision: f778e0d112
+Dec-29 14:28:35.121 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Dec-29 14:28:35.121 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Dec-29 14:28:35.135 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/samuel/.nextflow/secrets/store.json
+Dec-29 14:28:35.160 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@38eb2c50] - activable => nextflow.secret.LocalSecretsProvider@38eb2c50
+Dec-29 14:28:35.260 [main] DEBUG nextflow.Session - Session UUID: d858267a-af4e-4e19-b015-aebc6dbf7e92
+Dec-29 14:28:35.260 [main] DEBUG nextflow.Session - Run name: elegant_colden
+Dec-29 14:28:35.263 [main] DEBUG nextflow.Session - Executor pool size: 4
+Dec-29 14:28:35.273 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Dec-29 14:28:35.280 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Dec-29 14:28:35.318 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.0 build 5889
+  Created: 15-10-2023 15:07 UTC (12:07 BRST)
+  System: Linux 6.2.0-39-generic
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.13+7-b1751.21
+  Encoding: UTF-8 (UTF-8)
+  Process: 97567@schagaspc [127.0.1.1]
+  CPUs: 4 - Mem: 15.5 GB (2.6 GB) - Swap: 2 GB (1.9 GB)
+Dec-29 14:28:35.347 [main] DEBUG nextflow.Session - Work-dir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work [ext2/ext3]
+Dec-29 14:28:35.348 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/bin
+Dec-29 14:28:35.362 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Dec-29 14:28:35.377 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Dec-29 14:28:35.411 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Dec-29 14:28:35.425 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Dec-29 14:28:35.516 [main] DEBUG nextflow.Session - Session start
+Dec-29 14:28:36.394 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Dec-29 14:28:36.516 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Dec-29 14:28:36.516 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Dec-29 14:28:36.524 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Dec-29 14:28:36.531 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.5 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Dec-29 14:28:36.535 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Dec-29 14:28:36.755 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Dec-29 14:28:36.756 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Dec-29 14:28:36.783 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: convertToUpper, splitLetters
+Dec-29 14:28:36.784 [main] DEBUG nextflow.Session - Igniting dataflow network (2)
+Dec-29 14:28:36.784 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > splitLetters
+Dec-29 14:28:36.786 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > convertToUpper
+Dec-29 14:28:36.789 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_5fff74945b354a1a: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/MutationPipeline.nf
+Dec-29 14:28:36.789 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Dec-29 14:28:36.789 [main] DEBUG nextflow.Session - Session await
+Dec-29 14:28:36.971 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Dec-29 14:28:36.976 [Task submitter] INFO  nextflow.Session - [80/5a2345] Submitted process > splitLetters
+Dec-29 14:28:37.001 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: splitLetters; status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/80/5a2345d9be27a1bd25988627391df7]
+Dec-29 14:28:37.078 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Dec-29 14:28:37.081 [Task submitter] INFO  nextflow.Session - [af/29daaf] Submitted process > convertToUpper (2)
+Dec-29 14:28:37.087 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Dec-29 14:28:37.093 [Task submitter] INFO  nextflow.Session - [de/bc2eb9] Submitted process > convertToUpper (1)
+Dec-29 14:28:37.191 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: convertToUpper (2); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/af/29daaf37ee9013d634cd7038324f1e]
+Dec-29 14:28:37.223 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/de/bc2eb9034f152a0ea5e0827b30f1c7]
+Dec-29 14:28:37.227 [main] DEBUG nextflow.Session - Session await > all processes finished
+Dec-29 14:28:37.239 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Dec-29 14:28:37.240 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Dec-29 14:28:37.249 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=3; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=14ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Dec-29 14:28:37.400 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Dec-29 14:28:37.416 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Dec-29 14:28:37.417 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

@@ -1,0 +1,7 @@
+2023-12-29 14:17:35	2.3s	marvelous_laplace	OK	f778e0d112d43137fef6062b8c58e8e9	35c39992-c034-4011-b3a0-2920470d5f46	nextflow run MutationPipeline.nf
+2023-12-29 14:18:39	2.1s	modest_curran	OK	f778e0d112d43137fef6062b8c58e8e9	7141dc8a-4221-454f-ba65-34ff19f13f0b	nextflow run MutationPipeline.nf
+2023-12-29 14:23:05	3.2s	nostalgic_gautier	OK	f778e0d112d43137fef6062b8c58e8e9	b60a063b-ec19-4f56-8b00-000e2402c2b3	nextflow run MutationPipeline.nf
+2023-12-29 14:26:38	2.6s	curious_swanson	OK	f778e0d112d43137fef6062b8c58e8e9	23c624f3-00d9-4aed-9029-ff0a3f31cc91	nextflow run MutationPipeline.nf
+2023-12-29 14:28:14	2.8s	voluminous_thompson	OK	f778e0d112d43137fef6062b8c58e8e9	a3e42c22-e212-4885-9359-5edecfe9cfee	nextflow run MutationPipeline.nf
+2023-12-29 14:28:35	2.4s	elegant_colden	OK	f778e0d112d43137fef6062b8c58e8e9	d858267a-af4e-4e19-b015-aebc6dbf7e92	nextflow run MutationPipeline.nf
+2023-12-29 14:30:15	2.2s	determined_rosalind	OK	f778e0d112d43137fef6062b8c58e8e9	586098eb-b8ca-4165-a3ba-e536b0ab77ce	nextflow run MutationPipeline.nf
