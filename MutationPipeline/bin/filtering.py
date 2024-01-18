@@ -4,6 +4,7 @@ from Bio import SeqIO
 from collections import defaultdict
 import os
 import argparse
+import pandas as pd
 
 def calculate_n_percentage(sequence):
     
@@ -26,7 +27,7 @@ def mkdir_lineage(lineage):
     
     return path
 
-def find_representatives(input_fasta, percentage):
+def find_representatives(input_fasta, percentage, number_sequences):
     lineages = defaultdict(list)
     
     try:
@@ -37,10 +38,8 @@ def find_representatives(input_fasta, percentage):
         
         if not lineages:
             raise ValueError("No sequences found in the input FASTA file.")
-
-        # Write representatives to the output FASTA file
         
-        list_of_output=[]
+        metadata=[]
         for lineage, sequences in lineages.items():
             # Find the sequence with the smallest number of 'N' nucleotides
             # and lower than percentage% 'N' nucleotides
@@ -51,21 +50,30 @@ def find_representatives(input_fasta, percentage):
                 
                 if n_percentage < percentage:
                     representatives.append(seq)
+                    
 
             # Check if representatives (more than 2) was found and print its name
-            if not representatives or len(representatives) < 2:
+            if not representatives or len(representatives) <= number_sequences:
                 print("No representatives found:", lineage)
             
             else: 
-                print("Representatives found:", lineage)
+                print("------ Representatives found:", lineage)
+                print("-- Number of representatives:", len(representatives))
                 dir_lineage = mkdir_lineage(lineage)
                 fasta_path= os.path.join(dir_lineage, f"{lineage}.fasta")
 
                 # Write the representative to the output file
                 SeqIO.write(representatives, fasta_path, "fasta")
 
-            list_of_output.append(f"{lineage}.fasta")
+                # Get metadata from seq.records
+                for seq in representatives:
 
+                    id = seq.description.split('|')[2]
+                    detect_date = seq.description.split('|')[3]
+                    metadata.append([lineage, id, detect_date])
+
+        # Write metadata csv file
+        pd.DataFrame(metadata, columns=['Lineage', 'ID', 'Date']).to_csv('metadata_info.csv', index=False)
 
     except FileNotFoundError:
         print(f"Error: The input file '{input_fasta}' was not found.")
@@ -80,13 +88,16 @@ if __name__ == "__main__":
         parser = argparse.ArgumentParser(description="Separa as sequências por linhagens e exclui sequências com %<perc_n .")
         parser.add_argument("--input_fasta", default="input.fasta", help="Input FASTA file")
         parser.add_argument("--perc_n",  type=float, default=5, help="N percentage")
+        parser.add_argument("--minimum",  type=float, default=2, help="Minimum of sequences")
         args = parser.parse_args()
 
         input_fasta = args.input_fasta
         N_perc_threshold = args.perc_n
+        number_sequences = args.minimum
 
         result = find_representatives(input_fasta, 
-                                      N_perc_threshold)
+                                      N_perc_threshold,
+                                      number_sequences)
 
     except KeyboardInterrupt:
         print("\nProcess interrupted by the user.")

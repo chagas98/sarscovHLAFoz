@@ -13,7 +13,6 @@
 
 #renv::restore() #Use this command to install renv and dependencies to run this code
 print(getwd())
-#source('renv/activate.R')
 
 #Load R Packages
 requiredPackages <- c("renv", "devtools", "readr", "GISAIDR")
@@ -44,14 +43,14 @@ if (length(command_line_args) == 0) {
 
 # Access the first argument (assuming it's the variable you want)
 renviron <- command_line_args[1]
+start_date <- command_line_args[2]
+end_date <- command_line_args[3]
+city_name <- command_line_args[4]
 
 # Credentials
 readRenviron(renviron)
 username = Sys.getenv("GISAIDR_USERNAME")
 password = Sys.getenv("GISAIDR_PASSWORD")
-
-print(username)
-print(password)
 
 # GISAID Login 
 credentials <- login(username = username, 
@@ -61,12 +60,13 @@ credentials <- login(username = username,
 # Query
 gisaid_ids <- query(
   credentials = credentials,
-  location = "Foz do Iguacu",
-  from_subm = "2020-01-01",
-  to_subm = "2023-01-01",
+  location = city_name,
+  from_subm = start_date,
+  to_subm = end_date,
   fast = TRUE
 )
 
+print(gisaid_ids)
 # Output
 full_df <- download(credentials = credentials, 
                     list_of_accession_ids = gisaid_ids$accession_id)
