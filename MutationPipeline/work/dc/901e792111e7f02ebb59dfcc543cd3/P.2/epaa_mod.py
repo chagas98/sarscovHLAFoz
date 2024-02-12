@@ -559,6 +559,9 @@ def create_mutationsyntax_genome_column_value(pep, pep_dictionary):
 def create_gene_column_value(pep, pep_dictionary):
     return ",".join(set([variant.gene for variant in set(pep_dictionary[pep])]))
 
+def create_reference_column_value(pep, ref):
+    return ref if sum(aa1 != aa2 for aa1, aa2 in zip(pep, ref)) <= 1 and len(pep) == len(ref) else '-'
+    
 
 def create_variant_pos_column_value(pep, pep_dictionary):
     return ",".join(set(["{}".format(variant.genomePos) for variant in set(pep_dictionary[pep])]))
@@ -1209,11 +1212,13 @@ def generate_peptides_from_proteins_gb(proteins, window_size, peptides=None):
 
         seq = str(protein)
         refseq = str(protein.reference)
+
         for i in range(len(protein)+1-window_size):
             # generate peptide fragment
             end = i+window_size
             pep_seq = seq[i:end]
             ref_pep_seq = refseq[i:end]
+
             res.append((pep_seq, ref_pep_seq, i))
         
         return res
@@ -1241,11 +1246,14 @@ def generate_peptides_from_proteins_gb(proteins, window_size, peptides=None):
                 t_id = prot.transcript_id
                 if seq not in final_peptides:
                     pep_seq = Peptide(seq)
-                    pep_seq.reference = ref
+                    pep_seq.reference = Peptide(ref)
                     final_peptides[seq] = pep_seq
+
                 final_peptides[seq].proteins[t_id] = prot
                 final_peptides[seq].proteinPos[t_id].append(pos)
-    
+
+                #print(final_peptides.values())
+
     return iter(final_peptides.values())
 
 def make_predictions_from_variants(
@@ -1282,7 +1290,6 @@ def make_predictions_from_variants(
     for peplen in range(minlength, maxlength):
         peptide_gen = generate_peptides_from_proteins_gb(prots, peplen)
         print('PEPTIDE ---------------------')
-        print(peptide_gen)
         peptides_var = [x for x in peptide_gen]
         peptides = [p for p in peptides_var if is_created_by_variant(p)]
 
@@ -1292,39 +1299,56 @@ def make_predictions_from_variants(
 
         all_peptides = all_peptides + peptides
         all_peptides_filtered = all_peptides_filtered + filtered_peptides
-
+     
         results = []
-
+        results_ref = []
+        references = []
+        #print(filtered_peptides)
         if len(filtered_peptides) > 0:
             for method, version in methods.items():
                 try:
                     predictor = EpitopePredictorFactory(method, version=version)
                     results.extend([predictor.predict(filtered_peptides, alleles=alleles)])
+                    references.extend([ref.reference for ref in filtered_peptides])
+
+                    results_ref.extend([predictor.predict(references, alleles=alleles)])
                 except:
                     logger.warning(
                         "Prediction for length {length} and allele {allele} not possible with {method} version {version}.".format(
                             length=peplen, allele=",".join([str(a) for a in alleles]), method=method, version=version
                         )
                     )
-
+        
         # merge dataframes for multiple predictors
         if len(results) > 1:
+            print('ok')
             df = results[0].merge_results(results[1:])
         elif len(results) == 1:
+            print('okk')
             df = results[0]
+            df_ref = results_ref[0]
         else:
+            print('okkk')
             continue
+        
         df = pd.concat(results)
-
+        df_ref = pd.concat(results_ref)
+      
         # create method index and remove it from multi-column
         df = df.stack(level=1)
+        df_ref = df_ref.stack(level=1)
 
         # merge remaining multi-column Allele and ScoreType
         df.columns = df.columns.map("{0[0]} {0[1]}".format)
+        df_ref.columns = df.columns.map("{0[0]} {0[1]}".format)
 
         # reset index to have indices as columns
         df.reset_index(inplace=True)
+        df_ref.reset_index(inplace=True)
         df = df.rename(columns={"Method": "method", "Peptides": "sequence"})
+        df_ref = df_ref.rename(columns={"Method": "method", "Peptides": "sequence"})
+        
+        print(df_ref)
 
         for a in alleles:
             conv_allele = "%s_%s%s" % (a.locus, a.supertype, a.subtype)
@@ -1348,6 +1372,11 @@ def make_predictions_from_variants(
         )
         df["variant details (protein)"] = df["sequence"].map(
             lambda x: create_mutationsyntax_column_value(x, pep_to_variants)
+        )
+        #TODO verificar affinity and score
+        #TODO calcular para refseq
+        df['refseq'] = df.index.map(
+            lambda i: create_reference_column_value(df.at[i, 'sequence'], references[i])
         )
 
         for c in df.columns:
@@ -1720,6 +1749,7 @@ def __main__():
         )
         columns_tiles = [
             "sequence",
+            "refseq",
             "wt sequence",
             "length",
             "chr",
@@ -1734,6 +1764,7 @@ def __main__():
     else:
         columns_tiles = [
             "sequence",
+            "refseq",
             "length",
             "chr",
             "pos",
