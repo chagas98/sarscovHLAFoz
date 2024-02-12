@@ -1306,12 +1306,14 @@ def make_predictions_from_variants(
         #print(filtered_peptides)
         if len(filtered_peptides) > 0:
             for method, version in methods.items():
+                
+                references.extend([ref.reference for ref in filtered_peptides])
+
                 try:
                     predictor = EpitopePredictorFactory(method, version=version)
                     results.extend([predictor.predict(filtered_peptides, alleles=alleles)])
-                    references.extend([ref.reference for ref in filtered_peptides])
-
                     results_ref.extend([predictor.predict(references, alleles=alleles)])
+
                 except:
                     logger.warning(
                         "Prediction for length {length} and allele {allele} not possible with {method} version {version}.".format(
@@ -1323,6 +1325,7 @@ def make_predictions_from_variants(
         if len(results) > 1:
             print('ok')
             df = results[0].merge_results(results[1:])
+            df_ref = results_ref[0].merge_results(results_ref[1:])
         elif len(results) == 1:
             print('okk')
             df = results[0]
@@ -1340,15 +1343,17 @@ def make_predictions_from_variants(
 
         # merge remaining multi-column Allele and ScoreType
         df.columns = df.columns.map("{0[0]} {0[1]}".format)
-        df_ref.columns = df.columns.map("{0[0]} {0[1]}".format)
+        df_ref.columns = df_ref.columns.map("{0[0]} {0[1]}".format)
 
         # reset index to have indices as columns
         df.reset_index(inplace=True)
-        df_ref.reset_index(inplace=True)
         df = df.rename(columns={"Method": "method", "Peptides": "sequence"})
-        df_ref = df_ref.rename(columns={"Method": "method", "Peptides": "sequence"})
         
-        print(df_ref)
+        
+        df_ref.reset_index(inplace=True)
+        df_ref = df_ref.rename(columns={"Method": "method", "Peptides": "refseq"})
+        #df_ref.columns = [str(col) + '_refseq' if col != 'refseq' else col for col in df_ref.columns]
+        #df = df.add_suffix('_refseq')
 
         for a in alleles:
             conv_allele = "%s_%s%s" % (a.locus, a.supertype, a.subtype)
@@ -1356,7 +1361,7 @@ def make_predictions_from_variants(
             max_values_matrices["%s_%i" % (conv_allele, peplen)] = get_matrix_max_score(conv_allele, peplen)
 
         pep_to_variants = create_peptide_variant_dictionary(df["sequence"].tolist())
-        #print(pep_to_variants)
+
         df["length"] = df["sequence"].map(len)
         df["chr"] = df["sequence"].map(lambda x: create_variant_chr_column_value(x, pep_to_variants))
         df["pos"] = df["sequence"].map(lambda x: create_variant_pos_column_value(x, pep_to_variants))
@@ -1376,17 +1381,29 @@ def make_predictions_from_variants(
         #TODO verificar affinity and score
         #TODO calcular para refseq
         df['refseq'] = df.index.map(
-            lambda i: create_reference_column_value(df.at[i, 'sequence'], references[i])
-        )
+            lambda i: create_reference_column_value(df.at[i, 'sequence'], references[i]))
+        
+
+        print(df_ref.columns)
+        print(df.columns)
+        df = pd.merge(df, df_ref, on="refseq", how="left", suffixes=('', '_refseq'))
+
+        df.to_csv("ref_result.tsv")
 
         for c in df.columns:
             if ("HLA-" in str(c) or "H-2-" in str(c)) and "Score" in str(c):
                 idx = df.columns.get_loc(c)
                 allele = c.rstrip(" Score")
+
+                add_str = ""
+                if "refseq" in str(c):
+                    allele = c.rstrip(" Score_refseq")
+                    add_str = "_refseq"
+
                 df[c] = df[c].round(4)
                 df.insert(
                     idx + 1,
-                    "%s affinity" % allele,
+                    "%s affinity%s" % (allele, add_str),
                     df.apply(
                         lambda x: create_affinity_values(
                             allele, int(x["length"]), float(x[c]), x["method"], max_values_matrices, allele_string_map
@@ -1394,9 +1411,10 @@ def make_predictions_from_variants(
                         axis=1,
                     ),
                 )
+
                 df.insert(
                     idx + 2,
-                    "%s binder" % allele,
+                    "%s binder%s" % (allele, add_str),
                     df.apply(
                         lambda x: create_binder_values(float(x["%s Rank" % allele]), x["method"], tool_thresholds)
                         if "netmhc" in x["method"] and not use_affinity_thresholds
@@ -1404,6 +1422,15 @@ def make_predictions_from_variants(
                         axis=1,
                     ),
                 )
+
+                alleles_binders = df.columns[df.columns.str.contains(f'{allele} binder', regex = False)]
+                if len(alleles_binders) == 2:
+                    
+                    df.insert(
+                        idx + 4,
+                        f"{allele} binder_changes" ,
+                        df[f'{allele} binder'] != df[f'{allele} binder_refseq'])          
+
 
         df.columns = df.columns.str.replace("Score", "score")
         df.columns = df.columns.str.replace("Rank", "rank")
@@ -1611,6 +1638,15 @@ def __main__():
         "--ligandomics_id",
         help="Comma separated file with peptide sequence, score and median intensity of a ligandomics identification run.",
     )
+
+    parser.add_argument(
+        "-var",
+        "--variant_lineage",
+        required=False,
+        default="Unknown",
+        help="Variant lineage",
+    )
+
     parser.add_argument("-v", "--version", help="Script version", action="version", version=VERSION)
     args = parser.parse_args()
 
@@ -1629,7 +1665,7 @@ def __main__():
     metadata = []
     proteins = []
     #references = {"GRCh37": "https://feb2014.archive.ensembl.org", "GRCh38": "http://apr2018.archive.ensembl.org"}
-    references = {"GRCh38": "http://jul2023.archive.ensembl.org", "COVID": "https://covid-19.ensembl.org"}
+    references = {"GRCh38": "http://jul2023.archive.ensembl.org"}
     global transcriptProteinMap
     global transcriptSwissProtMap
 
@@ -1732,6 +1768,7 @@ def __main__():
         complete_df = pd.concat(pred_dataframes, sort=True)
         # replace method names with method names with version
         complete_df["method"] = complete_df["method"].apply(lambda x: x.lower() + "-" + methods[x.lower()])
+        complete_df["variant_lineage"] = args.variant_lineage
         predictions_available = True
     except:
         complete_df = pd.DataFrame()
@@ -1778,8 +1815,11 @@ def __main__():
     for c in complete_df.columns:
         if c not in columns_tiles:
             columns_tiles.append(c)
+            
     complete_df = complete_df.reindex(columns=columns_tiles)
 
+    #TODO checar se nao ta pegando de refseq
+    #TODO fazer para binder_changes
     binder_cols = [col for col in complete_df.columns if "binder" in col]
 
     binders = []
