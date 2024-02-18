@@ -135,3 +135,28 @@ process RUN_ANNOT_SNPEFF {
     snpEff ann -v -c snpEff.config -csvStats annotated_vcf_ann.csv -s annotated_vcf_ann.html $snpeff_db ../$input > ${input.baseName}.snpeff.vcf
     """
 }
+
+
+process RUN_EPYTOPE_PREDICTION {
+
+    input:
+    path folder
+    path input
+    path versions
+
+    output:
+    path "**.csv", emit: csv
+
+    script:
+    """
+    
+    cd ${folder.baseName}
+
+    mkdir -p prediction
+
+    cd prediction
+
+    # Run epaa_mod.py to predict epitope for the input VCF file    
+    epaa_mod.py --identifier ${input.baseName} --alleles 'A*01:01;A*02:01' --tools 'netmhcpan-4.1' --max_length 15 --min_length 12 --versions $versions --variant_lineage ${input.baseName} --somatic_mutation $input
+    """
+}

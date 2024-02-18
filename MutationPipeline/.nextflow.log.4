@@ -1,0 +1,236 @@
+Feb-17 23:07:05.435 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf --resume
+Feb-17 23:07:05.790 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Feb-17 23:07:05.861 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/samuel/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Feb-17 23:07:05.887 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Feb-17 23:07:05.889 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Feb-17 23:07:05.905 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Feb-17 23:07:05.954 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Feb-17 23:07:05.998 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/nextflow.config
+Feb-17 23:07:06.000 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/nextflow.config
+Feb-17 23:07:06.038 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Feb-17 23:07:08.021 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Feb-17 23:07:08.061 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [admiring_lalande] DSL2 - revision: 26b99e1795
+Feb-17 23:07:08.062 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Feb-17 23:07:08.062 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Feb-17 23:07:08.084 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/samuel/.nextflow/secrets/store.json
+Feb-17 23:07:08.092 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@36baa049] - activable => nextflow.secret.LocalSecretsProvider@36baa049
+Feb-17 23:07:08.249 [main] DEBUG nextflow.Session - Session UUID: 308b7739-0d6b-45e2-a8ac-1645575389f3
+Feb-17 23:07:08.249 [main] DEBUG nextflow.Session - Run name: admiring_lalande
+Feb-17 23:07:08.250 [main] DEBUG nextflow.Session - Executor pool size: 4
+Feb-17 23:07:08.265 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Feb-17 23:07:08.275 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Feb-17 23:07:08.367 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.1 build 5891
+  Created: 12-01-2024 22:01 UTC (20:01 BRST)
+  System: Linux 6.5.0-18-generic
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.1+13-LTS
+  Encoding: UTF-8 (UTF-8)
+  Process: 133500@schagaspc [127.0.1.1]
+  CPUs: 4 - Mem: 15.5 GB (207 MB) - Swap: 2 GB (2 GB)
+Feb-17 23:07:08.422 [main] DEBUG nextflow.Session - Work-dir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work [ext2/ext3]
+Feb-17 23:07:08.482 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Feb-17 23:07:08.566 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Feb-17 23:07:08.652 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Feb-17 23:07:08.682 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Feb-17 23:07:08.824 [main] DEBUG nextflow.Session - Session start
+Feb-17 23:07:09.327 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Feb-17 23:07:10.072 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_GISAID_SEQUENCES|GET_REFSEQ_SARS` matches process GET_REFSEQ_SARS
+Feb-17 23:07:10.106 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-17 23:07:10.106 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-17 23:07:10.121 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Feb-17 23:07:10.129 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.5 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Feb-17 23:07:10.134 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Feb-17 23:07:10.400 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_GISAID_SEQUENCES|GET_REFSEQ_SARS` matches process GET_GISAID_SEQUENCES
+Feb-17 23:07:10.407 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-17 23:07:10.409 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-17 23:07:10.437 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF|RUN_EPYTOPE_PREDICTION` matches process SELECT_BY_LINEAGE
+Feb-17 23:07:10.445 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-17 23:07:10.446 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-17 23:07:10.564 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF|RUN_EPYTOPE_PREDICTION` matches process RUN_MAPPING_MINIMAP2
+Feb-17 23:07:10.567 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-17 23:07:10.568 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-17 23:07:10.601 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF|RUN_EPYTOPE_PREDICTION` matches process VARIANT_CALLER
+Feb-17 23:07:10.609 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-17 23:07:10.610 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-17 23:07:10.621 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF|RUN_EPYTOPE_PREDICTION` matches process RUN_ANNOT_SNPEFF
+Feb-17 23:07:10.626 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-17 23:07:10.627 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-17 23:07:10.652 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF|RUN_EPYTOPE_PREDICTION` matches process RUN_EPYTOPE_PREDICTION
+Feb-17 23:07:10.658 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-17 23:07:10.658 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-17 23:07:10.675 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: GET_REFSEQ_SARS, SELECT_BY_LINEAGE, VARIANT_CALLER, RUN_MAPPING_MINIMAP2, RUN_EPYTOPE_PREDICTION, RUN_ANNOT_SNPEFF, GET_GISAID_SEQUENCES
+Feb-17 23:07:10.677 [main] DEBUG nextflow.Session - Igniting dataflow network (7)
+Feb-17 23:07:10.678 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_REFSEQ_SARS
+Feb-17 23:07:10.686 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_GISAID_SEQUENCES
+Feb-17 23:07:10.691 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SELECT_BY_LINEAGE
+Feb-17 23:07:10.692 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_MAPPING_MINIMAP2
+Feb-17 23:07:10.693 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > VARIANT_CALLER
+Feb-17 23:07:10.694 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_ANNOT_SNPEFF
+Feb-17 23:07:10.698 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_EPYTOPE_PREDICTION
+Feb-17 23:07:10.699 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_04ede5adcd37b624: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/main.nf
+  Script_1d45d1f1a8da58dc: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/./modules.nf
+Feb-17 23:07:10.699 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Feb-17 23:07:10.700 [main] DEBUG nextflow.Session - Session await
+Feb-17 23:07:11.080 [Actor Thread 7] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/home/samuel/anaconda3/envs/TCC; path=/home/samuel/anaconda3/envs/TCC
+Feb-17 23:07:11.287 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-17 23:07:11.290 [Task submitter] INFO  nextflow.Session - [6e/426467] Submitted process > GET_GISAID_SEQUENCES
+Feb-17 23:07:11.300 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-17 23:07:11.312 [Task submitter] INFO  nextflow.Session - [31/2dbdd9] Submitted process > GET_REFSEQ_SARS
+Feb-17 23:07:17.972 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: GET_REFSEQ_SARS; status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/31/2dbdd974e04570624dcaef767a1152]
+Feb-17 23:07:18.011 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Feb-17 23:08:59.799 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: GET_GISAID_SEQUENCES; status: COMPLETED; exit: 1; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/426467cfba2f758c393249f5cfad7a]
+Feb-17 23:08:59.806 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=GET_GISAID_SEQUENCES; work-dir=/home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/426467cfba2f758c393249f5cfad7a
+  error [nextflow.exception.ProcessFailedException]: Process `GET_GISAID_SEQUENCES` terminated with an error exit status (1)
+Feb-17 23:08:59.826 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'GET_GISAID_SEQUENCES'
+
+Caused by:
+  Process `GET_GISAID_SEQUENCES` terminated with an error exit status (1)
+
+Command executed:
+
+  # Run the getvariants.R script using the provided renviron file, start-to-end date and city name
+  
+  getvariants.R .Renviron 2020-01-01 2023-01-01 Foz do Iguacu
+
+Command exit status:
+  1
+
+Command output:
+  [1] "/home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/426467cfba2f758c393249f5cfad7a"
+
+Command error:
+  [1] "/home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/426467cfba2f758c393249f5cfad7a"
+  Loading required package: renv
+  
+  Attaching package: ‘renv’
+  
+  The following objects are masked from ‘package:stats’:
+  
+      embed, update
+  
+  The following objects are masked from ‘package:utils’:
+  
+      history, upgrade
+  
+  The following objects are masked from ‘package:base’:
+  
+      autoload, load, remove
+  
+  Loading required package: devtools
+  Loading required package: usethis
+  
+  Attaching package: ‘devtools’
+  
+  The following object is masked from ‘package:renv’:
+  
+      install
+  
+  Loading required package: readr
+  Loading required package: GISAIDR
+  
+  Attaching package: ‘GISAIDR’
+  
+  The following object is masked from ‘package:utils’:
+  
+      timestamp
+  
+  Warning message:
+  package ‘usethis’ was built under R version 4.2.3 
+  Error in send_request(method = "POST", data = data) : Server error!
+  Calls: login -> send_request
+  In addition: Warning message:
+  In send_request(method = "POST", data = data) :
+    An error occurred while trying to POST https://www.epicov.org/epi3/frontend?
+  Execution halted
+
+Work dir:
+  /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/426467cfba2f758c393249f5cfad7a
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+Feb-17 23:08:59.867 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Process `GET_GISAID_SEQUENCES` terminated with an error exit status (1)
+Feb-17 23:08:59.870 [main] DEBUG nextflow.Session - Session await > all processes finished
+Feb-17 23:08:59.942 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Feb-17 23:08:59.950 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Feb-17 23:08:59.957 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=6.6s; failedDuration=1m 48s; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Feb-17 23:09:00.110 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Feb-17 23:09:00.154 [main] WARN  nextflow.util.HistoryFile - Can't update history file: .nextflow/history
+java.lang.AssertionError: Duration unit cannot be a negative number. Expression: (duration >= 0). Values: duration = -3487881
+	at org.codehaus.groovy.runtime.InvokerHelper.assertFailed(InvokerHelper.java:434)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.assertFailed(ScriptBytecodeAdapter.java:670)
+	at nextflow.util.Duration.<init>(Duration.groovy:72)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:105)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:59)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at nextflow.util.HistoryFile$_update0_closure3.doCall(HistoryFile.groovy:95)
+	at jdk.internal.reflect.GeneratedMethodAccessor94.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1030)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at groovy.lang.Closure.call(Closure.java:416)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.each(DefaultGroovyMethods.java:2357)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.each(DefaultGroovyMethods.java:2342)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.each(DefaultGroovyMethods.java:2383)
+	at org.codehaus.groovy.runtime.dgm$202.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite$PojoMetaMethodSiteNoUnwrapNoCoerce.invoke(PojoMetaMethodSite.java:242)
+	at org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite.call(PojoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.util.HistoryFile.update0(HistoryFile.groovy:91)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:61)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:203)
+	at nextflow.util.HistoryFile$_update_closure2.doCall(HistoryFile.groovy:79)
+	at nextflow.util.HistoryFile$_update_closure2.doCall(HistoryFile.groovy)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1030)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:38)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:53)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:130)
+	at nextflow.util.HistoryFile.withFileLock(HistoryFile.groovy:442)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:48)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:189)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:57)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at nextflow.util.HistoryFile.update(HistoryFile.groovy:79)
+	at nextflow.util.HistoryFile.update(HistoryFile.groovy)
+	at nextflow.Session.destroy(Session.groovy:698)
+	at nextflow.script.ScriptRunner.shutdown(ScriptRunner.groovy:259)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:145)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:372)
+	at nextflow.cli.Launcher.run(Launcher.groovy:500)
+	at nextflow.cli.Launcher.main(Launcher.groovy:672)
+Feb-17 23:09:00.161 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

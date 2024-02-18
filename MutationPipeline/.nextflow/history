@@ -139,3 +139,11 @@
 2024-01-17 22:40:08	30.3s	insane_lalande	ERR	5f60f271889ca86122c2da04fe6ad7df	ef4393e4-cf0d-4032-8ae9-fd3bc76de169	nextflow run main.nf
 2024-01-17 22:40:46	2m 53s	pensive_cuvier	ERR	5f60f271889ca86122c2da04fe6ad7df	c4d04ca2-7403-411c-94d8-623b708ee9f5	nextflow run main.nf
 2024-01-17 22:45:10	4m 29s	curious_lagrange	OK	ee3cd12899f8e7df68377b94bdfb4cda	8043b407-5e2e-47ac-9772-e7ded1c93db4	nextflow run main.nf
+2024-01-19 21:18:12	3m 24s	tiny_leavitt	OK	ee3cd12899f8e7df68377b94bdfb4cda	624fa17b-54ff-4d0e-b48a-339a67449fef	nextflow run main.nf
+2024-01-19 21:22:23	5m 19s	distraught_easley	OK	56c1771baebd692898a0cbb72f35c610	3e0c8b29-78fe-4802-b781-f9763b3d8931	nextflow run main.nf
+2024-02-17 22:54:43	30.1s	boring_swartz	ERR	487168b64321d0f0f6494a924b4c389d	74548d14-8e42-4049-bb2b-23d053796420	nextflow run main.nf
+2024-02-17 22:55:35	5m 21s	infallible_brazil	ERR	487168b64321d0f0f6494a924b4c389d	b386bea6-55a3-4fb8-95ba-6f542ef4a2e5	nextflow run main.nf
+2024-02-17 23:07:08	-	admiring_lalande	-	26b99e17959e2b6920538a1e5b8cb4d4	308b7739-0d6b-45e2-a8ac-1645575389f3	nextflow run main.nf --resume
+2024-02-17 23:12:44	-	sick_lovelace	-	26b99e17959e2b6920538a1e5b8cb4d4	40d00a0e-dbf0-4fed-851b-84d54feb9b27	nextflow run main.nf
+2024-02-17 23:24:10	-	disturbed_noether	-	26b99e17959e2b6920538a1e5b8cb4d4	40d00a0e-dbf0-4fed-851b-84d54feb9b27	nextflow run main.nf -resume
+2024-02-17 23:30:44	-	angry_northcutt	-	26b99e17959e2b6920538a1e5b8cb4d4	97a663e8-0717-41f9-99bc-64b98c983110	nextflow run main.nf

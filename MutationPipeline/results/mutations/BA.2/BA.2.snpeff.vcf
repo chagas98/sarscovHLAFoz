@@ -29,7 +29,7 @@
 ##INFO=<ID=HWE,Number=1,Type=Float,Description="Chi^2 based HWE test P-value based on G3">
 ##INFO=<ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases">
 ##bcftools_callVersion=1.17+htslib-1.17
-##bcftools_callCommand=call -c --ploidy 1 -Ov -o BA.2.vcf; Date=Fri Jan 19 21:25:02 2024
+##bcftools_callCommand=call -c --ploidy 1 -Ov -o BA.2.vcf; Date=Sat Feb 17 21:58:19 2024
 ##SnpEffVersion="5.2 (build 2023-09-29 06:17), by Pablo Cingolani"
 ##SnpEffCmd="SnpEff  -csvStats annotated_vcf_ann.csv -s annotated_vcf_ann.html NC_045512.2 ../BA.2.vcf "
 ##INFO=<ID=ANN,Number=.,Type=String,Description="Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS / WARNINGS / INFO' ">

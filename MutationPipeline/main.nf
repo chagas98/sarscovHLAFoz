@@ -6,10 +6,11 @@ nextflow.enable.dsl = 2
  * Define the default parameters
  */ 
 params.n_perc = 5
-params.n_seqs = 2
+params.n_seqs = 1
 params.ref_seq = 'NC_045512.2'
 params.snpEff_config = "$baseDir/config/snpEff.config"
 params.renviron = "$baseDir/config/.Renviron"
+params.versions = "$baseDir/config/versions.csv"
 params.start_date = "2020-01-01"
 params.end_date = "2023-01-01"
 params.city_name = "Foz do Iguacu"
@@ -23,7 +24,8 @@ include {
   SELECT_BY_LINEAGE;
   RUN_MAPPING_MINIMAP2;
   VARIANT_CALLER;
-  RUN_ANNOT_SNPEFF} from './modules.nf' 
+  RUN_ANNOT_SNPEFF;
+  RUN_EPYTOPE_PREDICTION} from './modules.nf' 
 
 /* 
  * main pipeline logic
@@ -54,6 +56,11 @@ workflow {
 
     // Run annotation with snpEff
     RUN_ANNOT_SNPEFF(VARIANT_CALLER.out, params.ref_seq)
+
+    //
+    RUN_EPYTOPE_PREDICTION(VARIANT_CALLER.out, 
+                           RUN_ANNOT_SNPEFF.out.vcf,
+                           params.versions)
 
 }
 

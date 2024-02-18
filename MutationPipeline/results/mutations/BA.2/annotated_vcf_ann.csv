@@ -3,7 +3,7 @@
 
 Name , Value
 Genome , NC_045512.2 
-Date , 2024-01-19 21:27
+Date , 2024-02-17 22:00
 SnpEff_version , SnpEff 5.2 (build 2023-09-29 06:17), by Pablo Cingolani
 Command_line_arguments , SnpEff  -csvStats annotated_vcf_ann.csv -s annotated_vcf_ann.html NC_045512.2 ../BA.2.vcf 
 Warnings , 394 
