@@ -126,13 +126,12 @@ process RUN_ANNOT_SNPEFF {
 
     script:
     """
-
     mkdir -p ${input.baseName}
-    
+
     cd ${input.baseName}
 
     # Run snpEff to annotate the input VCF file using the provided snpeff_db
-    snpEff ann -v -c snpEff.config -csvStats annotated_vcf_ann.csv -s annotated_vcf_ann.html $snpeff_db ../$input > ${input.baseName}.snpeff.vcf
+    snpEff ann -v -c snpEff.config -csvStats annotated_vcf_ann.csv -s annotated_vcf_ann.html $snpeff_db ../$input > ${input.baseName}.snpEff.vcf
     """
 }
 
@@ -140,23 +139,29 @@ process RUN_ANNOT_SNPEFF {
 process RUN_EPYTOPE_PREDICTION {
 
     input:
-    path folder
     path input
     path versions
 
     output:
-    path "**.csv", emit: csv
+    path "**.tsv", emit: csv
 
     script:
     """
     
-    cd ${folder.baseName}
+    variant=${input.baseName.replace(".snpEff", "")}
+    
+    mkdir -p \${variant}
 
-    mkdir -p prediction
+    cd \${variant}
 
-    cd prediction
+    #mkdir -p prediction
+
+    #cd prediction
+    
+    export PYTHONWARNINGS="ignore::RuntimeWarning"
+    export PYTHONWARNINGS="ignore::FutureWarning"
 
     # Run epaa_mod.py to predict epitope for the input VCF file    
-    epaa_mod.py --identifier ${input.baseName} --alleles 'A*01:01;A*02:01' --tools 'netmhcpan-4.1' --max_length 15 --min_length 12 --versions $versions --variant_lineage ${input.baseName} --somatic_mutation $input
+    epaa_mod.py --identifier \${variant} --alleles 'A*01:01' --tools 'syfpeithi' --max_length 12 --min_length 8 --versions ../$versions --variant_lineage \${variant} --somatic_mutation ../$input
     """
 }

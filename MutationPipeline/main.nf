@@ -55,11 +55,11 @@ workflow {
                    GET_REFSEQ_SARS.out)
 
     // Run annotation with snpEff
-    RUN_ANNOT_SNPEFF(VARIANT_CALLER.out, params.ref_seq)
+    RUN_ANNOT_SNPEFF(VARIANT_CALLER.out, 
+                     params.ref_seq)
 
     //
-    RUN_EPYTOPE_PREDICTION(VARIANT_CALLER.out, 
-                           RUN_ANNOT_SNPEFF.out.vcf,
+    RUN_EPYTOPE_PREDICTION(RUN_ANNOT_SNPEFF.out.vcf,
                            params.versions)
 
 }

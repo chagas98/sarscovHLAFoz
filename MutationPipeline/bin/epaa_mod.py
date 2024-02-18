@@ -28,6 +28,9 @@ from epytope.Core.Transcript import Transcript
 from Bio import SeqUtils
 from datetime import datetime
 
+import warnings
+warnings.filterwarnings("ignore")
+
 __author__ = "Christopher Mohr (from Epytope python package) Adapted by Samuel Chagas de Assis"
 VERSION = "1.1"
 
@@ -435,7 +438,7 @@ def read_vcf(filename, pass_only=True):
                 dict_vars[var] = var
                 list_vars.append(var)
             else:
-                logger.error("No supported variant annotation string found. Skipping...")
+                print("No supported variant annotation string found. Skipping...")
                 continue
 
             transToVar = {}
@@ -596,7 +599,7 @@ def create_metadata_column_value(pep, c, pep_dictionary):
             if len(variant.get_metadata(c)) != 0
         ]
     )
-    if len(meta) is 0:
+    if len(meta) == 0:
         return np.nan
     else:
         return ",".join(meta)
@@ -611,7 +614,7 @@ def create_wt_seq_column_value(pep, wtseqs):
             if bool(transcript.vars) and "{}_{}".format(str(pep["sequence"]), transcript.transcript_id) in wtseqs
         ]
     )
-    if len(wild_type) is 0:
+    if len(wild_type) == 0:
         return np.nan
     else:
         return ",".join(wild_type)
@@ -690,7 +693,7 @@ def create_quant_column_value_for_result(row, dict, swissProtDict, key):
                 values.append(math.log(int(dict[p][key]), 2))
             else:
                 values.append(int(dict[p][key]))
-    if len(values) is 0:
+    if len(values) == 0:
         return np.nan
     else:
         return ",".join(set([str(v) for v in values]))
@@ -952,7 +955,7 @@ def fetch_genbank_record(accession_number):
 
     try:
         # Set your email address (required for accessing NCBI data)
-        Entrez.email = "your.email@example.com"
+        Entrez.email = "email_here@example.com"
 
         # Fetch the GenBank record for the specified accession number
         genbank = Entrez.efetch(db="nuccore", id=accession_number, rettype="gb", retmode="text")
@@ -1076,6 +1079,9 @@ def generate_transcripts_from_variants_gb(variants):
         #B) generate all possible combinations of variants
         #C) apply variants to transcript and generate transcript object
 
+    Entrez.email = "email_here@example.com"
+    seq_record = fetch_genbank_record('NC_045512.2')
+    
     transToVar = {}
     for v in variants:
        for trans_id in v.coding.keys():
@@ -1091,8 +1097,6 @@ def generate_transcripts_from_variants_gb(variants):
         for i in vs:
             print(vars(i))
 
-        Entrez.email = "your.email@example.com"
-        seq_record = fetch_genbank_record('NC_045512.2')
         query = fetch_transcripts(tId, seq_record=seq_record)
 
         if query is None:
@@ -1261,8 +1265,8 @@ def make_predictions_from_variants(
     protein_db,
     identifier,
     metadata,
-    transcriptProteinMap,
-):
+    transcriptProteinMap):
+
     # list for all peptides and filtered peptides
     all_peptides = []
     all_peptides_filtered = []
@@ -1280,7 +1284,11 @@ def make_predictions_from_variants(
         )
     ]
 
+    print('FOR LOOP')
+    print(minlength)
+    print(maxlength)
     for peplen in range(minlength, maxlength):
+        print('FOR LOOP0')
         peptide_gen = generate_peptides_from_proteins_gb(prots, peplen)
         peptides_var = [x for x in peptide_gen]
         peptides = [p for p in peptides_var if is_created_by_variant(p)]
@@ -1295,7 +1303,7 @@ def make_predictions_from_variants(
         results = []
         results_ref = []
         references = []
-        #print(filtered_peptides)
+        print('FOR LOOP1')
         if len(filtered_peptides) > 0:
             for method, version in methods.items():
                 
@@ -1321,7 +1329,7 @@ def make_predictions_from_variants(
             df = results[0]
             df_ref = results_ref[0]
         else:
-
+            print('FOR LOOP2')
             continue
         
         df = pd.concat(results)
@@ -1352,6 +1360,7 @@ def make_predictions_from_variants(
 
         pep_to_variants = create_peptide_variant_dictionary(df["sequence"].tolist())
 
+        print('FOR LOOP4')
         df["length"] = df["sequence"].map(len)
         df["chr"] = df["sequence"].map(lambda x: create_variant_chr_column_value(x, pep_to_variants))
         df["pos"] = df["sequence"].map(lambda x: create_variant_pos_column_value(x, pep_to_variants))
@@ -1426,6 +1435,8 @@ def make_predictions_from_variants(
         for col in set(metadata):
             df[col] = df.apply(lambda row: create_metadata_column_value(row, col, pep_to_variants), axis=1)
 
+        print('DATAFRAME APPEND')
+        print(df)
         pred_dataframes.append(df)
 
     statistics = {
@@ -1598,7 +1609,7 @@ def __main__():
         "--reference",
         help="Reference, retrieved information will be based on this ensembl version",
         required=False,
-        default="GRCh37",
+        default="GRCh38",
         choices=["GRCh37", "GRCh38","COVID"],
     )
     parser.add_argument(
@@ -1647,8 +1658,11 @@ def __main__():
     filehandler.setFormatter(formatter)
     logger.addHandler(filehandler)
 
-    logger.info("Running Epitope Prediction And Annotation version: " + str(VERSION))
-    logger.info("Starting predictions at " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    #logger.info("Running Epitope Prediction And Annotation version: " + str(VERSION))
+    #logger.info("Starting predictions at " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+
+    print("Running Epitope Prediction And Annotation version: " + str(VERSION))
+    print("Starting predictions at " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
     metadata = []
     proteins = []
@@ -1658,7 +1672,8 @@ def __main__():
     global transcriptSwissProtMap
 
     if args.somatic_mutations.endswith(".vcf"):
-        logger.info("Running epaa for variants...")
+        #logger.info("Running epaa for variants...")
+        print("Running epaa for variants...")
         variant_list, transcripts, metadata = read_vcf(args.somatic_mutations)
 
     else:
@@ -1758,10 +1773,15 @@ def __main__():
         complete_df["method"] = complete_df["method"].apply(lambda x: x.lower() + "-" + methods[x.lower()])
         complete_df["variant_lineage"] = args.variant_lineage
         predictions_available = True
-    except:
+    
+    except Exception as e:
         complete_df = pd.DataFrame()
         predictions_available = False
-        logger.error("No predictions available.")
+        #logger.error("No predictions available.")
+        #logger.info("No predictions available.")
+        print(methods)
+        print(f"No predictions available. Error {str(e)}")
+        
 
     # include wild type sequences to dataframe if specified
     if args.wild_type:
@@ -1915,9 +1935,10 @@ def __main__():
 
     # write dataframe to tsv
     complete_df.fillna("")
+
     if predictions_available:
         complete_df.to_csv("{}_prediction_result.tsv".format(args.identifier), "\t", index=False)
-
+    
     statistics["tool_thresholds"] = thresholds
     statistics["number_of_predictions"] = len(complete_df)
     statistics["number_of_binders"] = len(pos_predictions)
@@ -1930,7 +1951,8 @@ def __main__():
     with open("{}_report.json".format(args.identifier), "w") as json_out:
         json.dump(statistics, json_out)
 
-    logger.info("Finished predictions at " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    #logger.info("Finished predictions at " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    print("Finished predictions at " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
 
 if __name__ == "__main__":
