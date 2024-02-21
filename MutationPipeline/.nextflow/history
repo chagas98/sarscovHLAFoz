@@ -290,3 +290,5 @@
 2024-02-18 20:24:25	15.8s	stupefied_wiles	ERR	8bf035c781a1b85b2e392f339faf727c	cfe9910c-cdf1-4ebb-b121-38625b4cb0b9	nextflow run main.nf -resume
 2024-02-18 20:25:10	2.3s	voluminous_heisenberg	ERR	8bf035c781a1b85b2e392f339faf727c	cfe9910c-cdf1-4ebb-b121-38625b4cb0b9	nextflow run main.nf -resume
 2024-02-18 20:25:25	7m 18s	hopeful_neumann	ERR	8bf035c781a1b85b2e392f339faf727c	cfe9910c-cdf1-4ebb-b121-38625b4cb0b9	nextflow run main.nf -resume
+2024-02-20 21:06:18	3m 16s	focused_lattes	ERR	4a5453053145ff09c85b333663472876	037d03d1-416d-41d9-9117-7704c2ff08b4	nextflow run main.nf
+2024-02-20 21:10:43	27m 27s	modest_mcclintock	OK	4a5453053145ff09c85b333663472876	037d03d1-416d-41d9-9117-7704c2ff08b4	nextflow run main.nf -resume

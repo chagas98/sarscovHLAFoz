@@ -1,0 +1,5 @@
+Using TensorFlow backend.
+usage: epaa_mod.py [-h] [-s SOMATIC_MUTATIONS] [-g GERMLINE_MUTATIONS] [-i IDENTIFIER] [-p PEPTIDES] [-l MAX_LENGTH] [-ml MIN_LENGTH] -t TOOLS [-tt TOOL_THRESHOLDS] [-at] -sv VERSIONS -a ALLELES
+                   [-r {GRCh37,GRCh38,COVID}] [-f] [-wt] [-fo] [-rp REFERENCE_PROTEOME] [-gr GENE_REFERENCE] [-pq PROTEIN_QUANTIFICATION] [-ge GENE_EXPRESSION] [-de DIFF_GENE_EXPRESSION]
+                   [-li LIGANDOMICS_ID] [-var VARIANT_LINEAGE] [-v]
+epaa_mod.py: error: the following arguments are required: -t/--tools, -sv/--versions

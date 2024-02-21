@@ -141,6 +141,10 @@ process RUN_EPYTOPE_PREDICTION {
     input:
     path input
     path versions
+    val max_length
+    val min_length
+    val alleles
+    val tool
 
     output:
     path "**.tsv", emit: csv
@@ -162,6 +166,6 @@ process RUN_EPYTOPE_PREDICTION {
     export PYTHONWARNINGS="ignore::FutureWarning"
 
     # Run epaa_mod.py to predict epitope for the input VCF file    
-    epaa_mod.py --identifier \${variant} --alleles 'A*01:01' --tools 'syfpeithi' --max_length 12 --min_length 8 --versions ../$versions --variant_lineage \${variant} --somatic_mutation ../$input
+    epaa_mod.py --identifier \${variant} --alleles "$alleles" --tools "$tool" --max_length $max_length --min_length $min_length --versions ../$versions --variant_lineage \${variant} --somatic_mutation ../$input
     """
 }

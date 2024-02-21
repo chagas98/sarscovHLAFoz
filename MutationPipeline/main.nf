@@ -14,6 +14,11 @@ params.versions = "$baseDir/config/versions.csv"
 params.start_date = "2020-01-01"
 params.end_date = "2023-01-01"
 params.city_name = "Foz do Iguacu"
+params.max_length = 12
+params.min_length = 10
+params.alleles = "B*07:02;B*44:03"
+
+params.predict_tool = "netmhcpan-4.1"
 
 /* 
  * Import modules 
@@ -58,9 +63,13 @@ workflow {
     RUN_ANNOT_SNPEFF(VARIANT_CALLER.out, 
                      params.ref_seq)
 
-    //
+    // Run epytope prediction
     RUN_EPYTOPE_PREDICTION(RUN_ANNOT_SNPEFF.out.vcf,
-                           params.versions)
+                           params.versions,
+                           params.max_length,
+                           params.min_length,
+                           params.alleles,
+                           params.predict_tool)
 
 }
 
