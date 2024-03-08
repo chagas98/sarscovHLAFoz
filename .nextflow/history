@@ -1,0 +1,1 @@
+2024-01-24 21:04:58	10.3s	cheesy_austin	ERR	b0f0d7a5b3cd352e548901e4cc19937c73add465	761aa94d-f129-4037-8b1f-cce78bf4bb58	nextflow run nf-core/epitopeprediction -r 2.2.1 -profile test --outdir ok

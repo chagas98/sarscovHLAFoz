@@ -1,0 +1,327 @@
+Jan-24 21:04:53.897 [main] DEBUG nextflow.cli.Launcher - $> nextflow run nf-core/epitopeprediction -r 2.2.1 -profile test --outdir ok
+Jan-24 21:04:54.026 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.0
+Jan-24 21:04:54.068 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/samuel/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.2,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.0
+Jan-24 21:04:54.083 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jan-24 21:04:54.085 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jan-24 21:04:54.089 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Jan-24 21:04:54.103 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jan-24 21:04:54.127 [main] DEBUG nextflow.scm.ProviderConfig - Using SCM config path: /home/samuel/.nextflow/scm
+Jan-24 21:04:55.430 [main] DEBUG nextflow.scm.AssetManager - Git config: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/.git/config; branch: master; remote: origin; url: https://github.com/nf-core/epitopeprediction.git
+Jan-24 21:04:55.461 [main] DEBUG nextflow.scm.RepositoryFactory - Found Git repository result: [RepositoryFactory]
+Jan-24 21:04:55.473 [main] DEBUG nextflow.scm.AssetManager - Git config: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/.git/config; branch: master; remote: origin; url: https://github.com/nf-core/epitopeprediction.git
+Jan-24 21:04:57.001 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/nextflow.config
+Jan-24 21:04:57.004 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/nextflow.config
+Jan-24 21:04:57.040 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test`
+Jan-24 21:04:58.506 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [cfc_dev, uzl_omics, ifb_core, denbi_qbic, alice, mjolnir_globe, uppmax, incliva, uge, rosalind_uge, lugh, unibe_ibu, test_grch38_variant_tsv, vai, czbiohub_aws, jax, ccga_med, scw, tigem, tubingen_apg, google, apollo, ipop_up, pdc_kth, googlels, daisybio, eddie, medair, biowulf, bi, bigpurple, adcra, cedars, pawsey_setonix, vsc_kul_uhasselt, pawsey_nimbus, ucl_myriad, utd_ganymede, charliecloud, icr_davros, ceres, munin, arm, rosalind, hasta, cfc, uzh, ebi_codon_slurm, ebc, ku_sund_dangpu, ccga_dx, crick, marvin, biohpc_gen, shifter, mana, mamba, unc_lccc, wehi, awsbatch, wustl_htcf, imperial, maestro, software_license, genotoul, nci_gadi, abims, janelia, nu_genomics, googlebatch, oist, sahmri, mpcdf, leicester, vsc_ugent, test_mhcflurry, create, sage, cambridge, jex, podman, ebi_codon, cheaha, xanadu, nyu_hpc, test, test_peptides, computerome, ucd_sonic, seg_globe, sanger, dkfz, test_proteins, pasteur, ethz_euler, test_netmhcpan, test_mhcnuggets, test_full, imb, tuos_stanage, azurebatch, hki, crukmi, csiro_petrichor, docker, engaging, gis, hypatia, psmn, eva, nygc, test_peptides_h2, fgcz, conda, crg, singularity, test_variant_tsv, self_hosted_runner, uw_hyak_pedslabs, utd_sysbio, debug, genouest, cbe, phoenix, gitpod, seawulf, test_netmhc, uod_hpc, fub_curta, uct_hpc, aws_tower, binac]
+Jan-24 21:04:58.590 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Jan-24 21:04:58.591 [main] INFO  nextflow.cli.CmdRun - Launching `https://github.com/nf-core/epitopeprediction` [cheesy_austin] DSL2 - revision: b0f0d7a5b3 [2.2.1]
+Jan-24 21:04:58.591 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jan-24 21:04:58.591 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jan-24 21:04:58.596 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/samuel/.nextflow/secrets/store.json
+Jan-24 21:04:58.600 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@59e082f8] - activable => nextflow.secret.LocalSecretsProvider@59e082f8
+Jan-24 21:04:58.708 [main] DEBUG nextflow.Session - Session UUID: 761aa94d-f129-4037-8b1f-cce78bf4bb58
+Jan-24 21:04:58.708 [main] DEBUG nextflow.Session - Run name: cheesy_austin
+Jan-24 21:04:58.709 [main] DEBUG nextflow.Session - Executor pool size: 4
+Jan-24 21:04:58.721 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Jan-24 21:04:58.727 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Jan-24 21:04:58.757 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.0 build 5889
+  Created: 15-10-2023 15:07 UTC (12:07 BRST)
+  System: Linux 6.5.0-14-generic
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.13+7-b1751.21
+  Encoding: UTF-8 (UTF-8)
+  Process: 13452@schagaspc [127.0.1.1]
+  CPUs: 4 - Mem: 15.5 GB (4.8 GB) - Swap: 2 GB (2 GB)
+Jan-24 21:04:58.779 [main] DEBUG nextflow.Session - Work-dir: /home/samuel/Documents/UNILA/sarscovHLAFoz/work [ext2/ext3]
+Jan-24 21:04:58.804 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jan-24 21:04:58.819 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jan-24 21:04:58.941 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Jan-24 21:04:58.958 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Jan-24 21:04:59.044 [main] DEBUG nextflow.Session - Session start
+Jan-24 21:04:59.049 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /home/samuel/Documents/UNILA/sarscovHLAFoz/ok/pipeline_info/execution_trace_2024-01-24_21-04-58.txt
+Jan-24 21:04:59.062 [main] DEBUG nextflow.Session - Using default localLib path: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/lib
+Jan-24 21:04:59.065 [main] DEBUG nextflow.Session - Adding to the classpath library: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/lib
+Jan-24 21:04:59.066 [main] DEBUG nextflow.Session - Adding to the classpath library: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/lib/nfcore_external_java_deps.jar
+Jan-24 21:05:00.307 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jan-24 21:05:00.371 [main] INFO  nextflow.Nextflow - 
+
+-[2m----------------------------------------------------[0m-
+                                        [0;32m,--.[0;30m/[0;32m,-.[0m
+[0;34m        ___     __   __   __   ___     [0;32m/,-._.--~'[0m
+[0;34m  |\ | |__  __ /  ` /  \ |__) |__         [0;33m}  {[0m
+[0;34m  | \| |       \__, \__/ |  \ |___     [0;32m\`-._,-`-,[0m
+                                        [0;32m`._,._,'[0m
+[0;35m  nf-core/epitopeprediction v2.2.1-gb0f0d7a[0m
+-[2m----------------------------------------------------[0m-
+[1mCore Nextflow options[0m
+  [0;34mrevision                  : [0;32m2.2.1[0m
+  [0;34mrunName                   : [0;32mcheesy_austin[0m
+  [0;34mlaunchDir                 : [0;32m/home/samuel/Documents/UNILA/sarscovHLAFoz[0m
+  [0;34mworkDir                   : [0;32m/home/samuel/Documents/UNILA/sarscovHLAFoz/work[0m
+  [0;34mprojectDir                : [0;32m/home/samuel/.nextflow/assets/nf-core/epitopeprediction[0m
+  [0;34muserName                  : [0;32msamuel[0m
+  [0;34mprofile                   : [0;32mtest[0m
+  [0;34mconfigFiles               : [0;32m/home/samuel/.nextflow/assets/nf-core/epitopeprediction/nextflow.config[0m
+
+[1mInput/output options[0m
+  [0;34minput                     : [0;32mhttps://raw.githubusercontent.com/nf-core/test-datasets/epitopeprediction/testdata/sample_sheets/sample_sheet_variants.csv[0m
+  [0;34moutdir                    : [0;32mok[0m
+
+[1mReference genome options[0m
+  [0;34migenomes_ignore           : [0;32mtrue[0m
+
+[1mExternal software[0m
+  [0;34mnetmhcpan_path            : [0;32mnull[0m
+  [0;34mnetmhc_path               : [0;32mnull[0m
+  [0;34mnetmhciipan_path          : [0;32mnull[0m
+  [0;34mnetmhcii_path             : [0;32mnull[0m
+
+[1mInstitutional config options[0m
+  [0;34mconfig_profile_name       : [0;32mTest profile[0m
+  [0;34mconfig_profile_description: [0;32mMinimal test dataset to check pipeline function[0m
+
+[1mMax job request options[0m
+  [0;34mmax_cpus                  : [0;32m2[0m
+  [0;34mmax_memory                : [0;32m6.GB[0m
+  [0;34mmax_time                  : [0;32m6.h[0m
+
+[1mGeneric options[0m
+  [0;34mmultiqc_logo              : [0;32m/home/samuel/.nextflow/assets/nf-core/epitopeprediction/assets/nf-core-epitopeprediction_logo_light.png[0m
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+-[2m----------------------------------------------------[0m-
+If you use nf-core/epitopeprediction for your analysis please cite:
+
+* The pipeline
+  https://doi.org/10.5281/zenodo.3564666
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/nf-core/epitopeprediction/blob/master/CITATIONS.md
+-[2m----------------------------------------------------[0m-
+Jan-24 21:05:00.539 [main] WARN  nextflow.Nextflow - Found unexpected parameters:
+* --conda: [enabled:false]
+Jan-24 21:05:00.540 [main] INFO  nextflow.Nextflow - - [2mIgnore this warning: params.schema_ignore_params = "conda" [0m
+Jan-24 21:05:03.531 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:INPUT_CHECK:SAMPLESHEET_CHECK
+Jan-24 21:05:03.534 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SAMPLESHEET_CHECK` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:INPUT_CHECK:SAMPLESHEET_CHECK
+Jan-24 21:05:03.542 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.543 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.552 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jan-24 21:05:03.560 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.5 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Jan-24 21:05:03.564 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Jan-24 21:05:03.766 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GUNZIP_VCF
+Jan-24 21:05:03.767 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GUNZIP_VCF` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GUNZIP_VCF
+Jan-24 21:05:03.770 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.770 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.808 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GET_PREDICTION_VERSIONS
+Jan-24 21:05:03.808 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_PREDICTION_VERSIONS` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GET_PREDICTION_VERSIONS
+Jan-24 21:05:03.809 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.809 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.815 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS
+Jan-24 21:05:03.816 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EPYTOPE_CHECK_REQUESTED_MODELS` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS
+Jan-24 21:05:03.818 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.818 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.826 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PROTEIN
+Jan-24 21:05:03.826 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EPYTOPE_CHECK_REQUESTED_MODELS` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PROTEIN
+Jan-24 21:05:03.828 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.828 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.836 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PEP
+Jan-24 21:05:03.837 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EPYTOPE_CHECK_REQUESTED_MODELS` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PEP
+Jan-24 21:05:03.837 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EPYTOPE_CHECK_REQUESTED_MODELS_PEP` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PEP
+Jan-24 21:05:03.839 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.839 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.854 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EXTERNAL_TOOLS_IMPORT
+Jan-24 21:05:03.856 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.856 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.868 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SNPSIFT_SPLIT
+Jan-24 21:05:03.869 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SNPSIFT_SPLIT` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SNPSIFT_SPLIT
+Jan-24 21:05:03.873 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.874 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.885 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CSVTK_SPLIT
+Jan-24 21:05:03.885 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:CSVTK_SPLIT` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CSVTK_SPLIT
+Jan-24 21:05:03.886 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.886 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.899 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_GENERATE_PEPTIDES
+Jan-24 21:05:03.899 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EPYTOPE_GENERATE_PEPTIDES` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_GENERATE_PEPTIDES
+Jan-24 21:05:03.901 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.901 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.913 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PROTEIN
+Jan-24 21:05:03.913 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SPLIT_PEPTIDES` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PROTEIN
+Jan-24 21:05:03.914 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SPLIT_PEPTIDES_PROTEIN` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PROTEIN
+Jan-24 21:05:03.915 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.916 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.924 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PEPTIDES
+Jan-24 21:05:03.924 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SPLIT_PEPTIDES` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PEPTIDES
+Jan-24 21:05:03.924 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SPLIT_PEPTIDES_PEPTIDES` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PEPTIDES
+Jan-24 21:05:03.925 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.926 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.956 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_PROTEIN
+Jan-24 21:05:03.956 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EPYTOPE_PEPTIDE_PREDICTION_PROTEIN` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_PROTEIN
+Jan-24 21:05:03.958 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.958 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.972 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_PEP
+Jan-24 21:05:03.972 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EPYTOPE_PEPTIDE_PREDICTION_PEP` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_PEP
+Jan-24 21:05:03.973 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.974 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:03.988 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_VAR
+Jan-24 21:05:03.988 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EPYTOPE_PEPTIDE_PREDICTION_VAR` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_VAR
+Jan-24 21:05:03.990 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:03.990 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:04.014 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CAT_TSV
+Jan-24 21:05:04.015 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:CAT_TSV` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CAT_TSV
+Jan-24 21:05:04.017 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:04.017 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:04.028 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CSVTK_CONCAT
+Jan-24 21:05:04.029 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:CSVTK_CONCAT` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CSVTK_CONCAT
+Jan-24 21:05:04.030 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:04.030 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:04.038 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CAT_FASTA
+Jan-24 21:05:04.039 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:CAT_FASTA` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CAT_FASTA
+Jan-24 21:05:04.040 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:04.040 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:04.054 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_SINGLE
+Jan-24 21:05:04.054 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MERGE_JSON` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_SINGLE
+Jan-24 21:05:04.055 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MERGE_JSON_SINGLE` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_SINGLE
+Jan-24 21:05:04.055 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:04.056 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:04.061 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_MULTI
+Jan-24 21:05:04.061 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MERGE_JSON` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_MULTI
+Jan-24 21:05:04.062 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MERGE_JSON_MULTI` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_MULTI
+Jan-24 21:05:04.062 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:04.062 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:04.096 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CUSTOM_DUMPSOFTWAREVERSIONS
+Jan-24 21:05:04.097 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:CUSTOM_DUMPSOFTWAREVERSIONS` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CUSTOM_DUMPSOFTWAREVERSIONS
+Jan-24 21:05:04.098 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:04.098 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:04.146 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MULTIQC
+Jan-24 21:05:04.146 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MULTIQC` matches process NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MULTIQC
+Jan-24 21:05:04.148 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jan-24 21:05:04.148 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jan-24 21:05:04.156 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: SPLIT_PEPTIDES_PROTEIN, MERGE_JSON_SINGLE, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EXTERNAL_TOOLS_IMPORT, VARIANT_SPLIT, EPYTOPE_PEPTIDE_PREDICTION_VAR, EPYTOPE_GENERATE_PEPTIDES, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_GENERATE_PEPTIDES, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_PROTEIN, GUNZIP_VCF, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PROTEIN, EPYTOPE_CHECK_REQUESTED_MODELS, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_SINGLE, EPYTOPE_PEPTIDE_PREDICTION_PROTEIN, SPLIT_PEPTIDES, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CUSTOM_DUMPSOFTWAREVERSIONS, GUNZIP, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PEPTIDES, CAT_FASTA, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:INPUT_CHECK:SAMPLESHEET_CHECK, MERGE_JSON, CAT_FILES, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GET_PREDICTION_VERSIONS, EPYTOPE_PEPTIDE_PREDICTION, MERGE_JSON_MULTI, GET_PREDICTION_VERSIONS, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SNPSIFT_SPLIT, EXTERNAL_TOOLS_IMPORT, EPYTOPE_CHECK_REQUESTED_MODELS_PEP, CSVTK_CONCAT, CSVTK_SPLIT, MULTIQC, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GUNZIP_VCF, EPYTOPE_SHOW_SUPPORTED_MODELS, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PROTEIN, CAT_TSV, SPLIT_PEPTIDES_PEPTIDES, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PEP, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_VAR, SAMPLESHEET_CHECK, SNPSIFT_SPLIT, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_MULTI, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CSVTK_SPLIT, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CAT_FASTA, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_PEP, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MULTIQC, EPYTOPE_CHECK_REQUESTED_MODELS_PROTEIN, EPYTOPE_PEPTIDE_PREDICTION_PEP, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CAT_TSV, NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CSVTK_CONCAT, CUSTOM_DUMPSOFTWAREVERSIONS
+Jan-24 21:05:04.163 [main] DEBUG nextflow.Session - Igniting dataflow network (32)
+Jan-24 21:05:04.174 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:INPUT_CHECK:SAMPLESHEET_CHECK
+Jan-24 21:05:04.175 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GUNZIP_VCF
+Jan-24 21:05:04.175 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GET_PREDICTION_VERSIONS
+Jan-24 21:05:04.175 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS
+Jan-24 21:05:04.176 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PROTEIN
+Jan-24 21:05:04.176 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS_PEP
+Jan-24 21:05:04.176 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EXTERNAL_TOOLS_IMPORT
+Jan-24 21:05:04.177 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SNPSIFT_SPLIT
+Jan-24 21:05:04.177 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CSVTK_SPLIT
+Jan-24 21:05:04.178 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_GENERATE_PEPTIDES
+Jan-24 21:05:04.178 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PROTEIN
+Jan-24 21:05:04.178 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SPLIT_PEPTIDES_PEPTIDES
+Jan-24 21:05:04.178 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_PROTEIN
+Jan-24 21:05:04.179 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_PEP
+Jan-24 21:05:04.180 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_PEPTIDE_PREDICTION_VAR
+Jan-24 21:05:04.186 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CAT_TSV
+Jan-24 21:05:04.189 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CSVTK_CONCAT
+Jan-24 21:05:04.189 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CAT_FASTA
+Jan-24 21:05:04.189 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_SINGLE
+Jan-24 21:05:04.189 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MERGE_JSON_MULTI
+Jan-24 21:05:04.189 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:CUSTOM_DUMPSOFTWAREVERSIONS
+Jan-24 21:05:04.192 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MULTIQC
+Jan-24 21:05:04.193 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_4ecd285156c606b3: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/epytope_generate_peptides.nf
+  Script_3137c035cfc976ec: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/csvtk_concat.nf
+  Script_9b793050b4d87dc4: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/variant_split.nf
+  Script_df29d58afd9ad6db: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/snpsift_split.nf
+  Script_6c63ca124dd20459: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/epytope_peptide_prediction.nf
+  Script_10c44364d882821d: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/epytope_show_supported_models.nf
+  Script_778cf7e3b59f1c79: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/nf-core/multiqc/main.nf
+  Script_dc576499bdaf05f8: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/nf-core/custom/dumpsoftwareversions/main.nf
+  Script_b99f81f3247c1b22: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/nf-core/gunzip/main.nf
+  Script_c1fd40b5c42b75b8: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/epytope_check_requested_models.nf
+  Script_43c1eac2c8a1423b: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/cat_files.nf
+  Script_45766148dbc3ca04: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/main.nf
+  Script_c8c35c3e02ad542f: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../subworkflows/local/input_check.nf
+  Script_8bcb534742e0a233: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/external_tools_import.nf
+  Script_b64d63090dfe661f: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../subworkflows/local/../../modules/local/samplesheet_check.nf
+  Script_a876edb9181c7874: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/get_prediction_versions.nf
+  Script_34fc6b3578187b5e: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/csvtk_split.nf
+  Script_b1a91a71ad5fdd91: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/epitopeprediction.nf
+  Script_d449c189e62608ca: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/merge_json.nf
+  Script_06e11351a3d7bf61: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/./workflows/../modules/local/split_peptides.nf
+Jan-24 21:05:04.193 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Jan-24 21:05:04.193 [main] DEBUG nextflow.Session - Session await
+Jan-24 21:05:04.411 [FileTransfer-1] DEBUG nextflow.file.FilePorter - Copying foreign file https://raw.githubusercontent.com/nf-core/test-datasets/epitopeprediction/testdata/sample_sheets/sample_sheet_variants.csv to work dir: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/stage-761aa94d-f129-4037-8b1f-cce78bf4bb58/00/da24f5a84765f179b3bd420f2914b4/sample_sheet_variants.csv
+Jan-24 21:05:04.427 [Actor Thread 22] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 1; slices: 1; internal sort time: 0.001 s; external sort time: 0.03 s; total time: 0.031 s
+Jan-24 21:05:04.428 [Actor Thread 23] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 1; slices: 1; internal sort time: 0.008 s; external sort time: 0.036 s; total time: 0.044 s
+Jan-24 21:05:04.442 [Actor Thread 22] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/collect-file/8e2da40b48b079e94b6f77da844d060c
+Jan-24 21:05:04.443 [Actor Thread 23] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/collect-file/1c67a27e2987c04336741afb26eb3749
+Jan-24 21:05:04.455 [Actor Thread 23] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/nxf-8918785909885128643
+Jan-24 21:05:04.456 [Actor Thread 22] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/nxf-4258638432779147083
+Jan-24 21:05:04.460 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-24 21:05:04.463 [Task submitter] INFO  nextflow.Session - [37/e9de65] Submitted process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GET_PREDICTION_VERSIONS
+Jan-24 21:05:04.602 [Actor Thread 8] DEBUG nextflow.util.CacheHelper - Hash asset file sha-256: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/bin/check_samplesheet.py
+Jan-24 21:05:04.620 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-24 21:05:04.625 [Task submitter] INFO  nextflow.Session - [9e/c3461a] Submitted process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:INPUT_CHECK:SAMPLESHEET_CHECK (sample_sheet_variants.csv)
+Jan-24 21:05:04.873 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:INPUT_CHECK:SAMPLESHEET_CHECK (sample_sheet_variants.csv); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/9e/c3461a08127441ab983e8ef80ba9c5]
+Jan-24 21:05:04.945 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Jan-24 21:05:05.106 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:GET_PREDICTION_VERSIONS; status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/37/e9de65e83efc57f211d6fdb25ae2a1]
+Jan-24 21:05:06.158 [FileTransfer-2] DEBUG nextflow.file.FilePorter - Copying foreign file https://raw.githubusercontent.com/nf-core/test-datasets/epitopeprediction/testdata/variants/variants.vcf to work dir: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/stage-761aa94d-f129-4037-8b1f-cce78bf4bb58/ef/3b4eb4a5c56aa51eb2262368b73fa2/variants.vcf
+Jan-24 21:05:06.344 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-24 21:05:06.344 [Task submitter] INFO  nextflow.Session - [0f/db33d3] Submitted process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SNPSIFT_SPLIT (1)
+Jan-24 21:05:06.385 [Actor Thread 23] DEBUG nextflow.util.CacheHelper - Hash asset file sha-256: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/bin/check_requested_models.py
+Jan-24 21:05:06.400 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jan-24 21:05:06.403 [Task submitter] INFO  nextflow.Session - [37/4ad427] Submitted process > NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS (1)
+Jan-24 21:05:06.631 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS (1); status: COMPLETED; exit: 1; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/37/4ad427517b6c6ebfb0058608bea907]
+Jan-24 21:05:06.636 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS (1); work-dir=/home/samuel/Documents/UNILA/sarscovHLAFoz/work/37/4ad427517b6c6ebfb0058608bea907
+  error [nextflow.exception.ProcessFailedException]: Process `NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS (1)` terminated with an error exit status (1)
+Jan-24 21:05:06.653 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS (1)'
+
+Caused by:
+  Process `NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS (1)` terminated with an error exit status (1)
+
+Command executed:
+
+  check_requested_models.py --tools syfpeithi          --alleles 'A*01:01'         --max_length 11         --min_length 8         --versions versions.csv > model_warnings.log
+  
+  cat <<-END_VERSIONS > versions.yml
+  "NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:EPYTOPE_CHECK_REQUESTED_MODELS":
+      mhcflurry: $(echo $(mhcflurry-predict --version 2>&1 | sed 's/^mhcflurry //; s/ .*$//') )
+      mhcnuggets: $(echo $(python -c "import pkg_resources; print(pkg_resources.get_distribution('mhcnuggets').version)"))
+      epytope: $(echo $(python -c "import pkg_resources; print(pkg_resources.get_distribution('epytope').version)"))
+  END_VERSIONS
+
+Command exit status:
+  1
+
+Command output:
+  (empty)
+
+Command error:
+  Traceback (most recent call last):
+    File "/home/samuel/.nextflow/assets/nf-core/epitopeprediction/bin/check_requested_models.py", line 10, in <module>
+      from epytope.Core.Allele import Allele
+  ModuleNotFoundError: No module named 'epytope'
+
+Work dir:
+  /home/samuel/Documents/UNILA/sarscovHLAFoz/work/37/4ad427517b6c6ebfb0058608bea907
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Jan-24 21:05:06.662 [Task monitor] INFO  nextflow.Session - Execution cancelled -- Finishing pending tasks before exit
+Jan-24 21:05:06.671 [main] DEBUG nextflow.Session - Session await > all processes finished
+Jan-24 21:05:06.702 [Actor Thread 7] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 1; slices: 1; internal sort time: 0.001 s; external sort time: 0.002 s; total time: 0.003 s
+Jan-24 21:05:06.709 [Actor Thread 16] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:MULTIQC; work-dir=null
+  error [java.lang.InterruptedException]: java.lang.InterruptedException
+Jan-24 21:05:06.709 [Actor Thread 7] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/collect-file/bcce7780b4743cca542591a806dcd26d
+Jan-24 21:05:06.718 [Actor Thread 7] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/nxf-17300237928849185104
+Jan-24 21:05:06.718 [Actor Thread 23] DEBUG nextflow.util.CacheHelper - Hash asset file sha-256: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/assets/multiqc_config.yml
+Jan-24 21:05:06.720 [Actor Thread 23] DEBUG nextflow.util.CacheHelper - Hash asset file sha-256: /home/samuel/.nextflow/assets/nf-core/epitopeprediction/assets/nf-core-epitopeprediction_logo_light.png
+Jan-24 21:05:07.269 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: NFCORE_EPITOPEPREDICTION:EPITOPEPREDICTION:SNPSIFT_SPLIT (1); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/work/0f/db33d31be45fe9077df99da19c7625]
+Jan-24 21:05:07.285 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Jan-24 21:05:07.287 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jan-24 21:05:07.292 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Jan-24 21:05:07.294 [main] INFO  nextflow.Nextflow - -[0;35m[nf-core/epitopeprediction][0;31m Pipeline completed with errors[0m-
+Jan-24 21:05:07.300 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=3; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=1; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=2.9s; failedDuration=442ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=4; peakMemory=12 GB; ]
+Jan-24 21:05:07.300 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Jan-24 21:05:07.302 [main] DEBUG nextflow.trace.ReportObserver - Workflow completed -- rendering execution report
+Jan-24 21:05:08.011 [main] DEBUG nextflow.trace.TimelineObserver - Workflow completed -- rendering execution timeline
+Jan-24 21:05:08.279 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Jan-24 21:05:08.291 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Jan-24 21:05:08.293 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

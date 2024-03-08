@@ -37,3 +37,7 @@ Run time management; Software management; Portability & Interoperability; Reprod
 ![Alt text](<Screenshot from 2023-12-28 22-08-55.png>) [1]
 
 
+### TODO
+
+- createa yaml/json file to input parameters (best practices for sveral values)
+-
