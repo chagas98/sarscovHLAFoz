@@ -16,7 +16,7 @@ params.end_date = "2023-01-01"
 params.city_name = "Foz do Iguacu"
 params.max_length = 12
 params.min_length = 10
-params.alleles = "B*07:02;B*44:03"
+params.alleles = "B*07:02;B*44:03;B*15:01"
 
 params.predict_tool = "netmhcpan-4.1"
 

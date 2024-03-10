@@ -292,3 +292,8 @@
 2024-02-18 20:25:25	7m 18s	hopeful_neumann	ERR	8bf035c781a1b85b2e392f339faf727c	cfe9910c-cdf1-4ebb-b121-38625b4cb0b9	nextflow run main.nf -resume
 2024-02-20 21:06:18	3m 16s	focused_lattes	ERR	4a5453053145ff09c85b333663472876	037d03d1-416d-41d9-9117-7704c2ff08b4	nextflow run main.nf
 2024-02-20 21:10:43	27m 27s	modest_mcclintock	OK	4a5453053145ff09c85b333663472876	037d03d1-416d-41d9-9117-7704c2ff08b4	nextflow run main.nf -resume
+2024-03-09 21:13:39	16.7s	tiny_angela	ERR	5c5397c4b07e37ccc80c3abe1e86327d	fe42605a-49b9-493b-9fff-2f89eec4ba62	nextflow run main.nf
+2024-03-09 21:14:07	3m 40s	backstabbing_golick	ERR	5c5397c4b07e37ccc80c3abe1e86327d	1ec897d8-1183-4b08-b785-a2186b4bf013	nextflow run main.nf
+2024-03-09 21:22:58	27m 12s	evil_ramanujan	ERR	5c5397c4b07e37ccc80c3abe1e86327d	1ec897d8-1183-4b08-b785-a2186b4bf013	nextflow run main.nf -resume
+2024-03-09 21:54:09	15m 52s	cheesy_nightingale	ERR	5c5397c4b07e37ccc80c3abe1e86327d	6b4da7e0-7436-4160-92e0-bbf851ae1c5a	nextflow run main.nf
+2024-03-09 22:20:09	34m 58s	hopeful_poisson	OK	5c5397c4b07e37ccc80c3abe1e86327d	b3407fb2-4cb7-4d06-8f63-f92900409311	nextflow run main.nf

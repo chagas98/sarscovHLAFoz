@@ -1,267 +1,426 @@
-Feb-20 21:10:41.585 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf -resume
-Feb-20 21:10:41.853 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
-Feb-20 21:10:41.884 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/samuel/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
-Feb-20 21:10:41.907 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
-Feb-20 21:10:41.909 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
-Feb-20 21:10:41.917 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
-Feb-20 21:10:41.935 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
-Feb-20 21:10:41.964 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/nextflow.config
-Feb-20 21:10:41.966 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/nextflow.config
-Feb-20 21:10:42.005 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
-Feb-20 21:10:42.901 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
-Feb-20 21:10:42.917 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [modest_mcclintock] DSL2 - revision: 4a54530531
-Feb-20 21:10:42.918 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
-Feb-20 21:10:42.919 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
-Feb-20 21:10:42.932 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/samuel/.nextflow/secrets/store.json
-Feb-20 21:10:42.939 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@7a485a36] - activable => nextflow.secret.LocalSecretsProvider@7a485a36
-Feb-20 21:10:43.028 [main] DEBUG nextflow.Session - Session UUID: 037d03d1-416d-41d9-9117-7704c2ff08b4
-Feb-20 21:10:43.028 [main] DEBUG nextflow.Session - Run name: modest_mcclintock
-Feb-20 21:10:43.029 [main] DEBUG nextflow.Session - Executor pool size: 4
-Feb-20 21:10:43.037 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
-Feb-20 21:10:43.063 [main] DEBUG nextflow.cli.CmdRun - 
+Mar-09 22:20:06.927 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf
+Mar-09 22:20:07.501 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Mar-09 22:20:07.579 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/samuel/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Mar-09 22:20:07.604 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Mar-09 22:20:07.608 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Mar-09 22:20:07.615 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Mar-09 22:20:07.642 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Mar-09 22:20:07.684 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/nextflow.config
+Mar-09 22:20:07.688 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/nextflow.config
+Mar-09 22:20:07.725 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Mar-09 22:20:09.004 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Mar-09 22:20:09.045 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [hopeful_poisson] DSL2 - revision: 5c5397c4b0
+Mar-09 22:20:09.046 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Mar-09 22:20:09.047 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Mar-09 22:20:09.082 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/samuel/.nextflow/secrets/store.json
+Mar-09 22:20:09.093 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@40f35e52] - activable => nextflow.secret.LocalSecretsProvider@40f35e52
+Mar-09 22:20:09.286 [main] DEBUG nextflow.Session - Session UUID: b3407fb2-4cb7-4d06-8f63-f92900409311
+Mar-09 22:20:09.287 [main] DEBUG nextflow.Session - Run name: hopeful_poisson
+Mar-09 22:20:09.289 [main] DEBUG nextflow.Session - Executor pool size: 4
+Mar-09 22:20:09.310 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Mar-09 22:20:09.326 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-09 22:20:09.362 [main] DEBUG nextflow.cli.CmdRun - 
   Version: 23.10.1 build 5891
-  Created: 12-01-2024 22:01 UTC (19:01 BRST)
-  System: Linux 6.5.0-18-generic
-  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 21-internal-adhoc.conda.src
+  Created: 12-01-2024 22:01 UTC (20:01 BRST)
+  System: Linux 6.5.0-25-generic
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.1+13-LTS
   Encoding: UTF-8 (UTF-8)
-  Process: 63259@schagaspc [127.0.1.1]
-  CPUs: 4 - Mem: 15.5 GB (2.3 GB) - Swap: 2 GB (2 GB) - Virtual threads ON
-Feb-20 21:10:43.135 [main] DEBUG nextflow.Session - Work-dir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work [ext2/ext3]
-Feb-20 21:10:43.156 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
-Feb-20 21:10:43.171 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
-Feb-20 21:10:43.201 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
-Feb-20 21:10:43.214 [main] DEBUG nextflow.util.CustomPoolFactory - Creating virtual thread pool
-Feb-20 21:10:43.321 [main] DEBUG nextflow.Session - Session start
-Feb-20 21:10:43.577 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
-Feb-20 21:10:44.133 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_GISAID_SEQUENCES|GET_REFSEQ_SARS` matches process GET_REFSEQ_SARS
-Feb-20 21:10:44.168 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Feb-20 21:10:44.169 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Feb-20 21:10:44.177 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
-Feb-20 21:10:44.186 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.5 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
-Feb-20 21:10:44.189 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
-Feb-20 21:10:44.304 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_GISAID_SEQUENCES|GET_REFSEQ_SARS` matches process GET_GISAID_SEQUENCES
-Feb-20 21:10:44.305 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Feb-20 21:10:44.306 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Feb-20 21:10:44.312 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process SELECT_BY_LINEAGE
-Feb-20 21:10:44.314 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Feb-20 21:10:44.314 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Feb-20 21:10:44.339 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process RUN_MAPPING_MINIMAP2
-Feb-20 21:10:44.344 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Feb-20 21:10:44.344 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Feb-20 21:10:44.351 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process VARIANT_CALLER
-Feb-20 21:10:44.354 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Feb-20 21:10:44.355 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Feb-20 21:10:44.360 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process RUN_ANNOT_SNPEFF
-Feb-20 21:10:44.361 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Feb-20 21:10:44.362 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Feb-20 21:10:44.369 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:RUN_EPYTOPE_PREDICTION` matches process RUN_EPYTOPE_PREDICTION
-Feb-20 21:10:44.371 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Feb-20 21:10:44.371 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Feb-20 21:10:44.377 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: GET_REFSEQ_SARS, SELECT_BY_LINEAGE, VARIANT_CALLER, RUN_MAPPING_MINIMAP2, RUN_EPYTOPE_PREDICTION, RUN_ANNOT_SNPEFF, GET_GISAID_SEQUENCES
-Feb-20 21:10:44.379 [main] DEBUG nextflow.Session - Igniting dataflow network (7)
-Feb-20 21:10:44.380 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_REFSEQ_SARS
-Feb-20 21:10:44.382 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_GISAID_SEQUENCES
-Feb-20 21:10:44.385 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SELECT_BY_LINEAGE
-Feb-20 21:10:44.387 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_MAPPING_MINIMAP2
-Feb-20 21:10:44.391 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > VARIANT_CALLER
-Feb-20 21:10:44.395 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_ANNOT_SNPEFF
-Feb-20 21:10:44.397 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_EPYTOPE_PREDICTION
-Feb-20 21:10:44.399 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
-  Script_1f5cbed32729961f: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/main.nf
+  Process: 347022@schagaspc [127.0.1.1]
+  CPUs: 4 - Mem: 15.5 GB (5.8 GB) - Swap: 2 GB (2 GB)
+Mar-09 22:20:09.443 [main] DEBUG nextflow.Session - Work-dir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work [ext2/ext3]
+Mar-09 22:20:09.491 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Mar-09 22:20:09.524 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Mar-09 22:20:09.632 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Mar-09 22:20:09.672 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Mar-09 22:20:09.825 [main] DEBUG nextflow.Session - Session start
+Mar-09 22:20:10.544 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Mar-09 22:20:11.210 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_GISAID_SEQUENCES|GET_REFSEQ_SARS` matches process GET_REFSEQ_SARS
+Mar-09 22:20:11.282 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 22:20:11.283 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 22:20:11.299 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Mar-09 22:20:11.306 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.5 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Mar-09 22:20:11.312 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Mar-09 22:20:11.665 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_GISAID_SEQUENCES|GET_REFSEQ_SARS` matches process GET_GISAID_SEQUENCES
+Mar-09 22:20:11.667 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 22:20:11.667 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 22:20:11.693 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process SELECT_BY_LINEAGE
+Mar-09 22:20:11.695 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 22:20:11.696 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 22:20:11.787 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process RUN_MAPPING_MINIMAP2
+Mar-09 22:20:11.790 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 22:20:11.790 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 22:20:11.818 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process VARIANT_CALLER
+Mar-09 22:20:11.823 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 22:20:11.823 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 22:20:11.835 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process RUN_ANNOT_SNPEFF
+Mar-09 22:20:11.843 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 22:20:11.845 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 22:20:11.853 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:RUN_EPYTOPE_PREDICTION` matches process RUN_EPYTOPE_PREDICTION
+Mar-09 22:20:11.860 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 22:20:11.861 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 22:20:11.899 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: GET_REFSEQ_SARS, SELECT_BY_LINEAGE, VARIANT_CALLER, RUN_MAPPING_MINIMAP2, RUN_EPYTOPE_PREDICTION, RUN_ANNOT_SNPEFF, GET_GISAID_SEQUENCES
+Mar-09 22:20:11.900 [main] DEBUG nextflow.Session - Igniting dataflow network (7)
+Mar-09 22:20:11.901 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_REFSEQ_SARS
+Mar-09 22:20:11.910 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_GISAID_SEQUENCES
+Mar-09 22:20:11.922 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SELECT_BY_LINEAGE
+Mar-09 22:20:11.926 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_MAPPING_MINIMAP2
+Mar-09 22:20:11.927 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > VARIANT_CALLER
+Mar-09 22:20:11.927 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_ANNOT_SNPEFF
+Mar-09 22:20:11.929 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_EPYTOPE_PREDICTION
+Mar-09 22:20:11.930 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_75f0c500e5861301: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/main.nf
   Script_9b0cded9767e075a: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/./modules.nf
-Feb-20 21:10:44.399 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
-Feb-20 21:10:44.399 [main] DEBUG nextflow.Session - Session await
-Feb-20 21:10:44.551 [Actor Thread 15] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/home/samuel/anaconda3/envs/epytope2; path=/home/samuel/anaconda3/envs/epytope2
-Feb-20 21:10:44.704 [Actor Thread 12] INFO  nextflow.processor.TaskProcessor - [03/bbc63d] Cached process > GET_GISAID_SEQUENCES
-Feb-20 21:10:44.704 [Actor Thread 11] INFO  nextflow.processor.TaskProcessor - [07/b2bdea] Cached process > GET_REFSEQ_SARS
-Feb-20 21:10:44.753 [Actor Thread 21] INFO  nextflow.processor.TaskProcessor - [0e/74745f] Cached process > SELECT_BY_LINEAGE
-Feb-20 21:10:44.841 [Actor Thread 29] INFO  nextflow.processor.TaskProcessor - [a2/ae458b] Cached process > RUN_MAPPING_MINIMAP2 (1)
-Feb-20 21:10:44.857 [Actor Thread 31] INFO  nextflow.processor.TaskProcessor - [42/5db47a] Cached process > RUN_MAPPING_MINIMAP2 (2)
-Feb-20 21:10:44.864 [Actor Thread 35] INFO  nextflow.processor.TaskProcessor - [19/eb664a] Cached process > RUN_MAPPING_MINIMAP2 (3)
-Feb-20 21:10:44.875 [Actor Thread 38] INFO  nextflow.processor.TaskProcessor - [98/5a7b76] Cached process > RUN_MAPPING_MINIMAP2 (4)
-Feb-20 21:10:44.884 [Actor Thread 41] INFO  nextflow.processor.TaskProcessor - [03/98ede8] Cached process > VARIANT_CALLER (1)
-Feb-20 21:10:44.916 [Actor Thread 45] INFO  nextflow.processor.TaskProcessor - [80/b055f7] Cached process > VARIANT_CALLER (3)
-Feb-20 21:10:44.922 [Actor Thread 44] INFO  nextflow.processor.TaskProcessor - [ef/568219] Cached process > VARIANT_CALLER (2)
-Feb-20 21:10:44.951 [Actor Thread 49] INFO  nextflow.processor.TaskProcessor - [8c/88009a] Cached process > RUN_MAPPING_MINIMAP2 (5)
-Feb-20 21:10:44.964 [Actor Thread 58] INFO  nextflow.processor.TaskProcessor - [e3/5ef5e8] Cached process > RUN_ANNOT_SNPEFF (2)
-Feb-20 21:10:44.974 [Actor Thread 57] INFO  nextflow.processor.TaskProcessor - [d8/4953ed] Cached process > RUN_ANNOT_SNPEFF (1)
-Feb-20 21:10:44.980 [Actor Thread 54] INFO  nextflow.processor.TaskProcessor - [1d/5ce4e4] Cached process > VARIANT_CALLER (4)
-Feb-20 21:10:44.984 [Actor Thread 66] INFO  nextflow.processor.TaskProcessor - [b7/f693a4] Cached process > VARIANT_CALLER (5)
-Feb-20 21:10:44.999 [Actor Thread 55] INFO  nextflow.processor.TaskProcessor - [3e/978605] Cached process > RUN_MAPPING_MINIMAP2 (6)
-Feb-20 21:10:45.013 [Actor Thread 69] INFO  nextflow.processor.TaskProcessor - [94/e82547] Cached process > RUN_ANNOT_SNPEFF (4)
-Feb-20 21:10:45.020 [Actor Thread 59] INFO  nextflow.processor.TaskProcessor - [bd/849063] Cached process > RUN_ANNOT_SNPEFF (3)
-Feb-20 21:10:45.027 [Actor Thread 72] INFO  nextflow.processor.TaskProcessor - [bb/b1abbb] Cached process > RUN_MAPPING_MINIMAP2 (8)
-Feb-20 21:10:45.028 [Actor Thread 67] INFO  nextflow.processor.TaskProcessor - [67/a12d4a] Cached process > RUN_MAPPING_MINIMAP2 (7)
-Feb-20 21:10:45.052 [Actor Thread 77] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/home/samuel/anaconda3/envs/epytope; path=/home/samuel/anaconda3/envs/epytope
-Feb-20 21:10:45.068 [Actor Thread 76] INFO  nextflow.processor.TaskProcessor - [d6/b356b3] Cached process > RUN_ANNOT_SNPEFF (5)
-Feb-20 21:10:45.092 [Actor Thread 78] INFO  nextflow.processor.TaskProcessor - [d0/7dd5fd] Cached process > RUN_MAPPING_MINIMAP2 (9)
-Feb-20 21:10:45.163 [Actor Thread 86] INFO  nextflow.processor.TaskProcessor - [f8/be940e] Cached process > RUN_MAPPING_MINIMAP2 (10)
-Feb-20 21:10:45.164 [Actor Thread 89] INFO  nextflow.processor.TaskProcessor - [75/582ee5] Cached process > VARIANT_CALLER (8)
-Feb-20 21:10:45.170 [Actor Thread 85] INFO  nextflow.processor.TaskProcessor - [9a/68ab97] Cached process > VARIANT_CALLER (6)
-Feb-20 21:10:45.177 [Actor Thread 88] INFO  nextflow.processor.TaskProcessor - [16/0a2a8d] Cached process > VARIANT_CALLER (7)
-Feb-20 21:10:45.179 [Actor Thread 90] INFO  nextflow.processor.TaskProcessor - [cd/2abc23] Cached process > VARIANT_CALLER (9)
-Feb-20 21:10:45.204 [Actor Thread 95] INFO  nextflow.processor.TaskProcessor - [d2/8954b9] Cached process > RUN_MAPPING_MINIMAP2 (11)
-Feb-20 21:10:45.211 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:10:45.214 [Task submitter] INFO  nextflow.Session - [67/b98385] Submitted process > RUN_EPYTOPE_PREDICTION (1)
-Feb-20 21:10:45.223 [Actor Thread 102] INFO  nextflow.processor.TaskProcessor - [44/3cf5b5] Cached process > RUN_ANNOT_SNPEFF (6)
-Feb-20 21:10:45.228 [Actor Thread 105] INFO  nextflow.processor.TaskProcessor - [53/327a66] Cached process > RUN_ANNOT_SNPEFF (7)
-Feb-20 21:10:45.259 [Actor Thread 109] INFO  nextflow.processor.TaskProcessor - [63/dff3c4] Cached process > RUN_MAPPING_MINIMAP2 (12)
-Feb-20 21:10:45.315 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:10:45.316 [Task submitter] INFO  nextflow.Session - [6e/b793bf] Submitted process > RUN_EPYTOPE_PREDICTION (2)
-Feb-20 21:10:45.356 [Actor Thread 107] INFO  nextflow.processor.TaskProcessor - [9f/736f63] Cached process > RUN_ANNOT_SNPEFF (8)
-Feb-20 21:10:45.379 [Actor Thread 114] INFO  nextflow.processor.TaskProcessor - [05/4cfcc8] Cached process > RUN_MAPPING_MINIMAP2 (13)
-Feb-20 21:10:45.427 [Actor Thread 123] INFO  nextflow.processor.TaskProcessor - [8b/9d7e48] Cached process > RUN_ANNOT_SNPEFF (9)
-Feb-20 21:10:45.534 [Actor Thread 125] INFO  nextflow.processor.TaskProcessor - [82/d12c98] Cached process > RUN_MAPPING_MINIMAP2 (14)
-Feb-20 21:10:45.604 [Actor Thread 129] INFO  nextflow.processor.TaskProcessor - [b5/e8b040] Cached process > RUN_MAPPING_MINIMAP2 (15)
-Feb-20 21:10:45.612 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:10:45.613 [Task submitter] INFO  nextflow.Session - [c1/b624b0] Submitted process > RUN_EPYTOPE_PREDICTION (3)
-Feb-20 21:10:45.640 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:10:45.641 [Task submitter] INFO  nextflow.Session - [63/592cc7] Submitted process > RUN_EPYTOPE_PREDICTION (4)
-Feb-20 21:10:45.728 [Actor Thread 130] INFO  nextflow.processor.TaskProcessor - [85/137305] Cached process > RUN_MAPPING_MINIMAP2 (16)
-Feb-20 21:10:45.849 [Actor Thread 135] INFO  nextflow.processor.TaskProcessor - [8e/4c980e] Cached process > VARIANT_CALLER (10)
-Feb-20 21:10:45.904 [Actor Thread 137] INFO  nextflow.processor.TaskProcessor - [e7/9717ec] Cached process > RUN_MAPPING_MINIMAP2 (17)
-Feb-20 21:10:45.987 [Actor Thread 143] INFO  nextflow.processor.TaskProcessor - [cc/840924] Cached process > RUN_MAPPING_MINIMAP2 (18)
-Feb-20 21:10:46.024 [Actor Thread 144] INFO  nextflow.processor.TaskProcessor - [fc/7320c0] Cached process > VARIANT_CALLER (11)
-Feb-20 21:10:46.061 [Actor Thread 147] INFO  nextflow.processor.TaskProcessor - [2e/b4d8b4] Cached process > VARIANT_CALLER (12)
-Feb-20 21:10:46.088 [Actor Thread 149] INFO  nextflow.processor.TaskProcessor - [28/82803c] Cached process > VARIANT_CALLER (13)
-Feb-20 21:10:46.130 [Actor Thread 150] INFO  nextflow.processor.TaskProcessor - [fd/759ae7] Cached process > RUN_MAPPING_MINIMAP2 (19)
-Feb-20 21:10:46.138 [Actor Thread 153] INFO  nextflow.processor.TaskProcessor - [c4/65daf9] Cached process > RUN_MAPPING_MINIMAP2 (20)
-Feb-20 21:10:46.273 [Actor Thread 155] INFO  nextflow.processor.TaskProcessor - [14/4ed092] Cached process > RUN_MAPPING_MINIMAP2 (21)
-Feb-20 21:10:46.308 [Actor Thread 161] INFO  nextflow.processor.TaskProcessor - [03/6d399f] Cached process > VARIANT_CALLER (14)
-Feb-20 21:10:46.464 [Actor Thread 166] INFO  nextflow.processor.TaskProcessor - [bf/accf76] Cached process > RUN_ANNOT_SNPEFF (10)
-Feb-20 21:10:46.496 [Actor Thread 168] INFO  nextflow.processor.TaskProcessor - [ec/7d6b30] Cached process > RUN_ANNOT_SNPEFF (11)
-Feb-20 21:10:46.566 [Actor Thread 173] INFO  nextflow.processor.TaskProcessor - [91/cced71] Cached process > RUN_ANNOT_SNPEFF (12)
-Feb-20 21:10:46.583 [Actor Thread 164] INFO  nextflow.processor.TaskProcessor - [6b/547868] Cached process > VARIANT_CALLER (15)
-Feb-20 21:10:46.753 [Actor Thread 178] INFO  nextflow.processor.TaskProcessor - [15/476794] Cached process > VARIANT_CALLER (16)
-Feb-20 21:10:46.773 [Actor Thread 183] INFO  nextflow.processor.TaskProcessor - [8e/8de126] Cached process > RUN_ANNOT_SNPEFF (13)
-Feb-20 21:10:46.791 [Actor Thread 192] INFO  nextflow.processor.TaskProcessor - [26/cf84bb] Cached process > VARIANT_CALLER (17)
-Feb-20 21:10:46.880 [Actor Thread 195] INFO  nextflow.processor.TaskProcessor - [dc/f30614] Cached process > VARIANT_CALLER (18)
-Feb-20 21:10:46.911 [Actor Thread 198] INFO  nextflow.processor.TaskProcessor - [ca/92cf7d] Cached process > VARIANT_CALLER (19)
-Feb-20 21:10:47.000 [Actor Thread 202] INFO  nextflow.processor.TaskProcessor - [b7/6878e6] Cached process > RUN_ANNOT_SNPEFF (14)
-Feb-20 21:10:47.004 [Actor Thread 199] INFO  nextflow.processor.TaskProcessor - [64/a760a7] Cached process > VARIANT_CALLER (20)
-Feb-20 21:10:47.032 [Actor Thread 206] INFO  nextflow.processor.TaskProcessor - [1b/2afadf] Cached process > RUN_ANNOT_SNPEFF (15)
-Feb-20 21:10:47.058 [Actor Thread 209] INFO  nextflow.processor.TaskProcessor - [e7/5fd3ac] Cached process > RUN_ANNOT_SNPEFF (16)
-Feb-20 21:10:47.108 [Actor Thread 205] INFO  nextflow.processor.TaskProcessor - [65/6cf362] Cached process > VARIANT_CALLER (21)
-Feb-20 21:10:47.191 [Actor Thread 211] INFO  nextflow.processor.TaskProcessor - [6a/16b152] Cached process > RUN_ANNOT_SNPEFF (17)
-Feb-20 21:10:47.299 [Actor Thread 216] INFO  nextflow.processor.TaskProcessor - [07/fd0685] Cached process > RUN_ANNOT_SNPEFF (18)
-Feb-20 21:10:47.402 [Actor Thread 228] INFO  nextflow.processor.TaskProcessor - [fb/84399f] Cached process > RUN_ANNOT_SNPEFF (20)
-Feb-20 21:10:47.415 [Actor Thread 220] INFO  nextflow.processor.TaskProcessor - [4a/d651aa] Cached process > RUN_ANNOT_SNPEFF (19)
-Feb-20 21:10:47.507 [Actor Thread 234] INFO  nextflow.processor.TaskProcessor - [d7/0c341a] Cached process > RUN_ANNOT_SNPEFF (21)
-Feb-20 21:11:24.694 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 31; name: RUN_EPYTOPE_PREDICTION (4); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/63/592cc7b38e306ed16896f5239a96b2]
-Feb-20 21:11:24.698 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:11:24.702 [Task submitter] INFO  nextflow.Session - [60/4cfdb9] Submitted process > RUN_EPYTOPE_PREDICTION (5)
-Feb-20 21:13:12.419 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 23; name: RUN_EPYTOPE_PREDICTION (1); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/67/b98385d3057432177fbae79f3223af]
-Feb-20 21:13:12.422 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:13:12.422 [Task submitter] INFO  nextflow.Session - [65/eb648a] Submitted process > RUN_EPYTOPE_PREDICTION (6)
-Feb-20 21:13:29.421 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 24; name: RUN_EPYTOPE_PREDICTION (2); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/b793bfefd067c204d9c804a894d5c7]
-Feb-20 21:13:29.424 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:13:29.425 [Task submitter] INFO  nextflow.Session - [ac/5118ca] Submitted process > RUN_EPYTOPE_PREDICTION (7)
-Feb-20 21:14:06.432 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 39; name: RUN_EPYTOPE_PREDICTION (5); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/60/4cfdb9dc34b9a21d101484d7d86bde]
-Feb-20 21:14:06.437 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:14:06.437 [Task submitter] INFO  nextflow.Session - [5c/d719e7] Submitted process > RUN_EPYTOPE_PREDICTION (9)
-Feb-20 21:14:23.084 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 30; name: RUN_EPYTOPE_PREDICTION (3); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c1/b624b03dc11e18195eba5019dcd8b3]
-Feb-20 21:14:23.089 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:14:23.089 [Task submitter] INFO  nextflow.Session - [ae/1a1776] Submitted process > RUN_EPYTOPE_PREDICTION (8)
-Feb-20 21:15:06.618 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 47; name: RUN_EPYTOPE_PREDICTION (8); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ae/1a1776b606dfb26750d6532dc4bc79]
-Feb-20 21:15:06.622 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:15:06.622 [Task submitter] INFO  nextflow.Session - [49/703075] Submitted process > RUN_EPYTOPE_PREDICTION (10)
-Feb-20 21:15:10.718 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 42; name: RUN_EPYTOPE_PREDICTION (6); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/65/eb648a85529490dcdb642fdd7fd19b]
-Feb-20 21:15:10.723 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:15:10.727 [Task submitter] INFO  nextflow.Session - [90/637ea4] Submitted process > RUN_EPYTOPE_PREDICTION (11)
-Feb-20 21:15:44.308 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
-~> TaskHandler[id: 43; name: RUN_EPYTOPE_PREDICTION (7); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ac/5118ca1e1c1ecff43f6d768ec898cc]
-~> TaskHandler[id: 56; name: RUN_EPYTOPE_PREDICTION (9); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/5c/d719e748ce51486911b3bf5a1271d9]
-~> TaskHandler[id: 62; name: RUN_EPYTOPE_PREDICTION (10); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/49/703075fb8efe30b7e56f87cd625676]
-~> TaskHandler[id: 63; name: RUN_EPYTOPE_PREDICTION (11); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/637ea42a9f711b5fe246e0af50bb91]
-Feb-20 21:15:45.747 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 10 -- tasks to be submitted are shown below
-~> TaskHandler[id: 65; name: RUN_EPYTOPE_PREDICTION (12); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c4/3c60b1168f344310e78dc53fad5193]
-~> TaskHandler[id: 70; name: RUN_EPYTOPE_PREDICTION (13); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/99/0c2702d3a609342744a2d02e6222e2]
-~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (14); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/dbe30b9e0a15eb4e863f70d657320b]
-~> TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (15); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a8/6c5f8c70ca3938f5ea1dc86a31b8d6]
-~> TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (16); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/54/1698175a3b83f277091cf561e18658]
-~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c3/bd5de5837d642bb25ffe46602c2463]
-~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/95/55296320c4182090599124358033c5]
-~> TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/986d87b46f57f049639dc7e3d51039]
-~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/cf/827311d47adbdab3b402cdcc542f42]
-~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/04a923d7b8a6275c7a56df7ad3cc83]
-Feb-20 21:18:19.073 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 43; name: RUN_EPYTOPE_PREDICTION (7); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ac/5118ca1e1c1ecff43f6d768ec898cc]
-Feb-20 21:18:19.078 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:18:19.078 [Task submitter] INFO  nextflow.Session - [c4/3c60b1] Submitted process > RUN_EPYTOPE_PREDICTION (12)
-Feb-20 21:20:44.324 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
-~> TaskHandler[id: 56; name: RUN_EPYTOPE_PREDICTION (9); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/5c/d719e748ce51486911b3bf5a1271d9]
-~> TaskHandler[id: 62; name: RUN_EPYTOPE_PREDICTION (10); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/49/703075fb8efe30b7e56f87cd625676]
-~> TaskHandler[id: 63; name: RUN_EPYTOPE_PREDICTION (11); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/637ea42a9f711b5fe246e0af50bb91]
-~> TaskHandler[id: 65; name: RUN_EPYTOPE_PREDICTION (12); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c4/3c60b1168f344310e78dc53fad5193]
-Feb-20 21:20:46.116 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 9 -- tasks to be submitted are shown below
-~> TaskHandler[id: 70; name: RUN_EPYTOPE_PREDICTION (13); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/99/0c2702d3a609342744a2d02e6222e2]
-~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (14); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/dbe30b9e0a15eb4e863f70d657320b]
-~> TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (15); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a8/6c5f8c70ca3938f5ea1dc86a31b8d6]
-~> TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (16); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/54/1698175a3b83f277091cf561e18658]
-~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c3/bd5de5837d642bb25ffe46602c2463]
-~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/95/55296320c4182090599124358033c5]
-~> TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/986d87b46f57f049639dc7e3d51039]
-~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/cf/827311d47adbdab3b402cdcc542f42]
-~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/04a923d7b8a6275c7a56df7ad3cc83]
-Feb-20 21:21:26.038 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 56; name: RUN_EPYTOPE_PREDICTION (9); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/5c/d719e748ce51486911b3bf5a1271d9]
-Feb-20 21:21:26.058 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:21:26.059 [Task submitter] INFO  nextflow.Session - [99/0c2702] Submitted process > RUN_EPYTOPE_PREDICTION (13)
-Feb-20 21:22:12.975 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 62; name: RUN_EPYTOPE_PREDICTION (10); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/49/703075fb8efe30b7e56f87cd625676]
-Feb-20 21:22:12.979 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:22:12.979 [Task submitter] INFO  nextflow.Session - [90/dbe30b] Submitted process > RUN_EPYTOPE_PREDICTION (14)
-Feb-20 21:25:44.408 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
-~> TaskHandler[id: 63; name: RUN_EPYTOPE_PREDICTION (11); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/637ea42a9f711b5fe246e0af50bb91]
-~> TaskHandler[id: 65; name: RUN_EPYTOPE_PREDICTION (12); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c4/3c60b1168f344310e78dc53fad5193]
-~> TaskHandler[id: 70; name: RUN_EPYTOPE_PREDICTION (13); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/99/0c2702d3a609342744a2d02e6222e2]
-~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (14); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/dbe30b9e0a15eb4e863f70d657320b]
-Feb-20 21:25:47.053 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 7 -- tasks to be submitted are shown below
-~> TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (15); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a8/6c5f8c70ca3938f5ea1dc86a31b8d6]
-~> TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (16); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/54/1698175a3b83f277091cf561e18658]
-~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c3/bd5de5837d642bb25ffe46602c2463]
-~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/95/55296320c4182090599124358033c5]
-~> TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/986d87b46f57f049639dc7e3d51039]
-~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/cf/827311d47adbdab3b402cdcc542f42]
-~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/04a923d7b8a6275c7a56df7ad3cc83]
-Feb-20 21:26:57.512 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (14); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/dbe30b9e0a15eb4e863f70d657320b]
-Feb-20 21:26:57.516 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:26:57.523 [Task submitter] INFO  nextflow.Session - [a8/6c5f8c] Submitted process > RUN_EPYTOPE_PREDICTION (15)
-Feb-20 21:27:31.503 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 63; name: RUN_EPYTOPE_PREDICTION (11); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/637ea42a9f711b5fe246e0af50bb91]
-Feb-20 21:27:31.507 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:27:31.517 [Task submitter] INFO  nextflow.Session - [54/169817] Submitted process > RUN_EPYTOPE_PREDICTION (16)
-Feb-20 21:29:01.040 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 70; name: RUN_EPYTOPE_PREDICTION (13); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/99/0c2702d3a609342744a2d02e6222e2]
-Feb-20 21:29:01.043 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:29:01.043 [Task submitter] INFO  nextflow.Session - [c3/bd5de5] Submitted process > RUN_EPYTOPE_PREDICTION (17)
-Feb-20 21:30:25.662 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (15); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a8/6c5f8c70ca3938f5ea1dc86a31b8d6]
-Feb-20 21:30:25.665 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:30:25.665 [Task submitter] INFO  nextflow.Session - [95/552963] Submitted process > RUN_EPYTOPE_PREDICTION (18)
-Feb-20 21:30:44.497 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
-~> TaskHandler[id: 65; name: RUN_EPYTOPE_PREDICTION (12); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c4/3c60b1168f344310e78dc53fad5193]
-~> TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (16); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/54/1698175a3b83f277091cf561e18658]
-~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c3/bd5de5837d642bb25ffe46602c2463]
-~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/95/55296320c4182090599124358033c5]
-Feb-20 21:30:47.672 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 3 -- tasks to be submitted are shown below
-~> TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/986d87b46f57f049639dc7e3d51039]
-~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/cf/827311d47adbdab3b402cdcc542f42]
-~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/04a923d7b8a6275c7a56df7ad3cc83]
-Feb-20 21:31:31.539 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/95/55296320c4182090599124358033c5]
-Feb-20 21:31:31.543 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:31:31.544 [Task submitter] INFO  nextflow.Session - [90/986d87] Submitted process > RUN_EPYTOPE_PREDICTION (19)
-Feb-20 21:32:43.997 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (16); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/54/1698175a3b83f277091cf561e18658]
-Feb-20 21:32:44.000 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:32:44.000 [Task submitter] INFO  nextflow.Session - [cf/827311] Submitted process > RUN_EPYTOPE_PREDICTION (20)
-Feb-20 21:34:01.213 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c3/bd5de5837d642bb25ffe46602c2463]
-Feb-20 21:34:01.218 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-20 21:34:01.218 [Task submitter] INFO  nextflow.Session - [6e/04a923] Submitted process > RUN_EPYTOPE_PREDICTION (21)
-Feb-20 21:34:14.115 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/90/986d87b46f57f049639dc7e3d51039]
-Feb-20 21:34:46.307 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/cf/827311d47adbdab3b402cdcc542f42]
-Feb-20 21:35:34.011 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/04a923d7b8a6275c7a56df7ad3cc83]
-Feb-20 21:35:44.529 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
-~> TaskHandler[id: 65; name: RUN_EPYTOPE_PREDICTION (12); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c4/3c60b1168f344310e78dc53fad5193]
-Feb-20 21:38:09.776 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 65; name: RUN_EPYTOPE_PREDICTION (12); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c4/3c60b1168f344310e78dc53fad5193]
-Feb-20 21:38:09.799 [main] DEBUG nextflow.Session - Session await > all processes finished
-Feb-20 21:38:09.880 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
-Feb-20 21:38:09.881 [main] DEBUG nextflow.Session - Session await > all barriers passed
-Feb-20 21:38:09.891 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
-Feb-20 21:38:09.911 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=21; failedCount=0; ignoredCount=0; cachedCount=66; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=1h 39m 40s; failedDuration=0ms; cachedDuration=10m 21s;loadCpus=0; loadMemory=0; peakRunning=4; peakCpus=4; peakMemory=0; ]
-Feb-20 21:38:10.041 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
-Feb-20 21:38:10.091 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
-Feb-20 21:38:10.092 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
+Mar-09 22:20:11.930 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Mar-09 22:20:11.930 [main] DEBUG nextflow.Session - Session await
+Mar-09 22:20:12.163 [Actor Thread 5] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/home/samuel/anaconda3/envs/epytope2; path=/home/samuel/anaconda3/envs/epytope2
+Mar-09 22:20:12.325 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:12.339 [Task submitter] INFO  nextflow.Session - [76/741011] Submitted process > GET_GISAID_SEQUENCES
+Mar-09 22:20:12.348 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:12.349 [Task submitter] INFO  nextflow.Session - [11/cc0469] Submitted process > GET_REFSEQ_SARS
+Mar-09 22:20:16.987 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: GET_REFSEQ_SARS; status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/11/cc0469d7e70a854ccd8fe222f2ec50]
+Mar-09 22:20:17.028 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-09 22:20:47.154 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: GET_GISAID_SEQUENCES; status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/76/7410113a02a592601d0d95d0a4d3a4]
+Mar-09 22:20:47.171 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:47.172 [Task submitter] INFO  nextflow.Session - [8e/91a799] Submitted process > SELECT_BY_LINEAGE
+Mar-09 22:20:50.664 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: SELECT_BY_LINEAGE; status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/8e/91a7994772abb96970ecb053a12c4c]
+Mar-09 22:20:50.714 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:50.728 [Task submitter] INFO  nextflow.Session - [a8/b0c481] Submitted process > RUN_MAPPING_MINIMAP2 (1)
+Mar-09 22:20:50.734 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:50.735 [Task submitter] INFO  nextflow.Session - [f5/f2306c] Submitted process > RUN_MAPPING_MINIMAP2 (2)
+Mar-09 22:20:50.742 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:50.743 [Task submitter] INFO  nextflow.Session - [0c/31d3dd] Submitted process > RUN_MAPPING_MINIMAP2 (3)
+Mar-09 22:20:50.754 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:50.757 [Task submitter] INFO  nextflow.Session - [4a/0efad5] Submitted process > RUN_MAPPING_MINIMAP2 (4)
+Mar-09 22:20:57.264 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: RUN_MAPPING_MINIMAP2 (2); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/f5/f2306cb141c64c55598522cbdf3687]
+Mar-09 22:20:57.273 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:57.293 [Task submitter] INFO  nextflow.Session - [ca/3f3ca4] Submitted process > RUN_MAPPING_MINIMAP2 (5)
+Mar-09 22:20:57.785 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: RUN_MAPPING_MINIMAP2 (4); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/4a/0efad5599baca303a071372bd8794c]
+Mar-09 22:20:57.789 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:57.791 [Task submitter] INFO  nextflow.Session - [6d/26e66e] Submitted process > RUN_MAPPING_MINIMAP2 (9)
+Mar-09 22:20:58.032 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: RUN_MAPPING_MINIMAP2 (3); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/0c/31d3dd41db8574bc1cb6787151b3cb]
+Mar-09 22:20:58.052 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:58.052 [Task submitter] INFO  nextflow.Session - [63/9ebde4] Submitted process > RUN_MAPPING_MINIMAP2 (6)
+Mar-09 22:20:58.133 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: RUN_MAPPING_MINIMAP2 (1); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a8/b0c48100c1b2895092ce9560cc290d]
+Mar-09 22:20:58.137 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:20:58.137 [Task submitter] INFO  nextflow.Session - [48/8d5866] Submitted process > RUN_MAPPING_MINIMAP2 (7)
+Mar-09 22:21:04.582 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: RUN_MAPPING_MINIMAP2 (5); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ca/3f3ca4b40746b341c00cf69c8e5cc9]
+Mar-09 22:21:04.588 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:04.588 [Task submitter] INFO  nextflow.Session - [a4/6a083d] Submitted process > RUN_MAPPING_MINIMAP2 (8)
+Mar-09 22:21:05.452 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: RUN_MAPPING_MINIMAP2 (6); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/63/9ebde45d2f48446f2c8bfc29fba06b]
+Mar-09 22:21:05.469 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:05.469 [Task submitter] INFO  nextflow.Session - [54/4a973c] Submitted process > RUN_MAPPING_MINIMAP2 (11)
+Mar-09 22:21:05.480 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: RUN_MAPPING_MINIMAP2 (7); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/48/8d5866e31dba32ed5fe9107e2fe11c]
+Mar-09 22:21:05.483 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:05.483 [Task submitter] INFO  nextflow.Session - [a7/6379b7] Submitted process > RUN_MAPPING_MINIMAP2 (10)
+Mar-09 22:21:05.577 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 12; name: RUN_MAPPING_MINIMAP2 (9); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6d/26e66ef4f5b0ad5dfa879b549633ab]
+Mar-09 22:21:05.586 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:05.602 [Task submitter] INFO  nextflow.Session - [16/167e6a] Submitted process > RUN_MAPPING_MINIMAP2 (13)
+Mar-09 22:21:11.675 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: RUN_MAPPING_MINIMAP2 (8); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a4/6a083dfa13c3f7165f1558b01f20eb]
+Mar-09 22:21:11.681 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:11.692 [Task submitter] INFO  nextflow.Session - [c7/c6009c] Submitted process > RUN_MAPPING_MINIMAP2 (16)
+Mar-09 22:21:12.593 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 14; name: RUN_MAPPING_MINIMAP2 (11); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/54/4a973c5ba98701cf321a0651660bfa]
+Mar-09 22:21:12.610 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:12.610 [Task submitter] INFO  nextflow.Session - [ff/31fd0c] Submitted process > RUN_MAPPING_MINIMAP2 (17)
+Mar-09 22:21:12.619 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 16; name: RUN_MAPPING_MINIMAP2 (13); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/16/167e6a46e2646e2f1ec108f1146802]
+Mar-09 22:21:12.624 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:12.624 [Task submitter] INFO  nextflow.Session - [34/543cc2] Submitted process > RUN_MAPPING_MINIMAP2 (18)
+Mar-09 22:21:12.709 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 13; name: RUN_MAPPING_MINIMAP2 (10); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a7/6379b70176905a8015e85b2b1e3e3c]
+Mar-09 22:21:12.715 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:12.721 [Task submitter] INFO  nextflow.Session - [ef/3a1572] Submitted process > RUN_MAPPING_MINIMAP2 (12)
+Mar-09 22:21:19.317 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 19; name: RUN_MAPPING_MINIMAP2 (16); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c7/c6009cf2f335ebb7e82841cca9a162]
+Mar-09 22:21:19.323 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:19.323 [Task submitter] INFO  nextflow.Session - [56/13a8a3] Submitted process > RUN_MAPPING_MINIMAP2 (14)
+Mar-09 22:21:19.965 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 20; name: RUN_MAPPING_MINIMAP2 (17); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ff/31fd0c9fa689c35d69c33f2590482d]
+Mar-09 22:21:19.972 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:19.972 [Task submitter] INFO  nextflow.Session - [49/f1188a] Submitted process > RUN_MAPPING_MINIMAP2 (15)
+Mar-09 22:21:20.053 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 15; name: RUN_MAPPING_MINIMAP2 (12); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ef/3a15722cfd3e58a8cc9e4f7de298fb]
+Mar-09 22:21:20.056 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:20.063 [Task submitter] INFO  nextflow.Session - [9c/5eaa76] Submitted process > RUN_MAPPING_MINIMAP2 (19)
+Mar-09 22:21:20.172 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 21; name: RUN_MAPPING_MINIMAP2 (18); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/34/543cc250d80f55cb9332d3db391615]
+Mar-09 22:21:20.180 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:20.180 [Task submitter] INFO  nextflow.Session - [4f/e28ef4] Submitted process > RUN_MAPPING_MINIMAP2 (20)
+Mar-09 22:21:27.252 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 17; name: RUN_MAPPING_MINIMAP2 (14); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/56/13a8a3ca62f12407324f8d0c6a5d8d]
+Mar-09 22:21:27.257 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:27.262 [Task submitter] INFO  nextflow.Session - [b8/70b56e] Submitted process > RUN_MAPPING_MINIMAP2 (21)
+Mar-09 22:21:28.027 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 18; name: RUN_MAPPING_MINIMAP2 (15); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/49/f1188a6cbbd30a8df7508871e24882]
+Mar-09 22:21:28.037 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:28.037 [Task submitter] INFO  nextflow.Session - [00/f89e57] Submitted process > VARIANT_CALLER (1)
+Mar-09 22:21:28.426 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 23; name: RUN_MAPPING_MINIMAP2 (20); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/4f/e28ef4608f205df8f0df03612c7131]
+Mar-09 22:21:28.447 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:28.455 [Task submitter] INFO  nextflow.Session - [4c/317d27] Submitted process > VARIANT_CALLER (2)
+Mar-09 22:21:29.606 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 22; name: RUN_MAPPING_MINIMAP2 (19); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/9c/5eaa76f8dea9c28814d890afff5299]
+Mar-09 22:21:29.612 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:29.612 [Task submitter] INFO  nextflow.Session - [d1/f0a2b0] Submitted process > VARIANT_CALLER (3)
+Mar-09 22:21:34.667 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 25; name: VARIANT_CALLER (1); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/00/f89e577f1efad647698925e27f4714]
+Mar-09 22:21:34.670 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:34.680 [Task submitter] INFO  nextflow.Session - [4d/a21761] Submitted process > VARIANT_CALLER (4)
+Mar-09 22:21:35.110 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 26; name: VARIANT_CALLER (2); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/4c/317d2759e4dd48d45a7e4e25f87dbd]
+Mar-09 22:21:35.117 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:35.121 [Task submitter] INFO  nextflow.Session - [41/9d8a46] Submitted process > VARIANT_CALLER (5)
+Mar-09 22:21:35.141 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 24; name: RUN_MAPPING_MINIMAP2 (21); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/b8/70b56e0571941a15cf50d347b98115]
+Mar-09 22:21:35.156 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:35.156 [Task submitter] INFO  nextflow.Session - [ba/9879b9] Submitted process > VARIANT_CALLER (6)
+Mar-09 22:21:37.073 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 27; name: VARIANT_CALLER (3); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d1/f0a2b07f04fe3724ba297462600a59]
+Mar-09 22:21:37.081 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:37.106 [Task submitter] INFO  nextflow.Session - [f3/12661a] Submitted process > VARIANT_CALLER (7)
+Mar-09 22:21:40.930 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 30; name: VARIANT_CALLER (6); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ba/9879b966aa905119254bcd710a9cf0]
+Mar-09 22:21:40.952 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:40.953 [Task submitter] INFO  nextflow.Session - [56/fbdcc2] Submitted process > VARIANT_CALLER (8)
+Mar-09 22:21:40.988 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 28; name: VARIANT_CALLER (4); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/4d/a217619c5398e96ce20252450602cc]
+Mar-09 22:21:40.995 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:40.995 [Task submitter] INFO  nextflow.Session - [6e/99ecf1] Submitted process > VARIANT_CALLER (9)
+Mar-09 22:21:42.393 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 29; name: VARIANT_CALLER (5); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/41/9d8a46735c4f75cc1665a4a15de4f9]
+Mar-09 22:21:42.400 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:42.436 [Task submitter] INFO  nextflow.Session - [7b/78da87] Submitted process > VARIANT_CALLER (10)
+Mar-09 22:21:44.378 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 31; name: VARIANT_CALLER (7); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/f3/12661a5d6be7d0934c7ee8ebd43b8b]
+Mar-09 22:21:44.395 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:44.395 [Task submitter] INFO  nextflow.Session - [53/c55fbe] Submitted process > VARIANT_CALLER (11)
+Mar-09 22:21:47.902 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 33; name: VARIANT_CALLER (9); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6e/99ecf1672e0f06df067c3b80b8f577]
+Mar-09 22:21:47.909 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:47.922 [Task submitter] INFO  nextflow.Session - [69/4dfa7d] Submitted process > VARIANT_CALLER (12)
+Mar-09 22:21:47.954 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 32; name: VARIANT_CALLER (8); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/56/fbdcc21463681513f7017157fe1bc7]
+Mar-09 22:21:47.963 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:47.969 [Task submitter] INFO  nextflow.Session - [2d/e8a397] Submitted process > VARIANT_CALLER (13)
+Mar-09 22:21:49.677 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 34; name: VARIANT_CALLER (10); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/7b/78da87ec47a1267744f8f977214b40]
+Mar-09 22:21:49.681 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:49.684 [Task submitter] INFO  nextflow.Session - [b0/dbb2cb] Submitted process > VARIANT_CALLER (14)
+Mar-09 22:21:51.542 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 35; name: VARIANT_CALLER (11); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/53/c55fbec908f6d40f0d792de77bbbaf]
+Mar-09 22:21:51.548 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:51.554 [Task submitter] INFO  nextflow.Session - [5b/3658dd] Submitted process > VARIANT_CALLER (15)
+Mar-09 22:21:54.319 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 36; name: VARIANT_CALLER (12); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/69/4dfa7d97c87b2ab53f182f88e44f14]
+Mar-09 22:21:54.322 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:54.322 [Task submitter] INFO  nextflow.Session - [5b/1a93ba] Submitted process > VARIANT_CALLER (16)
+Mar-09 22:21:55.264 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 37; name: VARIANT_CALLER (13); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/2d/e8a3970234e5e25102d458b642b381]
+Mar-09 22:21:55.277 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:55.277 [Task submitter] INFO  nextflow.Session - [ea/a06b23] Submitted process > VARIANT_CALLER (17)
+Mar-09 22:21:56.817 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 38; name: VARIANT_CALLER (14); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/b0/dbb2cbebcfb843418d4d39ba1b3d39]
+Mar-09 22:21:56.824 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:56.824 [Task submitter] INFO  nextflow.Session - [40/711e14] Submitted process > VARIANT_CALLER (18)
+Mar-09 22:21:58.864 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 39; name: VARIANT_CALLER (15); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/5b/3658ddb4e997047ba9220d38ca9777]
+Mar-09 22:21:58.888 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:21:58.889 [Task submitter] INFO  nextflow.Session - [46/1f5c99] Submitted process > VARIANT_CALLER (19)
+Mar-09 22:22:00.803 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 40; name: VARIANT_CALLER (16); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/5b/1a93ba5ff93e16ac94cf6322f4e979]
+Mar-09 22:22:00.809 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:00.844 [Task submitter] INFO  nextflow.Session - [e5/221a2d] Submitted process > VARIANT_CALLER (20)
+Mar-09 22:22:02.323 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 41; name: VARIANT_CALLER (17); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ea/a06b237f97c74a2af260f5c46e87b0]
+Mar-09 22:22:02.328 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:02.329 [Task submitter] INFO  nextflow.Session - [1c/4dc262] Submitted process > RUN_ANNOT_SNPEFF (1)
+Mar-09 22:22:04.090 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 42; name: VARIANT_CALLER (18); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/40/711e14e02fd18b663eecfef7570f91]
+Mar-09 22:22:04.111 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:04.113 [Task submitter] INFO  nextflow.Session - [4c/501f79] Submitted process > RUN_ANNOT_SNPEFF (2)
+Mar-09 22:22:06.241 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 43; name: VARIANT_CALLER (19); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/46/1f5c99dda40d3655b7cd3857812efb]
+Mar-09 22:22:06.248 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:06.249 [Task submitter] INFO  nextflow.Session - [20/705c26] Submitted process > VARIANT_CALLER (21)
+Mar-09 22:22:08.109 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 44; name: VARIANT_CALLER (20); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/e5/221a2dd00c3335e9032f7ae4cceb49]
+Mar-09 22:22:08.131 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:08.132 [Task submitter] INFO  nextflow.Session - [45/08ddba] Submitted process > RUN_ANNOT_SNPEFF (3)
+Mar-09 22:22:16.930 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 47; name: VARIANT_CALLER (21); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/20/705c26b830cee8057ec76edd984a18]
+Mar-09 22:22:16.951 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:16.951 [Task submitter] INFO  nextflow.Session - [71/d4b5af] Submitted process > RUN_ANNOT_SNPEFF (4)
+Mar-09 22:22:18.891 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 45; name: RUN_ANNOT_SNPEFF (1); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/1c/4dc2628d7545b4f9e4688160b32502]
+Mar-09 22:22:18.894 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:18.894 [Task submitter] INFO  nextflow.Session - [82/07b203] Submitted process > RUN_ANNOT_SNPEFF (5)
+Mar-09 22:22:18.910 [Actor Thread 1] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/home/samuel/anaconda3/envs/epytope; path=/home/samuel/anaconda3/envs/epytope
+Mar-09 22:22:23.297 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 46; name: RUN_ANNOT_SNPEFF (2); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/4c/501f79c816e5284589a7989951513f]
+Mar-09 22:22:23.301 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:23.301 [Task submitter] INFO  nextflow.Session - [8c/d0d8c9] Submitted process > RUN_ANNOT_SNPEFF (6)
+Mar-09 22:22:26.390 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 48; name: RUN_ANNOT_SNPEFF (3); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/45/08ddbabe7bc7ca67c1614586bfe759]
+Mar-09 22:22:26.396 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:26.397 [Task submitter] INFO  nextflow.Session - [04/efc077] Submitted process > RUN_ANNOT_SNPEFF (7)
+Mar-09 22:22:34.102 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 49; name: RUN_ANNOT_SNPEFF (4); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/71/d4b5af39b2d35e75726dd34385d3ce]
+Mar-09 22:22:34.113 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:34.121 [Task submitter] INFO  nextflow.Session - [09/0f5e65] Submitted process > RUN_ANNOT_SNPEFF (8)
+Mar-09 22:22:37.294 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 50; name: RUN_ANNOT_SNPEFF (5); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/82/07b203902cb3c05f1e0c6cde8e2f43]
+Mar-09 22:22:37.305 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:37.308 [Task submitter] INFO  nextflow.Session - [b6/6bd4b4] Submitted process > RUN_ANNOT_SNPEFF (9)
+Mar-09 22:22:42.749 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 51; name: RUN_ANNOT_SNPEFF (6); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/8c/d0d8c970405d9a6c4af31b8023f4e9]
+Mar-09 22:22:42.755 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:42.755 [Task submitter] INFO  nextflow.Session - [af/fdd8a6] Submitted process > RUN_ANNOT_SNPEFF (10)
+Mar-09 22:22:47.281 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 52; name: RUN_ANNOT_SNPEFF (7); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/04/efc07798d9fd05082b4de34656a6de]
+Mar-09 22:22:47.304 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:47.307 [Task submitter] INFO  nextflow.Session - [a9/12d655] Submitted process > RUN_ANNOT_SNPEFF (11)
+Mar-09 22:22:54.057 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 53; name: RUN_ANNOT_SNPEFF (8); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/09/0f5e65e1d99d1c4458253aecfc36d9]
+Mar-09 22:22:54.060 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:54.060 [Task submitter] INFO  nextflow.Session - [96/4f490c] Submitted process > RUN_ANNOT_SNPEFF (12)
+Mar-09 22:22:57.743 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 54; name: RUN_ANNOT_SNPEFF (9); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/b6/6bd4b44cde62da92644292166af9e9]
+Mar-09 22:22:57.748 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:22:57.764 [Task submitter] INFO  nextflow.Session - [2c/52b584] Submitted process > RUN_ANNOT_SNPEFF (13)
+Mar-09 22:23:04.112 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 55; name: RUN_ANNOT_SNPEFF (10); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/af/fdd8a6c9a10fa0b85015d3f56cedbf]
+Mar-09 22:23:04.115 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:04.115 [Task submitter] INFO  nextflow.Session - [6a/6c45f5] Submitted process > RUN_ANNOT_SNPEFF (14)
+Mar-09 22:23:09.698 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 56; name: RUN_ANNOT_SNPEFF (11); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a9/12d6551f176433517f57b3a4b76f88]
+Mar-09 22:23:09.715 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:09.715 [Task submitter] INFO  nextflow.Session - [9e/19582f] Submitted process > RUN_ANNOT_SNPEFF (15)
+Mar-09 22:23:15.040 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 57; name: RUN_ANNOT_SNPEFF (12); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/96/4f490c64c7410290e25c391fe7c77b]
+Mar-09 22:23:15.060 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:15.061 [Task submitter] INFO  nextflow.Session - [58/377dd6] Submitted process > RUN_ANNOT_SNPEFF (16)
+Mar-09 22:23:20.126 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 58; name: RUN_ANNOT_SNPEFF (13); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/2c/52b584d40ed42c1ca53991bbefa0b0]
+Mar-09 22:23:20.132 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:20.133 [Task submitter] INFO  nextflow.Session - [68/5569e4] Submitted process > RUN_ANNOT_SNPEFF (17)
+Mar-09 22:23:26.730 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 59; name: RUN_ANNOT_SNPEFF (14); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6a/6c45f5252c42220af3c3e8be70d0c6]
+Mar-09 22:23:26.736 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:26.736 [Task submitter] INFO  nextflow.Session - [eb/dcfc4e] Submitted process > RUN_ANNOT_SNPEFF (18)
+Mar-09 22:23:30.672 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 60; name: RUN_ANNOT_SNPEFF (15); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/9e/19582f6357326acd52f2925cbce2e4]
+Mar-09 22:23:30.676 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:30.677 [Task submitter] INFO  nextflow.Session - [d0/7e72a7] Submitted process > RUN_ANNOT_SNPEFF (19)
+Mar-09 22:23:34.524 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 61; name: RUN_ANNOT_SNPEFF (16); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/58/377dd6130ec91e0dc050851fcb701d]
+Mar-09 22:23:34.528 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:34.528 [Task submitter] INFO  nextflow.Session - [b5/93c956] Submitted process > RUN_ANNOT_SNPEFF (20)
+Mar-09 22:23:42.446 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 62; name: RUN_ANNOT_SNPEFF (17); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/68/5569e4a6999281a863465eea4b07b5]
+Mar-09 22:23:42.472 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:42.473 [Task submitter] INFO  nextflow.Session - [c3/c0945c] Submitted process > RUN_ANNOT_SNPEFF (21)
+Mar-09 22:23:47.124 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 63; name: RUN_ANNOT_SNPEFF (18); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/eb/dcfc4e76eb81b380357ce349f93424]
+Mar-09 22:23:47.127 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:47.127 [Task submitter] INFO  nextflow.Session - [73/aee9e7] Submitted process > RUN_EPYTOPE_PREDICTION (1)
+Mar-09 22:23:51.747 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 64; name: RUN_ANNOT_SNPEFF (19); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d0/7e72a7084ee15b993ae7b233e1ee84]
+Mar-09 22:23:51.750 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:51.750 [Task submitter] INFO  nextflow.Session - [6d/0994ee] Submitted process > RUN_EPYTOPE_PREDICTION (2)
+Mar-09 22:23:56.982 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 65; name: RUN_ANNOT_SNPEFF (20); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/b5/93c956c8c29b15fe3eebdb67e89a44]
+Mar-09 22:23:56.992 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:23:57.003 [Task submitter] INFO  nextflow.Session - [d6/f86a16] Submitted process > RUN_EPYTOPE_PREDICTION (3)
+Mar-09 22:24:01.987 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 66; name: RUN_ANNOT_SNPEFF (21); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/c3/c0945cec7fd864645142352317cbd2]
+Mar-09 22:24:02.024 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:24:02.027 [Task submitter] INFO  nextflow.Session - [b3/75f910] Submitted process > RUN_EPYTOPE_PREDICTION (4)
+Mar-09 22:25:05.149 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 70; name: RUN_EPYTOPE_PREDICTION (4); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/b3/75f9101bf46c207d482d013db3d3a4]
+Mar-09 22:25:05.155 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:25:05.155 [Task submitter] INFO  nextflow.Session - [ca/7f9141] Submitted process > RUN_EPYTOPE_PREDICTION (5)
+Mar-09 22:25:11.457 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
+~> TaskHandler[id: 67; name: RUN_EPYTOPE_PREDICTION (1); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/73/aee9e7b9bf32a5ce704576d10d159f]
+~> TaskHandler[id: 68; name: RUN_EPYTOPE_PREDICTION (2); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6d/0994ee1273c27902c7df213e70efff]
+~> TaskHandler[id: 69; name: RUN_EPYTOPE_PREDICTION (3); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d6/f86a167674284b21ac1897b03f1fca]
+~> TaskHandler[id: 71; name: RUN_EPYTOPE_PREDICTION (5); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ca/7f914155d2b8aa27e94a901543c465]
+Mar-09 22:25:51.174 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 16 -- tasks to be submitted are shown below
+~> TaskHandler[id: 72; name: RUN_EPYTOPE_PREDICTION (6); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6c/08fc407fb1898e59417a74c189f398]
+~> TaskHandler[id: 73; name: RUN_EPYTOPE_PREDICTION (7); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/cf/85463014e6d7751311e33f9b404704]
+~> TaskHandler[id: 74; name: RUN_EPYTOPE_PREDICTION (8); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/9e/2eb7f0d6af23b7e24033678c1b088f]
+~> TaskHandler[id: 75; name: RUN_EPYTOPE_PREDICTION (9); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/28/8fab1cb7287f02c09bb9eccf537f45]
+~> TaskHandler[id: 76; name: RUN_EPYTOPE_PREDICTION (10); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/23/78c3198535b2acb6458a2380f0c196]
+~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (11); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d5/7c11b4493f5fb703666f51c316177f]
+~> TaskHandler[id: 78; name: RUN_EPYTOPE_PREDICTION (12); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/3c/67eee47ec0636ef9feec9259980507]
+~> TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (13); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/41/9030454c31330cc0a092f51bd8adc4]
+~> TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (14); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/57/5661d7978f4950ac0cc6009053539a]
+~> TaskHandler[id: 81; name: RUN_EPYTOPE_PREDICTION (15); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a9/ad298260c5f6b6517a8ee2dc5b659e]
+.. remaining tasks omitted.
+Mar-09 22:27:31.219 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 68; name: RUN_EPYTOPE_PREDICTION (2); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6d/0994ee1273c27902c7df213e70efff]
+Mar-09 22:27:31.224 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:27:31.224 [Task submitter] INFO  nextflow.Session - [6c/08fc40] Submitted process > RUN_EPYTOPE_PREDICTION (6)
+Mar-09 22:27:34.390 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 67; name: RUN_EPYTOPE_PREDICTION (1); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/73/aee9e7b9bf32a5ce704576d10d159f]
+Mar-09 22:27:34.396 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:27:34.396 [Task submitter] INFO  nextflow.Session - [cf/854630] Submitted process > RUN_EPYTOPE_PREDICTION (7)
+Mar-09 22:28:24.526 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 69; name: RUN_EPYTOPE_PREDICTION (3); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d6/f86a167674284b21ac1897b03f1fca]
+Mar-09 22:28:24.531 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:28:24.531 [Task submitter] INFO  nextflow.Session - [9e/2eb7f0] Submitted process > RUN_EPYTOPE_PREDICTION (8)
+Mar-09 22:28:35.629 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 72; name: RUN_EPYTOPE_PREDICTION (6); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6c/08fc407fb1898e59417a74c189f398]
+Mar-09 22:28:35.644 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:28:35.644 [Task submitter] INFO  nextflow.Session - [28/8fab1c] Submitted process > RUN_EPYTOPE_PREDICTION (9)
+Mar-09 22:28:58.185 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 71; name: RUN_EPYTOPE_PREDICTION (5); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/ca/7f914155d2b8aa27e94a901543c465]
+Mar-09 22:28:58.205 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:28:58.205 [Task submitter] INFO  nextflow.Session - [23/78c319] Submitted process > RUN_EPYTOPE_PREDICTION (10)
+Mar-09 22:30:04.864 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 73; name: RUN_EPYTOPE_PREDICTION (7); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/cf/85463014e6d7751311e33f9b404704]
+Mar-09 22:30:04.869 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:30:04.879 [Task submitter] INFO  nextflow.Session - [d5/7c11b4] Submitted process > RUN_EPYTOPE_PREDICTION (11)
+Mar-09 22:30:11.470 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
+~> TaskHandler[id: 74; name: RUN_EPYTOPE_PREDICTION (8); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/9e/2eb7f0d6af23b7e24033678c1b088f]
+~> TaskHandler[id: 75; name: RUN_EPYTOPE_PREDICTION (9); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/28/8fab1cb7287f02c09bb9eccf537f45]
+~> TaskHandler[id: 76; name: RUN_EPYTOPE_PREDICTION (10); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/23/78c3198535b2acb6458a2380f0c196]
+~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (11); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d5/7c11b4493f5fb703666f51c316177f]
+Mar-09 22:30:51.886 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 10 -- tasks to be submitted are shown below
+~> TaskHandler[id: 78; name: RUN_EPYTOPE_PREDICTION (12); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/3c/67eee47ec0636ef9feec9259980507]
+~> TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (13); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/41/9030454c31330cc0a092f51bd8adc4]
+~> TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (14); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/57/5661d7978f4950ac0cc6009053539a]
+~> TaskHandler[id: 81; name: RUN_EPYTOPE_PREDICTION (15); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a9/ad298260c5f6b6517a8ee2dc5b659e]
+~> TaskHandler[id: 82; name: RUN_EPYTOPE_PREDICTION (16); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6c/e7c3f391a60b32c75ab8a4e3a3b846]
+~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/36/a99783e73a9b78d8456efba53f8eb2]
+~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/16/794e8b54f01f262d423a5393e62b47]
+~> TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/27/54980a831186e8dbadf73d1c1e16eb]
+~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/f7/2cfaf9d3c9d85a0ef16b59b34a6df0]
+~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/e4/cf40a73dcda77cb45c42d7e5a4aeae]
+Mar-09 22:34:35.469 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 75; name: RUN_EPYTOPE_PREDICTION (9); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/28/8fab1cb7287f02c09bb9eccf537f45]
+Mar-09 22:34:35.474 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:34:35.475 [Task submitter] INFO  nextflow.Session - [3c/67eee4] Submitted process > RUN_EPYTOPE_PREDICTION (12)
+Mar-09 22:35:11.519 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
+~> TaskHandler[id: 74; name: RUN_EPYTOPE_PREDICTION (8); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/9e/2eb7f0d6af23b7e24033678c1b088f]
+~> TaskHandler[id: 76; name: RUN_EPYTOPE_PREDICTION (10); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/23/78c3198535b2acb6458a2380f0c196]
+~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (11); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d5/7c11b4493f5fb703666f51c316177f]
+~> TaskHandler[id: 78; name: RUN_EPYTOPE_PREDICTION (12); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/3c/67eee47ec0636ef9feec9259980507]
+Mar-09 22:35:52.484 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 9 -- tasks to be submitted are shown below
+~> TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (13); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/41/9030454c31330cc0a092f51bd8adc4]
+~> TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (14); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/57/5661d7978f4950ac0cc6009053539a]
+~> TaskHandler[id: 81; name: RUN_EPYTOPE_PREDICTION (15); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a9/ad298260c5f6b6517a8ee2dc5b659e]
+~> TaskHandler[id: 82; name: RUN_EPYTOPE_PREDICTION (16); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6c/e7c3f391a60b32c75ab8a4e3a3b846]
+~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/36/a99783e73a9b78d8456efba53f8eb2]
+~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/16/794e8b54f01f262d423a5393e62b47]
+~> TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/27/54980a831186e8dbadf73d1c1e16eb]
+~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/f7/2cfaf9d3c9d85a0ef16b59b34a6df0]
+~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/e4/cf40a73dcda77cb45c42d7e5a4aeae]
+Mar-09 22:37:01.549 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 74; name: RUN_EPYTOPE_PREDICTION (8); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/9e/2eb7f0d6af23b7e24033678c1b088f]
+Mar-09 22:37:01.562 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:37:01.562 [Task submitter] INFO  nextflow.Session - [41/903045] Submitted process > RUN_EPYTOPE_PREDICTION (13)
+Mar-09 22:37:11.613 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 76; name: RUN_EPYTOPE_PREDICTION (10); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/23/78c3198535b2acb6458a2380f0c196]
+Mar-09 22:37:11.618 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:37:11.618 [Task submitter] INFO  nextflow.Session - [57/5661d7] Submitted process > RUN_EPYTOPE_PREDICTION (14)
+Mar-09 22:40:11.527 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
+~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (11); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d5/7c11b4493f5fb703666f51c316177f]
+~> TaskHandler[id: 78; name: RUN_EPYTOPE_PREDICTION (12); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/3c/67eee47ec0636ef9feec9259980507]
+~> TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (13); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/41/9030454c31330cc0a092f51bd8adc4]
+~> TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (14); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/57/5661d7978f4950ac0cc6009053539a]
+Mar-09 22:40:52.643 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 7 -- tasks to be submitted are shown below
+~> TaskHandler[id: 81; name: RUN_EPYTOPE_PREDICTION (15); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a9/ad298260c5f6b6517a8ee2dc5b659e]
+~> TaskHandler[id: 82; name: RUN_EPYTOPE_PREDICTION (16); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6c/e7c3f391a60b32c75ab8a4e3a3b846]
+~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/36/a99783e73a9b78d8456efba53f8eb2]
+~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/16/794e8b54f01f262d423a5393e62b47]
+~> TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/27/54980a831186e8dbadf73d1c1e16eb]
+~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/f7/2cfaf9d3c9d85a0ef16b59b34a6df0]
+~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/e4/cf40a73dcda77cb45c42d7e5a4aeae]
+Mar-09 22:41:40.509 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 80; name: RUN_EPYTOPE_PREDICTION (14); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/57/5661d7978f4950ac0cc6009053539a]
+Mar-09 22:41:40.514 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:41:40.514 [Task submitter] INFO  nextflow.Session - [a9/ad2982] Submitted process > RUN_EPYTOPE_PREDICTION (15)
+Mar-09 22:43:03.899 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 79; name: RUN_EPYTOPE_PREDICTION (13); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/41/9030454c31330cc0a092f51bd8adc4]
+Mar-09 22:43:03.903 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:43:03.904 [Task submitter] INFO  nextflow.Session - [6c/e7c3f3] Submitted process > RUN_EPYTOPE_PREDICTION (16)
+Mar-09 22:45:11.547 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
+~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (11); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d5/7c11b4493f5fb703666f51c316177f]
+~> TaskHandler[id: 78; name: RUN_EPYTOPE_PREDICTION (12); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/3c/67eee47ec0636ef9feec9259980507]
+~> TaskHandler[id: 81; name: RUN_EPYTOPE_PREDICTION (15); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a9/ad298260c5f6b6517a8ee2dc5b659e]
+~> TaskHandler[id: 82; name: RUN_EPYTOPE_PREDICTION (16); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6c/e7c3f391a60b32c75ab8a4e3a3b846]
+Mar-09 22:45:52.924 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 5 -- tasks to be submitted are shown below
+~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/36/a99783e73a9b78d8456efba53f8eb2]
+~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/16/794e8b54f01f262d423a5393e62b47]
+~> TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/27/54980a831186e8dbadf73d1c1e16eb]
+~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/f7/2cfaf9d3c9d85a0ef16b59b34a6df0]
+~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/e4/cf40a73dcda77cb45c42d7e5a4aeae]
+Mar-09 22:46:49.130 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 82; name: RUN_EPYTOPE_PREDICTION (16); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/6c/e7c3f391a60b32c75ab8a4e3a3b846]
+Mar-09 22:46:49.140 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:46:49.141 [Task submitter] INFO  nextflow.Session - [36/a99783] Submitted process > RUN_EPYTOPE_PREDICTION (17)
+Mar-09 22:48:21.076 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 78; name: RUN_EPYTOPE_PREDICTION (12); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/3c/67eee47ec0636ef9feec9259980507]
+Mar-09 22:48:21.081 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:48:21.081 [Task submitter] INFO  nextflow.Session - [16/794e8b] Submitted process > RUN_EPYTOPE_PREDICTION (18)
+Mar-09 22:50:11.593 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 4 -- submitted tasks are shown below
+~> TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (11); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d5/7c11b4493f5fb703666f51c316177f]
+~> TaskHandler[id: 81; name: RUN_EPYTOPE_PREDICTION (15); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a9/ad298260c5f6b6517a8ee2dc5b659e]
+~> TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/36/a99783e73a9b78d8456efba53f8eb2]
+~> TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: RUNNING; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/16/794e8b54f01f262d423a5393e62b47]
+Mar-09 22:50:25.292 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 81; name: RUN_EPYTOPE_PREDICTION (15); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/a9/ad298260c5f6b6517a8ee2dc5b659e]
+Mar-09 22:50:25.296 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:50:25.296 [Task submitter] INFO  nextflow.Session - [27/54980a] Submitted process > RUN_EPYTOPE_PREDICTION (19)
+Mar-09 22:50:53.300 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 2 -- tasks to be submitted are shown below
+~> TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/f7/2cfaf9d3c9d85a0ef16b59b34a6df0]
+~> TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: NEW; exit: -; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/e4/cf40a73dcda77cb45c42d7e5a4aeae]
+Mar-09 22:51:58.582 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 85; name: RUN_EPYTOPE_PREDICTION (19); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/27/54980a831186e8dbadf73d1c1e16eb]
+Mar-09 22:51:58.589 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:51:58.589 [Task submitter] INFO  nextflow.Session - [f7/2cfaf9] Submitted process > RUN_EPYTOPE_PREDICTION (20)
+Mar-09 22:53:00.974 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 83; name: RUN_EPYTOPE_PREDICTION (17); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/36/a99783e73a9b78d8456efba53f8eb2]
+Mar-09 22:53:00.984 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 22:53:00.984 [Task submitter] INFO  nextflow.Session - [e4/cf40a7] Submitted process > RUN_EPYTOPE_PREDICTION (21)
+Mar-09 22:53:57.492 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 77; name: RUN_EPYTOPE_PREDICTION (11); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/d5/7c11b4493f5fb703666f51c316177f]
+Mar-09 22:54:34.204 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 84; name: RUN_EPYTOPE_PREDICTION (18); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/16/794e8b54f01f262d423a5393e62b47]
+Mar-09 22:54:53.926 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 86; name: RUN_EPYTOPE_PREDICTION (20); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/f7/2cfaf9d3c9d85a0ef16b59b34a6df0]
+Mar-09 22:55:06.417 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 87; name: RUN_EPYTOPE_PREDICTION (21); status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/e4/cf40a73dcda77cb45c42d7e5a4aeae]
+Mar-09 22:55:06.420 [main] DEBUG nextflow.Session - Session await > all processes finished
+Mar-09 22:55:06.422 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Mar-09 22:55:06.422 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Mar-09 22:55:06.426 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Mar-09 22:55:06.431 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=87; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=2h 15m 44s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=4; peakCpus=4; peakMemory=0; ]
+Mar-09 22:55:06.656 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Mar-09 22:55:06.692 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Mar-09 22:55:06.692 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

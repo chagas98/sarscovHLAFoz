@@ -1,0 +1,11 @@
+--2024-03-09 22:20:15--  https://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?db=nuccore&report=fasta&id=NC_045512.2
+Resolving www.ncbi.nlm.nih.gov (www.ncbi.nlm.nih.gov)... 2607:f220:41e:4290::110, 130.14.29.110
+Connecting to www.ncbi.nlm.nih.gov (www.ncbi.nlm.nih.gov)|2607:f220:41e:4290::110|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/plain]
+Saving to: ‘NC_045512.2.fasta’
+
+     0K .......... .......... .........                         145K=0,2s
+
+2024-03-09 22:20:16 (145 KB/s) - ‘NC_045512.2.fasta’ saved [30429]
+

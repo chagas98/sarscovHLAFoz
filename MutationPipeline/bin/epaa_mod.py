@@ -829,6 +829,17 @@ def create_binder_values(pred_value, method, thresholds):
     else:
         return np.nan
 
+def create_effect_values(pred_value, method, thresholds):
+    if not pd.isnull(pred_value):
+            
+            if pred_value > 2:
+                return 'NB'
+            elif pred_value < 0.5:
+                return 'SB'
+            elif pred_value <= 2 and pred_value >= 0.5:
+                return 'WB'          
+    else:
+        return np.nan
 
 def generate_wt_seqs(peptides):
     wt_dict = {}
@@ -1413,19 +1424,20 @@ def make_predictions_from_variants(
                     idx + 2,
                     "%s binder%s" % (allele, add_str),
                     df.apply(
-                        lambda x: create_binder_values(float(x["%s Rank" % allele]), x["method"], tool_thresholds)
-                        if "netmhc" in x["method"] and not use_affinity_thresholds
-                        else create_binder_values(float(x["%s affinity" % allele]), x["method"], tool_thresholds),
+                        lambda x: create_effect_values(
+                            float(x["%s Rank%s" % (allele,add_str)]), x["method"], tool_thresholds
+                        ),
                         axis=1,
                     ),
                 )
+
 
                 alleles_binders = df.columns[df.columns.str.contains(f'{allele} binder', regex = False)]
                 if len(alleles_binders) == 2:
                     
                     df.insert(
                         idx + 3,
-                        f"{allele} binder_changes" ,
+                        f"{allele} rank_changes" ,
                         df[f'{allele} binder'] != df[f'{allele} binder_refseq'])          
 
 
@@ -1732,6 +1744,9 @@ def __main__():
         "netmhcii": 500,
         "netmhciipan": 500,
     }
+
+  
+
     # Define binders based on the rank metric for netmhc family tools
     # NOTE these recommended thresholds might change in the future with new versions of the tools
     if "netmhc" in "".join(methods.keys()) and not args.use_affinity_thresholds:
@@ -1827,9 +1842,8 @@ def __main__():
     complete_df = complete_df.reindex(columns=columns_tiles)
 
     #TODO checar se nao ta pegando de refseq
-    #TODO fazer para binder_changes
     binder_cols = [col for col in complete_df.columns if ("binder" in col) and ("change" not in col) and ("refseq" not in col)]
-    binder_changes_cols = [col for col in complete_df.columns if ("binder_changes" in col)]
+    binder_changes_cols = [col for col in complete_df.columns if ("rank_changes" in col)]
 
 
     binders = []
@@ -1841,13 +1855,13 @@ def __main__():
     
 
     for i, r in complete_df.iterrows():
-        binder = False
-        change = False
+        binder = 'NB'
+        change = 'NB'
         for c in binder_cols:
-            if r[c] is True:
-                binder = True
+            if r[c] is 'SB':
+                binder = 'SB'
                 continue
-        if binder:
+        if binder is 'SB':
             binders.append(str(r["sequence"]))
             pos_predictions.append(str(r["sequence"]))
         else:
