@@ -14,6 +14,8 @@ library(tools)
 library(purrr)
 library(gtsummary)
 library(tidyverse)
+library(gridExtra)
+library(grid)
 
 #sessioninfo::package_info()
 
@@ -67,8 +69,7 @@ concat_mutations <- function(working_directory) {
                                                     TRUE ~ "single")) %>%
         dplyr::mutate(pos = as.integer(pos)) %>% 
         dplyr::mutate_at(vars(columns_to_bool), ~ ifelse(tolower(.) == 'true', TRUE, FALSE)) %>% 
-        dplyr::rename(all_of(rename_columns))
-
+        dplyr::rename(all_of(rename_columns)) 
 
       # Add the data from the current CSV file to the combined data
       combined_data <- dplyr::bind_rows(data_clean, combined_data)
@@ -133,8 +134,8 @@ template_table <- function(data, div, include_list, translation=NA) {
                            statistic = list(
                              all_continuous() ~ "{mean} ({sd})",
                              all_categorical() ~ "{n} ({p}%)",
-                             HLA.B.07.02.affinity ~ "{median} ({p25}, {p75})",
-                             HLA.B.07.02.affinity_refseq ~ "{median} ({p25}, {p75})"
+                             HLA.B.07.02.rank ~ "{median} ({p25}, {p75})",
+                             HLA.B.07.02.rank_refseq ~ "{median} ({p25}, {p75})"
                              #VentilatorySupport_days ~ "{median} ({p25}, {p75})",
                              #HospitalPeriod_days ~ "{median} ({p25}, {p75})",
                              #ICU_days ~ "{median} ({p25}, {p75})"
@@ -149,28 +150,26 @@ template_table <- function(data, div, include_list, translation=NA) {
 
 }
 
+# concat
 peptides_dataset <- concat_mutations(
   working_directory = "results/mutations")
 
-  
+# deduplicate  
 peptides_deduplicate  <-  peptides_dataset %>%
   dplyr::filter(multiple_mutation == "single") %>%
   tidyr::drop_na(pos) %>%
   deduplicating(data = ., 
-                columns = c("sequence", "pos", "gene")) #variant_protein possui grupos de variantes iguais
+                columns = c("sequence", "length", "pos", "gene")) #variant_protein possui grupos de variantes iguais
 
-peptides_deduplicate  %>% 
-  group_by(pos, gene,variant_protein)  %>% 
-  tally(sort = T) %>%
-  print(n = 200)
+###################################################################################
+################################### TABLE 1 #######################################
+###################################################################################
 
-
-##Translation
 lista_labels = list(
   length = "k-mers",
-  `HLA.B.07.02.affinity` = "B07:02 score Mutant",
-  `HLA.B.07.02.affinity_refseq` = "B07:02 score WT")
-names(lista_labels)
+  `HLA.B.07.02.rank` = "B07:02 rank Mutant",
+  `HLA.B.07.02.rank_refseq` = "B07:02 rank WT")
+
   ##Collect between outcomes
 tab_stats <- template_table(data = peptides_deduplicate,
                             div = "gene",
@@ -188,49 +187,162 @@ tab_statsYears <- template_table(data = data_final,
                                  div = "SamplesGroupYear",
                                  translation = lista_labels)
 
-##Between outcomes in 2020
-pval20 <- data_final %>%
-  dplyr::filter(SamplesGroupYear %in% "2020") %>%
-  template_table(., "Outcome_icu", lista_labels) %>%
-  gtsummary::add_p(Age ~ "wilcox.test") %>%
-  gtsummary::modify_header(p.value ~ "**Alta20 vs. Obito20**") %>%
-  gtsummary::modify_column_hide(all_stat_cols())
+###################################################################################
+################################### FIG 1 #########################################
+###################################################################################
 
-  ##Between outcomes in 2021
-pval21 <- data_final %>%
-  dplyr::filter(SamplesGroupYear %in% "2021") %>%
-  template_table(., "Outcome_icu", lista_labels) %>%
-  gtsummary::add_p(Age ~ "wilcox.test") %>%
-  gtsummary::modify_header(p.value ~ "**Alta21 vs. Obito21**") %>%
-  gtsummary::modify_column_hide(all_stat_cols())
-
-  ##Between incidence in years
-pvalYears <- data_final %>%
-  template_table(., "SamplesGroupYear", lista_labels) %>%
-  gtsummary::add_p(Age ~ "wilcox.test") %>%
-  gtsummary::modify_header(p.value ~ "**2020 vs. 2021**") %>%
-  gtsummary::modify_column_hide(all_stat_cols())
-
-  ##Gather all tables
-summary_table_final <-
-  gtsummary::tbl_merge(list(tab_stats, tab_statsYears,
-                            pval20, pval21, pvalYears)) %>%
-  gtsummary::modify_header(label = "") %>%
-  gtsummary::modify_spanning_header(
-    list(
-      gtsummary::all_stat_cols() ~ "**Desfechos**",
-      gtsummary::starts_with("p.value") ~ "**p-valores**"
-    )
+impact_dataset <- peptides_deduplicate  %>%
+  tidyr::pivot_longer(
+    cols = contains('.binder'), 
+    names_sep = '.binder', 
+    names_to = c('alelles', 'seqclass')
   ) %>%
-  gtsummary::as_flex_table() %>%
-  flextable::set_table_properties(width = 1, layout = "autofit")
+  dplyr::mutate(
+    seqclass = case_when(
+      grepl("_refseq", seqclass) ~ 'rank_refseq',
+      TRUE ~ 'rank_mutant'
+    )
+  ) %>% 
+    tidyr::pivot_wider(
+    names_from = seqclass, 
+    values_from = value
+  ) %>%
+  dplyr::mutate(
+    alelles = gsub(".binder_refseq|.binder", "", alelles),
+    alelles = gsub("HLA.B.", "B*", alelles),
+    alelles = gsub("\\.", ":", alelles),
+    impact = case_when(
+      grepl("NB", rank_refseq) & grepl("SB", rank_mutant) ~ 'Gain',
+      grepl("SB", rank_refseq) & grepl("NB", rank_mutant) ~ 'Loss',
+      grepl("NB", rank_refseq) & grepl("WB", rank_mutant) ~ 'Weak Gain',
+      grepl("SB", rank_refseq) & grepl("WB", rank_mutant) ~ 'Weak Loss',
+      TRUE ~ 'No Effect')
+  ) 
+
+impact_dataset_gain  <- impact_dataset %>% 
+  #dplyr::filter(
+  #  if_any(contains("impact"), ~ . != 'No Effect'))
+  dplyr::filter(grepl('Gain', impact))
+
+impact_dataset_loss  <- impact_dataset %>% 
+  #dplyr::filter(
+  #  if_any(contains("impact"), ~ . != 'No Effect'))
+  dplyr::filter(grepl('Loss', impact))
+
+impact_dataset_noeffect  <- impact_dataset %>% 
+  #dplyr::filter(
+  #  if_any(contains("impact"), ~ . != 'No Effect'))
+  dplyr::filter(grepl('No Effect', impact))
+
+alleles_names  <- unique(impact_dataset$alelles)
+alleles_sorted  <- str_sort(alleles_names, numeric = TRUE)
+
+genes_names  <- unique(impact_dataset$gene)
+genes_sorted  <- genes_names[order(nchar(genes_names))]
 
 
-peptides_dataset <- concat_mutations("results/mutations")
 
-df <- tibble(
-  x = sample(10, 100, rep = TRUE),
-  y = sample(10, 100, rep = TRUE)
-)
+g.mid<-ggplot(impact_dataset,aes(x=1,y=factor(alelles, alleles_sorted)))+geom_text(aes(label=alelles))+
+  geom_segment(aes(x=0.94,xend=0.96,yend=alelles))+
+  geom_segment(aes(x=1.04,xend=1.065,yend=alelles))+
+  ggtitle("")+
+  ylab(NULL)+
+  scale_x_continuous(expand=c(0,0),limits=c(0.94,1.065))+
+  theme(axis.title=element_blank(),
+        panel.grid=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.background=element_blank(),
+        axis.text.x=element_text(color=NA),
+        axis.ticks.x=element_line(color=NA),
+        plot.margin = unit(c(1,-1,1,-1), "mm"))
 
-deduplicating(df, c('x', 'y'))
+g1 <- ggplot(data = impact_dataset_gain, 
+             aes(x = factor(alelles, alleles_sorted), 
+             fill = impact)) +
+  geom_histogram(stat = "count") + 
+  theme(legend.position="left",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.ticks.y = element_blank(), 
+        plot.margin = unit(c(1,-1,1,0), "mm")) +
+  scale_y_reverse() + coord_flip()
+
+g2 <- ggplot(data = impact_dataset_loss, 
+             aes(x = factor(alelles, alleles_sorted), 
+             fill = impact)) + 
+  xlab(NULL) +
+  geom_histogram(stat = "count") +
+  theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
+        axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+        plot.margin = unit(c(1,0,1,-1), "mm")) +
+  coord_flip()
+
+gg1 <- ggplot_gtable(ggplot_build(g1))
+gg2 <- ggplot_gtable(ggplot_build(g2))
+gg.mid <- ggplot_gtable(ggplot_build(g.mid))
+
+grid.arrange(gg1,gg.mid,gg2, ncol=3,widths=c(4/9,1/9,4/9))
+
+
+###################################################################################
+################################### FIG 2 #########################################
+###################################################################################
+
+
+g3 <- ggplot(data = impact_dataset_noeffect, aes(x = alelles)) +
+  geom_histogram(stat = "count") + 
+  theme(axis.title.x = element_blank(), 
+        plot.margin = unit(c(1,-1,1,0), "mm"))
+
+
+
+###################################################################################
+################################### FIG 3 #########################################
+###################################################################################
+
+g.mid2 <- ggplot(impact_dataset,aes(x=1,y=factor(gene, genes_sorted))) +
+  geom_text(aes(label=gene))+
+  geom_segment(aes(x=0.94,xend=0.96,yend=gene))+
+  geom_segment(aes(x=1.04,xend=1.065,yend=gene))+
+  ggtitle("")+
+  ylab(NULL)+
+  scale_x_continuous(expand=c(0,0),limits=c(0.94,1.065))+
+  theme(axis.title=element_blank(),
+        panel.grid=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.background=element_blank(),
+        axis.text.x=element_text(color=NA),
+        axis.ticks.x=element_line(color=NA),
+        plot.margin = unit(c(1,-1,1,-1), "mm"))
+
+g4 <- ggplot(data = impact_dataset_gain, 
+             aes(x = factor(gene, genes_sorted), 
+             fill = impact)) +
+  geom_bar(stat = "count", width = 0.7) + 
+  theme(legend.position="left",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.ticks.y = element_blank(), 
+        plot.margin = unit(c(1,-1,1,0), "mm")) +
+  scale_y_reverse() + coord_flip()
+
+g5 <- ggplot(data = impact_dataset_loss, aes(x = factor(gene, genes_sorted), fill = impact)) +xlab(NULL)+
+  geom_bar(stat = "count", width = 0.7)+
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        #axis.text.y = element_blank(), 
+        axis.ticks.y = element_blank(),
+        plot.margin = unit(c(1,0,1,-1), "mm")) +
+  scale_x_discrete(drop = FALSE) +
+  coord_flip()
+g5
+gg4 <- ggplot_gtable(ggplot_build(g4))
+gg5 <- ggplot_gtable(ggplot_build(g5))
+gg.mid2 <- ggplot_gtable(ggplot_build(g.mid2))
+
+grid.arrange(g4,g.mid2,g5,ncol=3,widths=c(4/9,1/9,4/9))
+
