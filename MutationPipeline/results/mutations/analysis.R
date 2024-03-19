@@ -16,6 +16,8 @@ library(gtsummary)
 library(tidyverse)
 library(gridExtra)
 library(grid)
+library(ggplot2)
+library(stringr)
 
 #sessioninfo::package_info()
 
@@ -161,6 +163,10 @@ peptides_deduplicate  <-  peptides_dataset %>%
   deduplicating(data = ., 
                 columns = c("sequence", "length", "pos", "gene")) #variant_protein possui grupos de variantes iguais
 
+nrow(peptides_deduplicate)
+colnames(peptides_deduplicate)
+peptides_deduplicate  %>% 
+  count(gene, sort=TRUE)
 ###################################################################################
 ################################### TABLE 1 #######################################
 ###################################################################################
@@ -195,7 +201,7 @@ impact_dataset <- peptides_deduplicate  %>%
   tidyr::pivot_longer(
     cols = contains('.binder'), 
     names_sep = '.binder', 
-    names_to = c('alelles', 'seqclass')
+    names_to = c('alleles', 'seqclass')
   ) %>%
   dplyr::mutate(
     seqclass = case_when(
@@ -208,9 +214,9 @@ impact_dataset <- peptides_deduplicate  %>%
     values_from = value
   ) %>%
   dplyr::mutate(
-    alelles = gsub(".binder_refseq|.binder", "", alelles),
-    alelles = gsub("HLA.B.", "B*", alelles),
-    alelles = gsub("\\.", ":", alelles),
+    alleles = gsub(".binder_refseq|.binder", "", alleles),
+    alleles = gsub("HLA.B.", "B*", alleles),
+    alleles = gsub("\\.", ":", alleles),
     impact = case_when(
       grepl("NB", rank_refseq) & grepl("SB", rank_mutant) ~ 'Gain',
       grepl("SB", rank_refseq) & grepl("NB", rank_mutant) ~ 'Loss',
@@ -218,6 +224,10 @@ impact_dataset <- peptides_deduplicate  %>%
       grepl("SB", rank_refseq) & grepl("WB", rank_mutant) ~ 'Weak Loss',
       TRUE ~ 'No Effect')
   ) 
+
+impact_dataset  %>% 
+  count(gene)  %>% 
+  print(n=200)
 
 impact_dataset_gain  <- impact_dataset %>% 
   #dplyr::filter(
@@ -234,17 +244,17 @@ impact_dataset_noeffect  <- impact_dataset %>%
   #  if_any(contains("impact"), ~ . != 'No Effect'))
   dplyr::filter(grepl('No Effect', impact))
 
-alleles_names  <- unique(impact_dataset$alelles)
+alleles_names  <- unique(impact_dataset$alleles)
 alleles_sorted  <- str_sort(alleles_names, numeric = TRUE)
 
 genes_names  <- unique(impact_dataset$gene)
 genes_sorted  <- genes_names[order(nchar(genes_names))]
 
 
-
-g.mid<-ggplot(impact_dataset,aes(x=1,y=factor(alelles, alleles_sorted)))+geom_text(aes(label=alelles))+
-  geom_segment(aes(x=0.94,xend=0.96,yend=alelles))+
-  geom_segment(aes(x=1.04,xend=1.065,yend=alelles))+
+g.mid <- ggplot(impact_dataset,aes(x=1,y=factor(alleles, alleles_sorted)))+
+  geom_text(aes(label=alleles))+
+  geom_segment(aes(x=0.94,xend=0.96,yend=alleles))+
+  geom_segment(aes(x=1.04,xend=1.065,yend=alleles))+
   ggtitle("")+
   ylab(NULL)+
   scale_x_continuous(expand=c(0,0),limits=c(0.94,1.065))+
@@ -256,46 +266,50 @@ g.mid<-ggplot(impact_dataset,aes(x=1,y=factor(alelles, alleles_sorted)))+geom_te
         axis.text.x=element_text(color=NA),
         axis.ticks.x=element_line(color=NA),
         plot.margin = unit(c(1,-1,1,-1), "mm"))
-
+g.mid
 g1 <- ggplot(data = impact_dataset_gain, 
-             aes(x = factor(alelles, alleles_sorted), 
+             aes(x = factor(alleles, alleles_sorted), 
              fill = impact)) +
   geom_histogram(stat = "count") + 
   theme(legend.position="left",
-        axis.title.x = element_blank(), 
-        axis.title.y = element_blank(), 
-        axis.text.y = element_blank(), 
-        axis.ticks.y = element_blank(), 
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
         plot.margin = unit(c(1,-1,1,0), "mm")) +
+  scale_x_discrete(drop=FALSE) +
   scale_y_reverse() + coord_flip()
 
 g2 <- ggplot(data = impact_dataset_loss, 
-             aes(x = factor(alelles, alleles_sorted), 
-             fill = impact)) + 
+             aes(x = factor(alleles, alleles_sorted),
+             fill = impact)) +
   xlab(NULL) +
   geom_histogram(stat = "count") +
-  theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
-        axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.ticks.y = element_blank(),
         plot.margin = unit(c(1,0,1,-1), "mm")) +
+  scale_x_discrete(drop=FALSE) +
   coord_flip()
 
 gg1 <- ggplot_gtable(ggplot_build(g1))
 gg2 <- ggplot_gtable(ggplot_build(g2))
 gg.mid <- ggplot_gtable(ggplot_build(g.mid))
 
-grid.arrange(gg1,gg.mid,gg2, ncol=3,widths=c(4/9,1/9,4/9))
-
+final_plot <- grid.arrange(g1,g.mid,g2, ncol=3,widths=c(4/9,1/9,4/9))
+ggsave(file="test.pdf", final_plot,  width = 12, height = 8, dpi = 150) #saves g
 
 ###################################################################################
 ################################### FIG 2 #########################################
 ###################################################################################
 
 
-g3 <- ggplot(data = impact_dataset_noeffect, aes(x = alelles)) +
+g3 <- ggplot(data = impact_dataset_noeffect, aes(x = alleles)) +
   geom_histogram(stat = "count") + 
   theme(axis.title.x = element_blank(), 
         plot.margin = unit(c(1,-1,1,0), "mm"))
-
+g3
 
 
 ###################################################################################
@@ -328,6 +342,7 @@ g4 <- ggplot(data = impact_dataset_gain,
         axis.text.y = element_blank(), 
         axis.ticks.y = element_blank(), 
         plot.margin = unit(c(1,-1,1,0), "mm")) +
+  scale_x_discrete(drop = FALSE) +
   scale_y_reverse() + coord_flip()
 
 g5 <- ggplot(data = impact_dataset_loss, aes(x = factor(gene, genes_sorted), fill = impact)) +xlab(NULL)+

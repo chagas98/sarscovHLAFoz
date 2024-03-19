@@ -1,0 +1,128 @@
+Mar-09 21:13:37.148 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf
+Mar-09 21:13:37.409 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Mar-09 21:13:37.452 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/samuel/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Mar-09 21:13:37.471 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Mar-09 21:13:37.472 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Mar-09 21:13:37.477 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Mar-09 21:13:37.492 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Mar-09 21:13:37.522 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/nextflow.config
+Mar-09 21:13:37.524 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/nextflow.config
+Mar-09 21:13:37.571 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Mar-09 21:13:38.960 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Mar-09 21:13:39.055 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [tiny_angela] DSL2 - revision: 5c5397c4b0
+Mar-09 21:13:39.056 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Mar-09 21:13:39.057 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Mar-09 21:13:39.079 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/samuel/.nextflow/secrets/store.json
+Mar-09 21:13:39.086 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@17410c07] - activable => nextflow.secret.LocalSecretsProvider@17410c07
+Mar-09 21:13:39.207 [main] DEBUG nextflow.Session - Session UUID: fe42605a-49b9-493b-9fff-2f89eec4ba62
+Mar-09 21:13:39.208 [main] DEBUG nextflow.Session - Run name: tiny_angela
+Mar-09 21:13:39.209 [main] DEBUG nextflow.Session - Executor pool size: 4
+Mar-09 21:13:39.223 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Mar-09 21:13:39.231 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-09 21:13:39.266 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.1 build 5891
+  Created: 12-01-2024 22:01 UTC (20:01 BRST)
+  System: Linux 6.5.0-25-generic
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.1+13-LTS
+  Encoding: UTF-8 (UTF-8)
+  Process: 203615@schagaspc [127.0.1.1]
+  CPUs: 4 - Mem: 15.5 GB (959.5 MB) - Swap: 2 GB (2 GB)
+Mar-09 21:13:39.298 [main] DEBUG nextflow.Session - Work-dir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work [ext2/ext3]
+Mar-09 21:13:39.331 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Mar-09 21:13:39.365 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Mar-09 21:13:39.395 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Mar-09 21:13:39.418 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Mar-09 21:13:39.584 [main] DEBUG nextflow.Session - Session start
+Mar-09 21:13:39.942 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Mar-09 21:13:40.548 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_GISAID_SEQUENCES|GET_REFSEQ_SARS` matches process GET_REFSEQ_SARS
+Mar-09 21:13:40.581 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 21:13:40.581 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 21:13:40.591 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Mar-09 21:13:40.597 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.5 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Mar-09 21:13:40.600 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Mar-09 21:13:40.740 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:GET_GISAID_SEQUENCES|GET_REFSEQ_SARS` matches process GET_GISAID_SEQUENCES
+Mar-09 21:13:40.742 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 21:13:40.743 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 21:13:40.750 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process SELECT_BY_LINEAGE
+Mar-09 21:13:40.752 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 21:13:40.752 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 21:13:40.779 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process RUN_MAPPING_MINIMAP2
+Mar-09 21:13:40.781 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 21:13:40.782 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 21:13:40.793 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process VARIANT_CALLER
+Mar-09 21:13:40.794 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 21:13:40.795 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 21:13:40.800 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SELECT_BY_LINEAGE|RUN_MAPPING_MINIMAP2|VARIANT_CALLER|RUN_ANNOT_SNPEFF` matches process RUN_ANNOT_SNPEFF
+Mar-09 21:13:40.802 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 21:13:40.802 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 21:13:40.818 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:RUN_EPYTOPE_PREDICTION` matches process RUN_EPYTOPE_PREDICTION
+Mar-09 21:13:40.820 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Mar-09 21:13:40.820 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Mar-09 21:13:40.827 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: GET_REFSEQ_SARS, SELECT_BY_LINEAGE, VARIANT_CALLER, RUN_MAPPING_MINIMAP2, RUN_EPYTOPE_PREDICTION, RUN_ANNOT_SNPEFF, GET_GISAID_SEQUENCES
+Mar-09 21:13:40.829 [main] DEBUG nextflow.Session - Igniting dataflow network (7)
+Mar-09 21:13:40.830 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_REFSEQ_SARS
+Mar-09 21:13:40.831 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_GISAID_SEQUENCES
+Mar-09 21:13:40.832 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SELECT_BY_LINEAGE
+Mar-09 21:13:40.834 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_MAPPING_MINIMAP2
+Mar-09 21:13:40.836 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > VARIANT_CALLER
+Mar-09 21:13:40.836 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_ANNOT_SNPEFF
+Mar-09 21:13:40.837 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_EPYTOPE_PREDICTION
+Mar-09 21:13:40.842 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_75f0c500e5861301: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/main.nf
+  Script_9b0cded9767e075a: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/./modules.nf
+Mar-09 21:13:40.842 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Mar-09 21:13:40.842 [main] DEBUG nextflow.Session - Session await
+Mar-09 21:13:41.046 [Actor Thread 7] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/home/samuel/anaconda3/envs/epytope2; path=/home/samuel/anaconda3/envs/epytope2
+Mar-09 21:13:41.189 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 21:13:41.193 [Task submitter] INFO  nextflow.Session - [7e/549883] Submitted process > GET_REFSEQ_SARS
+Mar-09 21:13:41.204 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Mar-09 21:13:41.205 [Task submitter] INFO  nextflow.Session - [23/bb05fd] Submitted process > GET_GISAID_SEQUENCES
+Mar-09 21:13:45.297 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: GET_REFSEQ_SARS; status: COMPLETED; exit: 0; error: -; workDir: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/7e/549883b193634b548d4f65eead6a9d]
+Mar-09 21:13:45.348 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-09 21:13:55.560 [SIGINT handler] DEBUG nextflow.Session - Session aborted -- Cause: SIGINT
+Mar-09 21:13:55.599 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Mar-09 21:13:55.612 [SIGINT handler] DEBUG nextflow.Session - The following nodes are still active:
+[process] SELECT_BY_LINEAGE
+  status=ACTIVE
+  port 0: (value) OPEN  ; channel: input
+  port 1: (value) bound ; channel: quality
+  port 2: (value) bound ; channel: number_seqs
+  port 3: (cntrl) -     ; channel: $
+
+[process] RUN_MAPPING_MINIMAP2
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: input
+  port 1: (value) bound ; channel: reference
+  port 2: (cntrl) -     ; channel: $
+
+[process] VARIANT_CALLER
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: input
+  port 1: (value) bound ; channel: reference
+  port 2: (cntrl) -     ; channel: $
+
+[process] RUN_ANNOT_SNPEFF
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: input
+  port 1: (value) bound ; channel: snpeff_db
+  port 2: (cntrl) -     ; channel: $
+
+[process] RUN_EPYTOPE_PREDICTION
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: input
+  port 1: (value) bound ; channel: versions
+  port 2: (value) bound ; channel: max_length
+  port 3: (value) bound ; channel: min_length
+  port 4: (value) bound ; channel: alleles
+  port 5: (value) bound ; channel: tool
+  port 6: (cntrl) -     ; channel: $
+
+Mar-09 21:13:55.613 [main] DEBUG nextflow.Session - Session await > all processes finished
+Mar-09 21:13:55.614 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Mar-09 21:13:55.622 [main] WARN  n.processor.TaskPollingMonitor - Killing running tasks (1)
+Mar-09 21:13:55.631 [main] DEBUG n.executor.local.LocalTaskHandler - Unable to kill GET_GISAID_SEQUENCES -- command: kill -TERM 203757; exit: 1 
+ bash: line 1: kill: (203757) - No such process
+
+Mar-09 21:13:55.647 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=1; retriesCount=0; abortedCount=0; succeedDuration=4.1s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Mar-09 21:13:55.693 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Mar-09 21:13:55.757 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

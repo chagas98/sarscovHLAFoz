@@ -14,9 +14,9 @@ params.versions = "$baseDir/config/versions.csv"
 params.start_date = "2020-01-01"
 params.end_date = "2023-01-01"
 params.city_name = "Foz do Iguacu"
-params.max_length = 12
+params.max_length = 14
 params.min_length = 10
-params.alleles = "B*07:02;B*44:03;B*15:01"
+params.alleles = "B*07:02;B*44:03;B*15:01;B*51:01;B*18:01;B*35:01;B*38:01;B*08:01;B*49:01;B*14:02;B*39:01;B*27:05;B*40:01;B*53:01;B*57:01"
 
 params.predict_tool = "netmhcpan-4.1"
 

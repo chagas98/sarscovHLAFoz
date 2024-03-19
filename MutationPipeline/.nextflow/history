@@ -297,3 +297,4 @@
 2024-03-09 21:22:58	27m 12s	evil_ramanujan	ERR	5c5397c4b07e37ccc80c3abe1e86327d	1ec897d8-1183-4b08-b785-a2186b4bf013	nextflow run main.nf -resume
 2024-03-09 21:54:09	15m 52s	cheesy_nightingale	ERR	5c5397c4b07e37ccc80c3abe1e86327d	6b4da7e0-7436-4160-92e0-bbf851ae1c5a	nextflow run main.nf
 2024-03-09 22:20:09	34m 58s	hopeful_poisson	OK	5c5397c4b07e37ccc80c3abe1e86327d	b3407fb2-4cb7-4d06-8f63-f92900409311	nextflow run main.nf
+2024-03-14 21:00:10	5h 27m 53s	determined_pare	OK	75091f1339eb409bad054c36cbd6f141	5387e833-2809-4a96-a111-0f75976664b9	nextflow run main.nf
