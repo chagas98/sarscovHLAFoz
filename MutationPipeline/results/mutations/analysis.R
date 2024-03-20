@@ -152,19 +152,60 @@ template_table <- function(data, div, include_list, translation=NA) {
 
 }
 
+# Function to translate mutation annotation
+translate_mutation <- function(mutation_string) {
+  # Mapping of three-letter amino acid codes to single-letter codes
+  aa_mapping <- c("Ala" = "A", "Arg" = "R", "Asn" = "N", "Asp" = "D", "Cys" = "C", "Glu" = "E",
+                  "Gln" = "Q", "Gly" = "G", "His" = "H", "Ile" = "I", "Leu" = "L", "Lys" = "K",
+                  "Met" = "M", "Phe" = "F", "Pro" = "P", "Ser" = "S", "Thr" = "T", "Trp" = "W",
+                  "Tyr" = "Y", "Val" = "V")
+
+  # Split the string by comma if present
+  parts <- unlist(strsplit(mutation_string, ","))
+
+  # Get the first annotation
+  annotation <- parts[1]
+
+  # Extract information
+  match <- regexpr("[[:digit:]]+", annotation)  # Find the position
+  position <- substr(annotation, match, match + attr(match, "match.length") - 1)
+  original_aa <- substr(annotation, 3, match - 1)
+  mutated_aa <- substr(annotation, match + attr(match, "match.length"), nchar(annotation))
+
+  # Translate three-letter amino acid codes to single-letter codes
+  original_aa_single <- aa_mapping[original_aa]
+  mutated_aa_single <- aa_mapping[mutated_aa]
+
+  # Concatenate and return translated annotation
+  translated_annotation <- paste0(original_aa_single, position, mutated_aa_single)
+  return(translated_annotation)
+}
+
+# Function to sort elements in a string separated by commas
+sort_string <- function(string) {
+  sorted <- sort(unlist(strsplit(string, ",")))
+  paste(sorted, collapse = ",")
+}
+
 # concat
 peptides_dataset <- concat_mutations(
   working_directory = "results/mutations")
 
 # deduplicate  
-peptides_deduplicate  <-  peptides_dataset %>%
+peptides_single  <-  peptides_dataset %>%
   dplyr::filter(multiple_mutation == "single") %>%
-  tidyr::drop_na(pos) %>%
+  tidyr::drop_na(pos)  %>% 
+  dplyr::mutate(variant_protein_sorted = map(variant_protein, sort_string))  %>% 
+  dplyr::mutate(variant_protein_sorted = map(variant_protein, translate_mutation))
+  
+peptides_deduplicate <- peptides_single %>% 
   deduplicating(data = ., 
-                columns = c("sequence", "length", "pos", "gene")) #variant_protein possui grupos de variantes iguais
+                columns = c("sequence", 
+                            "length", 
+                            "pos", 
+                            "gene")
+  ) #variant_protein possui grupos de variantes iguais
 
-nrow(peptides_deduplicate)
-colnames(peptides_deduplicate)
 peptides_deduplicate  %>% 
   count(gene, sort=TRUE)
 ###################################################################################
@@ -197,22 +238,37 @@ tab_statsYears <- template_table(data = data_final,
 ################################### FIG 1 #########################################
 ###################################################################################
 
-impact_dataset <- peptides_deduplicate  %>%
+impact_dataset_all <- peptides_single  %>%
+  dplyr::select(-dplyr::contains('.rank_changes')) %>%
   tidyr::pivot_longer(
-    cols = contains('.binder'), 
-    names_sep = '.binder', 
-    names_to = c('alleles', 'seqclass')
+    cols = contains('.rank'), 
+    names_sep = '.rank', 
+    names_to = c('alleles', 'rank_type')
   ) %>%
   dplyr::mutate(
-    seqclass = case_when(
-      grepl("_refseq", seqclass) ~ 'rank_refseq',
-      TRUE ~ 'rank_mutant'
+    rank_type = case_when(
+      grepl("_refseq", rank_type) ~ 'rank_values_refseq',
+      TRUE ~ 'rank_values_mutant'
     )
   ) %>% 
     tidyr::pivot_wider(
-    names_from = seqclass, 
+    names_from = rank_type, 
     values_from = value
-  ) %>%
+  ) %>%  
+  dplyr::mutate(
+    rank_mutant = case_when(
+      rank_values_mutant < 0.5 ~ 'SB',
+      rank_values_mutant >= 0.5 & rank_values_mutant < 2 ~ 'WB',
+      rank_values_mutant >= 2 ~ 'NB',
+      TRUE ~ 'NA'
+    ),
+    rank_refseq = case_when(
+      rank_values_refseq < 0.5 ~ 'SB',
+      rank_values_refseq >= 0.5 & rank_values_refseq < 2 ~ 'WB',
+      rank_values_refseq >= 2 ~ 'NB',
+      TRUE ~ 'NA'
+    )
+  ) %>% 
   dplyr::mutate(
     alleles = gsub(".binder_refseq|.binder", "", alleles),
     alleles = gsub("HLA.B.", "B*", alleles),
@@ -223,35 +279,37 @@ impact_dataset <- peptides_deduplicate  %>%
       grepl("NB", rank_refseq) & grepl("WB", rank_mutant) ~ 'Weak Gain',
       grepl("SB", rank_refseq) & grepl("WB", rank_mutant) ~ 'Weak Loss',
       TRUE ~ 'No Effect')
-  ) 
+  )  
 
-impact_dataset  %>% 
-  count(gene)  %>% 
-  print(n=200)
+impact_dataset_deduplicate <- impact_dataset_all %>% 
+  deduplicating(data = ., 
+                columns = c("sequence", "length",
+                            "pos", "gene", "alleles"))
 
-impact_dataset_gain  <- impact_dataset %>% 
+
+impact_dataset_gain  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
   dplyr::filter(grepl('Gain', impact))
 
-impact_dataset_loss  <- impact_dataset %>% 
+impact_dataset_loss  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
   dplyr::filter(grepl('Loss', impact))
 
-impact_dataset_noeffect  <- impact_dataset %>% 
+impact_dataset_noeffect  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
   dplyr::filter(grepl('No Effect', impact))
 
-alleles_names  <- unique(impact_dataset$alleles)
+alleles_names  <- unique(impact_dataset_deduplicate$alleles)
 alleles_sorted  <- str_sort(alleles_names, numeric = TRUE)
 
-genes_names  <- unique(impact_dataset$gene)
+genes_names  <- unique(impact_dataset_deduplicate$gene)
 genes_sorted  <- genes_names[order(nchar(genes_names))]
 
 
-g.mid <- ggplot(impact_dataset,aes(x=1,y=factor(alleles, alleles_sorted)))+
+g.mid <- ggplot(impact_dataset_deduplicate,aes(x=1,y=factor(alleles, alleles_sorted)))+
   geom_text(aes(label=alleles))+
   geom_segment(aes(x=0.94,xend=0.96,yend=alleles))+
   geom_segment(aes(x=1.04,xend=1.065,yend=alleles))+
@@ -297,8 +355,7 @@ gg1 <- ggplot_gtable(ggplot_build(g1))
 gg2 <- ggplot_gtable(ggplot_build(g2))
 gg.mid <- ggplot_gtable(ggplot_build(g.mid))
 
-final_plot <- grid.arrange(g1,g.mid,g2, ncol=3,widths=c(4/9,1/9,4/9))
-ggsave(file="test.pdf", final_plot,  width = 12, height = 8, dpi = 150) #saves g
+grid.arrange(g1,g.mid,g2, ncol=3,widths=c(4/9,1/9,4/9))
 
 ###################################################################################
 ################################### FIG 2 #########################################
@@ -316,7 +373,7 @@ g3
 ################################### FIG 3 #########################################
 ###################################################################################
 
-g.mid2 <- ggplot(impact_dataset,aes(x=1,y=factor(gene, genes_sorted))) +
+g.mid2 <- ggplot(impact_dataset_deduplicate,aes(x=1,y=factor(gene, genes_sorted))) +
   geom_text(aes(label=gene))+
   geom_segment(aes(x=0.94,xend=0.96,yend=gene))+
   geom_segment(aes(x=1.04,xend=1.065,yend=gene))+
@@ -349,7 +406,7 @@ g5 <- ggplot(data = impact_dataset_loss, aes(x = factor(gene, genes_sorted), fil
   geom_bar(stat = "count", width = 0.7)+
   theme(axis.title.x = element_blank(), 
         axis.title.y = element_blank(), 
-        #axis.text.y = element_blank(), 
+        axis.text.y = element_blank(), 
         axis.ticks.y = element_blank(),
         plot.margin = unit(c(1,0,1,-1), "mm")) +
   scale_x_discrete(drop = FALSE) +
@@ -361,3 +418,151 @@ gg.mid2 <- ggplot_gtable(ggplot_build(g.mid2))
 
 grid.arrange(g4,g.mid2,g5,ncol=3,widths=c(4/9,1/9,4/9))
 
+###################################################################################
+################################### FIG 4 #########################################
+###################################################################################
+
+impact_dataset  %>% 
+  count(variant_protein_sorted) %>% 
+  print(n=300)
+
+peptides_single  %>% 
+  count(variant_protein_sorted) 
+
+
+impact_dataset_gain_all <- dplyr::semi_join(
+  impact_dataset_all, 
+  impact_dataset_gain, 
+  by = c("sequence", "alleles", "variant_protein")
+)
+
+impact_dataset_loss_all <- dplyr::semi_join(
+  impact_dataset_all, 
+  impact_dataset_loss, 
+  by = c("sequence", "alleles", "variant_protein")
+)
+
+lineages_names  <- unique(peptides_single$variant_lineage)
+lineages_sorted  <- str_sort(lineages_names)
+
+g.mid3 <- ggplot(impact_dataset_all,aes(x=1,y=factor(variant_lineage, lineages_sorted))) +
+  geom_text(aes(label=variant_lineage))+
+  geom_segment(aes(x=0.94,xend=0.96,yend=variant_lineage))+
+  geom_segment(aes(x=1.04,xend=1.065,yend=variant_lineage))+
+  ggtitle("")+
+  ylab(NULL)+
+  scale_x_continuous(expand=c(0,0),limits=c(0.94,1.065))+
+  theme(axis.title=element_blank(),
+        panel.grid=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.background=element_blank(),
+        axis.text.x=element_text(color=NA),
+        axis.ticks.x=element_line(color=NA),
+        plot.margin = unit(c(1,-1,1,-1), "mm"))
+
+g6 <- ggplot(data = impact_dataset_gain_all, 
+             aes(x = factor(variant_lineage, lineages_sorted), 
+             fill = impact)) +
+  geom_bar(stat = "count", width = 0.7) + 
+  theme(legend.position="left",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.ticks.y = element_blank(), 
+        plot.margin = unit(c(1,-1,1,0), "mm")) +
+  scale_x_discrete(drop = FALSE) +
+  scale_y_reverse() + coord_flip()
+g6
+g7 <- ggplot(data = impact_dataset_loss_all, aes(x = factor(variant_lineage, lineages_sorted), fill = impact)) +xlab(NULL)+
+  geom_bar(stat = "count", width = 0.7)+
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.ticks.y = element_blank(),
+        plot.margin = unit(c(1,0,1,-1), "mm")) +
+  scale_x_discrete(drop = FALSE) +
+  coord_flip()
+g7
+gg6 <- ggplot_gtable(ggplot_build(g6))
+gg7 <- ggplot_gtable(ggplot_build(g7))
+gg.mid3 <- ggplot_gtable(ggplot_build(g.mid3))
+
+grid.arrange(g6,gg.mid3,g7,ncol=3,widths=c(4/9,1/9,4/9))
+
+###################################################################################
+################################### FIG 5 #########################################
+###################################################################################
+library(lubridate)
+metadata <- read.csv('results/mutations/metadata_info.csv', sep=',')
+patients <- read.csv('results/raw_data/patients_hla.csv', sep=',')
+
+metadata_date <- metadata %>%
+  mutate(month_year = format(as.Date(Date), "%m-%Y"),
+         year = format(as.Date(Date), "%Y"))
+
+lineage_date <- metadata_date %>%
+  count(Lineage, month_year) %>%
+  group_by(month_year) %>%         
+  mutate(prop = prop.table(n)*100)
+
+patients_date <- patients %>%
+  filter(HospitalPeriod_days < 65)  %>% 
+  mutate(month_year = format(as.Date(Hospital_admission), "%m-%Y")) %>%
+  select(allele1, allele2, month_year) %>%
+  pivot_longer(cols = c(allele1, allele2),
+               names_to = 'type',
+               values_to = 'alleles') %>%
+  count(alleles, month_year) %>%
+  group_by(month_year) %>%          
+  mutate(prop = prop.table(n)*100)
+
+ggplot(lineage_date, aes(x = lubridate::my(month_year), y = prop, fill = Lineage)) +
+  geom_bar(stat = "identity") +
+  #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
+  labs(title = "Relative Prevalence of Virus Lineages",
+       x = "Month-Year",
+       y = "Relative Prevalence (%)",
+       fill = "Lineage Name") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y")
+
+
+ggplot(patients_date, aes(x = lubridate::my(month_year), y = prop, fill = alleles)) +
+  geom_bar(stat = "identity") +
+  #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
+  labs(title = "Relative Prevalence of Virus Lineages",
+       x = "Month-Year",
+       y = "Relative Prevalence (%)",
+       fill = "Lineage Name") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y")
+
+
+ggplot(lineage_date, aes(x = lubridate::my(month_year))) +
+  geom_bar(stat = "count") +
+  #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
+  labs(title = "Relative Prevalence of Virus Lineages",
+       x = "Month-Year",
+       y = "Relative Prevalence (%)",
+       fill = "Lineage Name") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y")
+
+
+###################################################################################
+################################### FIG 6 #########################################
+###################################################################################
+
+impact_dataset_all$fold_change <- log2(impact_dataset_all$rank_values_mutant / impact_dataset_all$rank_values_refseq)
+
+
+FC_loss_all <- impact_dataset_all %>%
+  dplyr::mutate(fold_change = log2(rank_values_mutant / rank_values_refseq)) %>% 
+  dplyr::filter(impact %in% c('Loss', 'Weak Loss'))
+
+
+ggplot(FC_loss_all, aes(x = variant_lineage, y = fold_change, group=factor(length), color = alleles))+
+  geom_point(aes(shape=factor(length), size=factor(length)))+
+  scale_y_continuous(minor_breaks = NULL)+
+  scale_x_discrete(drop = FALSE)
