@@ -324,7 +324,7 @@ g.mid <- ggplot(impact_dataset_deduplicate,aes(x=1,y=factor(alleles, alleles_sor
         axis.text.x=element_text(color=NA),
         axis.ticks.x=element_line(color=NA),
         plot.margin = unit(c(1,-1,1,-1), "mm"))
-g.mid
+
 g1 <- ggplot(data = impact_dataset_gain, 
              aes(x = factor(alleles, alleles_sorted), 
              fill = impact)) +
@@ -366,8 +366,6 @@ g3 <- ggplot(data = impact_dataset_noeffect, aes(x = alleles)) +
   geom_histogram(stat = "count") + 
   theme(axis.title.x = element_blank(), 
         plot.margin = unit(c(1,-1,1,0), "mm"))
-g3
-
 
 ###################################################################################
 ################################### FIG 3 #########################################
@@ -473,7 +471,7 @@ g6 <- ggplot(data = impact_dataset_gain_all,
         plot.margin = unit(c(1,-1,1,0), "mm")) +
   scale_x_discrete(drop = FALSE) +
   scale_y_reverse() + coord_flip()
-g6
+
 g7 <- ggplot(data = impact_dataset_loss_all, aes(x = factor(variant_lineage, lineages_sorted), fill = impact)) +xlab(NULL)+
   geom_bar(stat = "count", width = 0.7)+
   theme(axis.title.x = element_blank(), 
@@ -483,12 +481,12 @@ g7 <- ggplot(data = impact_dataset_loss_all, aes(x = factor(variant_lineage, lin
         plot.margin = unit(c(1,0,1,-1), "mm")) +
   scale_x_discrete(drop = FALSE) +
   coord_flip()
-g7
+
 gg6 <- ggplot_gtable(ggplot_build(g6))
 gg7 <- ggplot_gtable(ggplot_build(g7))
 gg.mid3 <- ggplot_gtable(ggplot_build(g.mid3))
 
-grid.arrange(g6,gg.mid3,g7,ncol=3,widths=c(4/9,1/9,4/9))
+grid.arrange(g6,g.mid3,g7,ncol=3,widths=c(4/9,1/9,4/9))
 
 ###################################################################################
 ################################### FIG 5 #########################################
@@ -498,43 +496,77 @@ metadata <- read.csv('results/mutations/metadata_info.csv', sep=',')
 patients <- read.csv('results/raw_data/patients_hla.csv', sep=',')
 
 metadata_date <- metadata %>%
+  group_by(Date) %>% 
   mutate(month_year = format(as.Date(Date), "%m-%Y"),
-         year = format(as.Date(Date), "%Y"))
+         year = format(as.Date(Date), "%Y"),
+         group_date = cur_group_id()
+         ) %>% 
+  ungroup()
+
+detection_sorted  <- metadata_date %>%
+  group_by(Lineage) %>%
+  slice(which.min(group_date)) %>%
+  select(Lineage, first_detection = group_date) %>% 
+  arrange(first_detection) %>% 
+  pull(Lineage) 
+detection_sorted
 
 lineage_date <- metadata_date %>%
   count(Lineage, month_year) %>%
   group_by(month_year) %>%         
   mutate(prop = prop.table(n)*100)
 
-patients_date <- patients %>%
+alleles_binned <- patients %>%
   filter(HospitalPeriod_days < 65)  %>% 
   mutate(month_year = format(as.Date(Hospital_admission), "%m-%Y")) %>%
   select(allele1, allele2, month_year) %>%
   pivot_longer(cols = c(allele1, allele2),
                names_to = 'type',
                values_to = 'alleles') %>%
+  count(alleles) %>%
+  group_by(alleles) %>%          
+  mutate(alleles = ifelse(n < 7, "Others", alleles)) %>%
+  ungroup() 
+  
+patients_date <- patients %>%
+  filter(HospitalPeriod_days < 65) %>% 
+  mutate(month_year = format(as.Date(Hospital_admission), "%m-%Y")) %>%
+  select(allele1, allele2, month_year) %>%
+  pivot_longer(cols = c(allele1, allele2),
+               names_to = 'type',
+               values_to = 'alleles') %>%
+  mutate(alleles = ifelse(alleles %in% alleles_binned$alleles, alleles, "Others")) %>%
   count(alleles, month_year) %>%
   group_by(month_year) %>%          
-  mutate(prop = prop.table(n)*100)
+  mutate(prop = prop.table(n))
 
-ggplot(lineage_date, aes(x = lubridate::my(month_year), y = prop, fill = Lineage)) +
+library(viridis)
+colourCount_variants = length(unique(lineage_date$Lineage))
+getPalette_variants = colorRampPalette(brewer.pal(9, "Set1"))
+magma_edit <- c("#000004FF", "#302e57", "#4f4c85", "#7612b9", "#9d12b9" , "#b464c4",
+"#d6147f", "#e77e83", "#ffc7c7", "#94011a",  "#ce1f3c", "#e24c54", "#e03a07", "#ff8800", "#fbb861", "#FECE91FF", "#FDE6A8FF", "#c29e00", "#eeca2a", "#e9de40",
+"#c9c9c9")
+ggplot(lineage_date, aes(x = lubridate::my(month_year), y = prop, fill = factor(Lineage, detection_sorted))) +
   geom_bar(stat = "identity") +
   #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
   labs(title = "Relative Prevalence of Virus Lineages",
        x = "Month-Year",
-       y = "Relative Prevalence (%)",
-       fill = "Lineage Name") +
+       y = "Relative Prevalence (%)") +
+  scale_fill_manual(values = getPalette_variants(colourCount_variants))+
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y")
 
+library(RColorBrewer)
+colourCount_alleles = length(unique(patients_date$alleles))
+getPalette_alleles = colorRampPalette(brewer.pal(9, "Spectral"))
 
-ggplot(patients_date, aes(x = lubridate::my(month_year), y = prop, fill = alleles)) +
+ggplot(patients_date, aes(x = lubridate::my(month_year), y = prop, fill=alleles)) +
   geom_bar(stat = "identity") +
   #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
   labs(title = "Relative Prevalence of Virus Lineages",
        x = "Month-Year",
-       y = "Relative Prevalence (%)",
-       fill = "Lineage Name") +
+       y = "Relative Prevalence (%)") +
+  scale_fill_manual(values = getPalette_alleles(colourCount_alleles))+
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y")
 
@@ -561,8 +593,36 @@ FC_loss_all <- impact_dataset_all %>%
   dplyr::mutate(fold_change = log2(rank_values_mutant / rank_values_refseq)) %>% 
   dplyr::filter(impact %in% c('Loss', 'Weak Loss'))
 
+library(ggnewscale)
 
-ggplot(FC_loss_all, aes(x = variant_lineage, y = fold_change, group=factor(length), color = alleles))+
-  geom_point(aes(shape=factor(length), size=factor(length)))+
-  scale_y_continuous(minor_breaks = NULL)+
-  scale_x_discrete(drop = FALSE)
+cbp1 <- c("#ff0000", "#fd8282", "#ff7301", "#e2a807", "#f3d83f", "#206916", "#138f03", 
+          "#0dad70", "#2464c4", "#4f90f1", "#00ccff", "#7c0494", "#e900ca", "#ee70ddc2")
+
+library(grid)
+
+muh_grob <- grid::rectGrob(
+  x=0, y=1:21, gp=gpar(
+    color='white', fill= getPalette_variants(colourCount_variants), alpha=0.8))
+
+colourCount_alleles = length(unique(FC_loss_all$alleles))
+
+ggplot(FC_loss_all)+
+  geom_point(aes(x = fold_change, y = factor(variant_lineage, detection_sorted), colour = factor(length)), size = 5)+ 
+  scale_colour_brewer("K-mers", type = "div", palette =  'Greys')+
+  ggnewscale::new_scale_colour()+ 
+  geom_point(aes(x = fold_change, y = factor(variant_lineage, detection_sorted), colour = alleles), size = 3, fill = NA)+ 
+  scale_colour_manual('Alleles', values = getPalette_alleles(colourCount1))+
+  coord_cartesian(clip='off') +
+  theme(
+    plot.title = element_text(size=14, face= "bold", colour= "black" ),
+    axis.title.x = element_text(size=14, face="bold", colour = "black"),    
+    axis.title.y = element_text(size=14, face="bold", colour = "black"),    
+    axis.text.x = element_text(size=10, face="bold", colour = "black"), 
+    axis.text.y = element_text(size=10, face="bold", colour = "white"),
+    panel.background = element_rect(fill = "white"),
+    panel.grid = element_line(color = "grey70"))+
+  annotation_custom(
+    grob=muh_grob, ymin = 0, ymax = 1, xmin = -0.55, xmax=0.25
+  ) +
+  scale_y_discrete(drop = FALSE)
+
