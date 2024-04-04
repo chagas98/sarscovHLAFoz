@@ -16,12 +16,16 @@ library(gtsummary)
 library(tidyverse)
 library(gridExtra)
 library(grid)
+library(patchwork)
 library(ggplot2)
 library(stringr)
+library(RColorBrewer)
+
+library(viridis)
 
 #sessioninfo::package_info()
-
-
+setwd('../../')
+getwd()
 #' Concatenate all prediction results from mutations directory
 #'
 #' @param working_directory Path to the root of the mutations directory
@@ -310,9 +314,8 @@ genes_sorted  <- genes_names[order(nchar(genes_names))]
 
 
 g.mid <- ggplot(impact_dataset_deduplicate,aes(x=1,y=factor(alleles, alleles_sorted)))+
-  geom_text(aes(label=alleles))+
-  geom_segment(aes(x=0.94,xend=0.96,yend=alleles))+
-  geom_segment(aes(x=1.04,xend=1.065,yend=alleles))+
+  geom_text(aes(label=alleles, fontface='plain', family='sans'),
+            size=3.5)+
   ggtitle("")+
   ylab(NULL)+
   scale_x_continuous(expand=c(0,0),limits=c(0.94,1.065))+
@@ -323,7 +326,7 @@ g.mid <- ggplot(impact_dataset_deduplicate,aes(x=1,y=factor(alleles, alleles_sor
         panel.background=element_blank(),
         axis.text.x=element_text(color=NA),
         axis.ticks.x=element_line(color=NA),
-        plot.margin = unit(c(1,-1,1,-1), "mm"))
+        plot.margin = unit(c(-5,-1, 1,-1), "mm"))
 
 g1 <- ggplot(data = impact_dataset_gain, 
              aes(x = factor(alleles, alleles_sorted), 
@@ -355,7 +358,7 @@ gg1 <- ggplot_gtable(ggplot_build(g1))
 gg2 <- ggplot_gtable(ggplot_build(g2))
 gg.mid <- ggplot_gtable(ggplot_build(g.mid))
 
-grid.arrange(g1,g.mid,g2, ncol=3,widths=c(4/9,1/9,4/9))
+grid.arrange(gg1,gg.mid,gg2, ncol=3,widths=c(4/9,1/9,4/9))
 
 ###################################################################################
 ################################### FIG 2 #########################################
@@ -366,7 +369,7 @@ g3 <- ggplot(data = impact_dataset_noeffect, aes(x = alleles)) +
   geom_histogram(stat = "count") + 
   theme(axis.title.x = element_blank(), 
         plot.margin = unit(c(1,-1,1,0), "mm"))
-
+g3
 ###################################################################################
 ################################### FIG 3 #########################################
 ###################################################################################
@@ -409,12 +412,12 @@ g5 <- ggplot(data = impact_dataset_loss, aes(x = factor(gene, genes_sorted), fil
         plot.margin = unit(c(1,0,1,-1), "mm")) +
   scale_x_discrete(drop = FALSE) +
   coord_flip()
-g5
+
 gg4 <- ggplot_gtable(ggplot_build(g4))
 gg5 <- ggplot_gtable(ggplot_build(g5))
 gg.mid2 <- ggplot_gtable(ggplot_build(g.mid2))
 
-grid.arrange(g4,g.mid2,g5,ncol=3,widths=c(4/9,1/9,4/9))
+grid.arrange(g4,g.mid2,g5,ncol=3,widths=c(2/5,1/5,2/5))
 
 ###################################################################################
 ################################### FIG 4 #########################################
@@ -543,44 +546,65 @@ patients_date <- patients %>%
 library(viridis)
 colourCount_variants = length(unique(lineage_date$Lineage))
 getPalette_variants = colorRampPalette(brewer.pal(9, "Set1"))
-magma_edit <- c("#000004FF", "#302e57", "#4f4c85", "#7612b9", "#9d12b9" , "#b464c4",
-"#d6147f", "#e77e83", "#ffc7c7", "#94011a",  "#ce1f3c", "#e24c54", "#e03a07", "#ff8800", "#fbb861", "#FECE91FF", "#FDE6A8FF", "#c29e00", "#eeca2a", "#e9de40",
-"#c9c9c9")
-ggplot(lineage_date, aes(x = lubridate::my(month_year), y = prop, fill = factor(Lineage, detection_sorted))) +
-  geom_bar(stat = "identity") +
+
+test <- ggplot(lineage_date, aes(x = lubridate::my(month_year), y = prop, fill = factor(Lineage, detection_sorted))) +
+  geom_bar(stat = "identity",  colour="black") +
   #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
-  labs(title = "Relative Prevalence of Virus Lineages",
-       x = "Month-Year",
+  labs( x = "Month-Year",
        y = "Relative Prevalence (%)") +
   scale_fill_manual(values = getPalette_variants(colourCount_variants))+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y")
+  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.01,0)) +
+  scale_y_continuous(expand = c(0.01,0)) +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.line.x = element_blank(),
+        legend.title = element_blank(),
+        panel.grid=element_blank(),
+        panel.background=element_blank())
 
-library(RColorBrewer)
+test1 <- ggplot(lineage_date, aes(x = lubridate::my(month_year), y = n)) +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "") +
+  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.01,0)) +
+  theme_linedraw() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        plot.margin = margin(0, 0, 0, 0, "mm"))
+
+(test1 + test + plot_layout(ncol=1, heights = c(0.5, 3), guides = "collect"))
+
+
 colourCount_alleles = length(unique(patients_date$alleles))
 getPalette_alleles = colorRampPalette(brewer.pal(9, "Spectral"))
 
-ggplot(patients_date, aes(x = lubridate::my(month_year), y = prop, fill=alleles)) +
-  geom_bar(stat = "identity") +
+
+test2 <- ggplot(patients_date, aes(x = lubridate::my(month_year), y = prop, fill=alleles)) +
+  geom_bar(stat = "identity", colour="black") +
   #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
-  labs(title = "Relative Prevalence of Virus Lineages",
-       x = "Month-Year",
+  labs(x = "Month-Year",
        y = "Relative Prevalence (%)") +
   scale_fill_manual(values = getPalette_alleles(colourCount_alleles))+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y")
+  #scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.01,0)) +
+  scale_y_continuous(expand = c(0.01,0)) +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.line.x = element_blank(),
+        legend.title = element_blank(),
+        panel.grid=element_blank(),
+        panel.background=element_blank()) +
+  scale_x_date(limits = min(lubridate::my(lineage_date$month_year)), max(lubridate::my(lineage_date$month_year)))
+max(lubridate::my(lineage_date$month_year))
+test2
+test3 <- ggplot(patients_date, aes(x = lubridate::my(month_year),  y = n)) +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "") +
+  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.01,0)) +
+  theme_linedraw() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        plot.margin = margin(0, 0, 0, 0, "mm"))
 
-
-ggplot(lineage_date, aes(x = lubridate::my(month_year))) +
-  geom_bar(stat = "count") +
-  #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
-  labs(title = "Relative Prevalence of Virus Lineages",
-       x = "Month-Year",
-       y = "Relative Prevalence (%)",
-       fill = "Lineage Name") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y")
-
+(test3 + test2 + plot_layout(ncol=1, heights = c(0.5, 3), guides = "collect"))
 
 ###################################################################################
 ################################### FIG 6 #########################################
