@@ -546,11 +546,14 @@ patients_date <- patients %>%
 library(viridis)
 colourCount_variants = length(unique(lineage_date$Lineage))
 getPalette_variants = colorRampPalette(brewer.pal(9, "Set1"))
+magma_edit <- c("#000004FF", "#302e57", "#4f4c85", "#7612b9", "#9d12b9" , "#b464c4",
+"#d6147f", "#e77e83", "#ffc7c7", "#94011a",  "#ce1f3c", "#e24c54", "#e03a07", "#ff8800", "#fbb861", "#FECE91FF", "#FDE6A8FF", "#c29e00", "#eeca2a", "#e9de40",
+"#c9c9c9")
 
 test <- ggplot(lineage_date, aes(x = lubridate::my(month_year), y = prop, fill = factor(Lineage, detection_sorted))) +
   geom_bar(stat = "identity",  colour="black") +
   #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
-  labs( x = "Month-Year",
+  labs( x = "",
        y = "Relative Prevalence (%)") +
   scale_fill_manual(values = getPalette_variants(colourCount_variants))+
   scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.01,0)) +
@@ -571,40 +574,39 @@ test1 <- ggplot(lineage_date, aes(x = lubridate::my(month_year), y = n)) +
         axis.ticks.x = element_blank(),
         plot.margin = margin(0, 0, 0, 0, "mm"))
 
-(test1 + test + plot_layout(ncol=1, heights = c(0.5, 3), guides = "collect"))
 
-
+lineage_date$month_year
 colourCount_alleles = length(unique(patients_date$alleles))
-getPalette_alleles = colorRampPalette(brewer.pal(9, "Spectral"))
+getPalette_alleles = colorRampPalette(brewer.pal(9, "BrBG"))
 
+
+break.vec <- range(as.Date("01-03-2020", format="%d-%m-%Y"), as.Date("01-06-2022", format="%d-%m-%Y"))
 
 test2 <- ggplot(patients_date, aes(x = lubridate::my(month_year), y = prop, fill=alleles)) +
-  geom_bar(stat = "identity", colour="black") +
-  #scale_fill_manual(values = c("A" = "blue", "B" = "red", "C" = "green")) +  # Change colors as needed
-  labs(x = "Month-Year",
-       y = "Relative Prevalence (%)") +
+  geom_bar(stat = "identity", colour='black') +
+  labs( x = "",
+        y = "Relative Prevalence (%)") +
+  scale_x_date(limits = break.vec, date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.025,0)) +
   scale_fill_manual(values = getPalette_alleles(colourCount_alleles))+
-  #scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.01,0)) +
   scale_y_continuous(expand = c(0.01,0)) +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         axis.line.x = element_blank(),
         legend.title = element_blank(),
         panel.grid=element_blank(),
-        panel.background=element_blank()) +
-  scale_x_date(limits = min(lubridate::my(lineage_date$month_year)), max(lubridate::my(lineage_date$month_year)))
-max(lubridate::my(lineage_date$month_year))
-test2
-test3 <- ggplot(patients_date, aes(x = lubridate::my(month_year),  y = n)) +
+        panel.background=element_blank())
+
+
+test3 <- ggplot(patients_date, aes(x = lubridate::my(month_year), y = n)) +
   geom_bar(stat = "identity") +
   labs(x = "", y = "") +
-  scale_x_date(date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.01,0)) +
+  scale_x_date(limits = break.vec, date_breaks = '1 month', date_labels = "%b-%Y", expand = c(0.025,0)) +
   theme_linedraw() +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         plot.margin = margin(0, 0, 0, 0, "mm"))
 
-(test3 + test2 + plot_layout(ncol=1, heights = c(0.5, 3), guides = "collect"))
+(test1 + test + test3 + test2 + plot_layout(ncol=1, heights = c(1, 4, 1, 4), guides = "collect"))
 
 ###################################################################################
 ################################### FIG 6 #########################################
@@ -635,7 +637,7 @@ ggplot(FC_loss_all)+
   scale_colour_brewer("K-mers", type = "div", palette =  'Greys')+
   ggnewscale::new_scale_colour()+ 
   geom_point(aes(x = fold_change, y = factor(variant_lineage, detection_sorted), colour = alleles), size = 3, fill = NA)+ 
-  scale_colour_manual('Alleles', values = getPalette_alleles(colourCount1))+
+  scale_colour_manual('Alleles', values = getPalette_alleles(colourCount_alleles))+
   coord_cartesian(clip='off') +
   theme(
     plot.title = element_text(size=14, face= "bold", colour= "black" ),
