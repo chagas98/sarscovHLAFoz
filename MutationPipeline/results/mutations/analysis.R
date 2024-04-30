@@ -25,6 +25,7 @@ library(cowplot)
 library(viridis)
 library(ggnewscale)
 library(grid)
+library(ggrepel)
 
 #sessioninfo::package_info()
 setwd('../../')
@@ -213,36 +214,36 @@ peptides_deduplicate <- peptides_single %>%
                             "gene")
   ) #variant_protein possui grupos de variantes iguais
 
-peptides_deduplicate  %>% 
-  count(gene, sort=TRUE)
-###################################################################################
-################################### TABLE 1 #######################################
-###################################################################################
-
-lista_labels = list(
-  length = "k-mers",
-  `HLA.B.07.02.rank` = "B*07:02 rank Mutant",
-  `HLA.B.07.02.rank_refseq` = "B*07:02 rank WT")
-
-  ##Collect between outcomes
-tab_stats <- template_table(data = peptides_deduplicate,
-                            div = "gene",
-                            include_list = names(lista_labels),
-                            translation = lista_labels)
-
-summary_table_final <-
-  gtsummary::tbl_merge(list(tab_stats)) %>%
-  gtsummary::modify_header(label = "") 
-
-summary_table_final
-  #flextable::set_table_properties(width = 1, layout = "autofit")
-  ##Collect between years
-tab_statsYears <- template_table(data = data_final,
-                                 div = "SamplesGroupYear",
-                                 translation = lista_labels)
 
 ###################################################################################
-################################### FIG 1 #########################################
+################################### METADATA ######################################
+###################################################################################
+metadata <- read.csv('results/mutations/metadata_info.csv', sep=',')
+patients <- read.csv('results/raw_data/patients_hla.csv', sep=',')
+
+metadata_date <- metadata %>%
+  group_by(Date) %>% 
+  mutate(month_year = format(as.Date(Date), "%m-%Y"),
+         year = format(as.Date(Date), "%Y"),
+         group_date = cur_group_id()
+  ) %>% 
+  ungroup()
+
+detection_sorted  <- metadata_date %>%
+  group_by(Lineage) %>%
+  slice(which.min(group_date)) %>%
+  select(Lineage, first_detection = group_date) %>% 
+  arrange(first_detection) %>% 
+  pull(Lineage) 
+
+
+lineage_date <- metadata_date %>%
+  count(Lineage, month_year) %>%
+  group_by(month_year) %>%         
+  mutate(prop = prop.table(n)*100)
+
+###################################################################################
+################################### MAIN DATA ######################################
 ###################################################################################
 
 impact_dataset_all <- peptides_single  %>%
@@ -308,6 +309,38 @@ impact_dataset_noeffect  <- impact_dataset_deduplicate %>%
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
   dplyr::filter(grepl('No Effect', impact))
+
+
+###################################################################################
+################################### TABLE 1 #######################################
+###################################################################################
+
+lista_labels = list(
+  length = "k-mers",
+  `HLA.B.07.02.rank` = "B*07:02 rank Mutant",
+  `HLA.B.07.02.rank_refseq` = "B*07:02 rank WT")
+
+##Collect between outcomes
+tab_stats <- template_table(data = peptides_deduplicate,
+                            div = "gene",
+                            include_list = names(lista_labels),
+                            translation = lista_labels)
+
+summary_table_final <-
+  gtsummary::tbl_merge(list(tab_stats)) %>%
+  gtsummary::modify_header(label = "") 
+
+summary_table_final
+#flextable::set_table_properties(width = 1, layout = "autofit")
+##Collect between years
+tab_statsYears <- template_table(data = data_final,
+                                 div = "SamplesGroupYear",
+                                 translation = lista_labels)
+
+
+###################################################################################
+################################### FIG1C #########################################
+###################################################################################
 
 alleles_names  <- unique(impact_dataset_deduplicate$alleles)
 alleles_sorted  <- str_sort(alleles_names, numeric = TRUE)
@@ -391,19 +424,11 @@ g2 <- ggplot(data = impact_dataset_loss,
 
 fig1C <- (g1 + g.mid + g2)  + plot_layout(ncol=3, widths = c(4,1.4,4), guides = "collect")
 
+
 ###################################################################################
-################################### FIG 2 #########################################
+################################### FIG 1A ########################################
 ###################################################################################
 
-
-g3 <- ggplot(data = impact_dataset_noeffect, aes(x = alleles)) +
-  geom_histogram(stat = "count") + 
-  theme(axis.title.x = element_blank(), 
-        plot.margin = unit(c(1,-1,1,0), "mm"))
-g3
-###################################################################################
-################################### FIG 3 #########################################
-###################################################################################
 unique_gene <- impact_dataset_deduplicate %>% 
   select(gene) %>% 
   distinct()
@@ -476,15 +501,8 @@ fig1A <- g4  + g.mid2 + g5 + plot_layout(ncol=3, widths = c(4,1.4,4))
 
 
 ###################################################################################
-################################### FIG 4 #########################################
+################################### FIG 1B ########################################
 ###################################################################################
-
-impact_dataset  %>% 
-  count(variant_protein_sorted) %>% 
-  print(n=300)
-
-peptides_single  %>% 
-  count(variant_protein_sorted) 
 
 
 impact_dataset_gain_all <- dplyr::semi_join(
@@ -579,35 +597,60 @@ fig1 <- (wrap_elements(fig1A) | plot_spacer() | wrap_elements(fig1B) | plot_spac
   plot_layout(ncol=5, widths = c(1.3/5, 0.0005/5, 1.5/5, 0.0005/5, 1.7/5)) +
   plot_annotation(tag_levels = list(c("A", "B", "C")))
 
-ggsave('Fig1.png', fig1, height = 10, width = 40, scale = 1,  units = "cm")
+ggsave('Fig1.png', fig1, height = 14, width = 40, scale = 1,  units = "cm")
 
+
+###################################################################################
+################################### FIG 2 #########################################
+###################################################################################
+
+mutation_dataset <- impact_dataset_all %>% 
+  deduplicating(data = ., columns = c("variant_protein_sorted", "gene", "variant_lineage")) %>% 
+  group_by(pos,variant_protein_sorted) %>% 
+  count()
+
+# Create data
+set.seed(1000)
+data <- data.frame(
+  x=LETTERS[1:26], 
+  y=abs(rnorm(26))
+)
+
+# Reorder the data
+data <- data %>%
+  arrange(y) %>%
+  mutate(x=factor(x,x))
+
+# Plot
+p <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
+  geom_segment(
+    aes(x=pos, xend=pos, y=0, yend=n), 
+    color=ifelse(mutation_dataset$n > 10, "orange", "grey"), 
+    size=ifelse(mutation_dataset$n > 10, 1.3, 0.7)
+  ) +
+  geom_point(
+    color=ifelse(mutation_dataset$n > 10, "orange", "grey"), 
+    size=ifelse(mutation_dataset$n > 10, 5, 2)
+  ) +
+  theme(
+    legend.position="none"
+  ) +
+  xlab("") +
+  ylab("Value of Y")
+p
+# Add annotation
+
+p + geom_text_repel(data=filter(mutation_dataset, n>10), aes(label=variant_protein_sorted))
+p + annotate("text", x=mutation_dataset$pos[which(mutation_dataset$n>10)], y=ifelse(mutation_dataset$n[which(mutation_dataset$n>10)]*1.2, 
+             label=mutation_dataset$variant_protein_sorted[which(mutation_dataset$n>10)], 
+             color="orange", size=4 , angle=0, fontface="bold", hjust=0) 
+  
+  annotate("text", x = grep("A", data$x), y = data$y[which(data$x=="A")]*1.2, 
+           label = paste("Group A is not too bad\n (val=",data$y[which(data$x=="A")] %>% round(2),")",sep="" ) , 
+           color="orange", size=4 , angle=0, fontface="bold", hjust=0) 
 ###################################################################################
 ################################### FIG 5 #########################################
 ###################################################################################
-metadata <- read.csv('results/mutations/metadata_info.csv', sep=',')
-patients <- read.csv('results/raw_data/patients_hla.csv', sep=',')
-
-metadata_date <- metadata %>%
-  group_by(Date) %>% 
-  mutate(month_year = format(as.Date(Date), "%m-%Y"),
-         year = format(as.Date(Date), "%Y"),
-         group_date = cur_group_id()
-         ) %>% 
-  ungroup()
-
-detection_sorted  <- metadata_date %>%
-  group_by(Lineage) %>%
-  slice(which.min(group_date)) %>%
-  select(Lineage, first_detection = group_date) %>% 
-  arrange(first_detection) %>% 
-  pull(Lineage) 
-
-
-lineage_date <- metadata_date %>%
-  count(Lineage, month_year) %>%
-  group_by(month_year) %>%         
-  mutate(prop = prop.table(n)*100)
-
 
 alleles_binned <- patients %>%
   filter(HospitalPeriod_days < 65)  %>% 
