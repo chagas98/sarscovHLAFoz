@@ -311,6 +311,21 @@ impact_dataset_noeffect  <- impact_dataset_deduplicate %>%
   dplyr::filter(grepl('No Effect', impact))
 
 
+impact_only_loss  <- impact_dataset_deduplicate %>% 
+  dplyr::filter(impact == 'Loss')
+
+
+impact_only_gain  <- impact_dataset_deduplicate %>% 
+  dplyr::filter(impact == 'Gain')
+
+impact_only_weakloss  <- impact_dataset_deduplicate %>% 
+  dplyr::filter(impact == 'Weak Loss')
+
+
+impact_only_weakgain  <- impact_dataset_deduplicate %>% 
+  dplyr::filter(impact == 'Weak Gain')
+
+
 ###################################################################################
 ################################### TABLE 1 #######################################
 ###################################################################################
@@ -606,48 +621,103 @@ ggsave('Fig1.png', fig1, height = 14, width = 40, scale = 1,  units = "cm")
 
 mutation_dataset <- impact_dataset_all %>% 
   deduplicating(data = ., columns = c("variant_protein_sorted", "gene", "variant_lineage")) %>% 
-  group_by(pos,variant_protein_sorted) %>% 
+  group_by(pos,gene,variant_protein_sorted) %>% 
   count()
 
-# Create data
-set.seed(1000)
-data <- data.frame(
-  x=LETTERS[1:26], 
-  y=abs(rnorm(26))
-)
-
-# Reorder the data
-data <- data %>%
-  arrange(y) %>%
-  mutate(x=factor(x,x))
 
 # Plot
-p <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
+fig2A <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
   geom_segment(
     aes(x=pos, xend=pos, y=0, yend=n), 
     color=ifelse(mutation_dataset$n > 10, "orange", "grey"), 
-    size=ifelse(mutation_dataset$n > 10, 1.3, 0.7)
+    linewidth=ifelse(mutation_dataset$n > 10, 1, 0.7)
   ) +
   geom_point(
     color=ifelse(mutation_dataset$n > 10, "orange", "grey"), 
-    size=ifelse(mutation_dataset$n > 10, 5, 2)
+    size=ifelse(mutation_dataset$n > 10, 4, 2)
   ) +
-  theme(
-    legend.position="none"
+  geom_point(data=filter(mutation_dataset, variant_protein_sorted %in% impact_only_loss$variant_protein_sorted),
+    color="red", 
+    size=2
   ) +
-  xlab("") +
-  ylab("Value of Y")
-p
-# Add annotation
+  geom_point(data=filter(mutation_dataset, variant_protein_sorted %in% impact_only_gain$variant_protein_sorted),
+    color="gray30", 
+    size=2
+  ) +
+#  geom_text_repel(data=filter(mutation_dataset, n>10), 
+#                  aes(label=variant_protein_sorted),
+#                  max.overlaps = Inf,
+#                  min.segment.length = 10, seed = 42, point.padding = 3,
+#                  max.time = 1, max.iter = 1e5,
+#                  direction = "x",
+#                 color='orange'
+ # ) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(size=16), 
+        axis.title.y = element_text(size=14), 
+        axis.text.y = element_text(size=13), 
+        axis.text.x=element_text(size=13),
+        axis.ticks.y = element_blank(),) +
+  scale_y_continuous(limits = c(0, 25), expand = c(0,0)) +
+  scale_x_continuous(breaks=seq(0, 30000, 5000)) +
+  ylab("Frequência de Mutações") +
+  xlab("Posição (Nucleotídeos)")
 
-p + geom_text_repel(data=filter(mutation_dataset, n>10), aes(label=variant_protein_sorted))
-p + annotate("text", x=mutation_dataset$pos[which(mutation_dataset$n>10)], y=ifelse(mutation_dataset$n[which(mutation_dataset$n>10)]*1.2, 
-             label=mutation_dataset$variant_protein_sorted[which(mutation_dataset$n>10)], 
-             color="orange", size=4 , angle=0, fontface="bold", hjust=0) 
-  
-  annotate("text", x = grep("A", data$x), y = data$y[which(data$x=="A")]*1.2, 
-           label = paste("Group A is not too bad\n (val=",data$y[which(data$x=="A")] %>% round(2),")",sep="" ) , 
-           color="orange", size=4 , angle=0, fontface="bold", hjust=0) 
+fig2A
+ggsave('Fig2A.png', fig2A, height = 8, width = 26, scale = 1,  units = "cm")
+
+mutation_dataset_spike <-  mutation_dataset %>% 
+  filter(gene == 'S') %>% 
+  mutate(prot_pos = as.numeric(map(variant_protein_sorted, parse_number)))
+
+fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
+  geom_segment(
+    aes(x=prot_pos, xend=prot_pos, y=0, yend=n), 
+    color=ifelse(mutation_dataset_spike$n > 10, "orange", "grey"), 
+    size=ifelse(mutation_dataset_spike$n > 10, 1, 0.7)
+  ) +
+  geom_point(
+    color=ifelse(mutation_dataset_spike$n > 10, "orange", "grey"), 
+    size=ifelse(mutation_dataset_spike$n > 10, 4, 2)
+  ) +
+  geom_point(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_loss$variant_protein_sorted),
+             color="red", 
+             size=2
+  ) +
+  geom_point(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_gain$variant_protein_sorted),
+             color="gray30", 
+             size=2
+  ) +
+  geom_text_repel(data=filter(mutation_dataset_spike, n>10 && !(variant_protein_sorted %in% impact_only_loss$variant_protein_sorted)), 
+                  aes(label=variant_protein_sorted),
+                  max.overlaps = Inf,
+                  min.segment.length = 10, seed = 42, point.padding = 3,
+                  max.time = 1, max.iter = 1e5,
+                  direction = "x",
+                  color='orange'
+  ) +
+  geom_text_repel(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_loss$variant_protein_sorted), 
+                  aes(label=variant_protein_sorted),
+                  color="red"
+  ) + 
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(size=16), 
+        axis.title.y = element_text(size=13), 
+        axis.text.y = element_text(size=13), 
+        axis.text.x=element_text(size=13),
+        plot.margin = unit(c(7,6,5,6), "mm")
+  ) +
+  scale_y_continuous(limits = c(0, 25), expand = c(0,0)) +
+  scale_x_continuous(limits = c(0, 1200), breaks=seq(0, 1200, 200), expand = c(0,0)) +
+  ylab("Frequência de Mutações") +
+  xlab("Resíduos")
+
+fig2B
+ggsave('Fig2B.png', fig2B, height = 7, width = 24, scale = 1,  units = "cm")
+
+
 ###################################################################################
 ################################### FIG 5 #########################################
 ###################################################################################
