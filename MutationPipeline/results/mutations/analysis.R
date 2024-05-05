@@ -143,9 +143,9 @@ template_table <- function(data, div, include_list, translation=NA) {
                            percent = "column",
                            statistic = list(
                              all_continuous() ~ "{mean} ({sd})",
-                             all_categorical() ~ "{n} ({p}%)",
-                             HLA.B.07.02.rank ~ "{median} ({p25}, {p75})",
-                             HLA.B.07.02.rank_refseq ~ "{median} ({p25}, {p75})"
+                             all_categorical() ~ "{n} ({p}%)"
+                             #HLA.B.07.02.rank ~ "{median} ({p25}, {p75})",
+                             #HLA.B.07.02.rank_refseq ~ "{median} ({p25}, {p75})"
                              #VentilatorySupport_days ~ "{median} ({p25}, {p75})",
                              #HospitalPeriod_days ~ "{median} ({p25}, {p75})",
                              #ICU_days ~ "{median} ({p25}, {p75})"
@@ -213,7 +213,6 @@ peptides_deduplicate <- peptides_single %>%
                             "pos", 
                             "gene")
   ) #variant_protein possui grupos de variantes iguais
-
 
 ###################################################################################
 ################################### METADATA ######################################
@@ -331,9 +330,7 @@ impact_only_weakgain  <- impact_dataset_deduplicate %>%
 ###################################################################################
 
 lista_labels = list(
-  length = "k-mers",
-  `HLA.B.07.02.rank` = "B*07:02 rank Mutant",
-  `HLA.B.07.02.rank_refseq` = "B*07:02 rank WT")
+  length = "k-mers")
 
 ##Collect between outcomes
 tab_stats <- template_table(data = peptides_deduplicate,
@@ -610,8 +607,10 @@ fig1B <- g6  + g.mid3  + g7 + plot_layout(ncol=3, widths = c(4,1.4,4))
 
 fig1 <- (wrap_elements(fig1A) | plot_spacer() | wrap_elements(fig1B) | plot_spacer() | wrap_elements(fig1C))  + 
   plot_layout(ncol=5, widths = c(1.3/5, 0.0005/5, 1.5/5, 0.0005/5, 1.7/5)) +
-  plot_annotation(tag_levels = list(c("A", "B", "C")))
+  plot_annotation(tag_levels = list(c("A", "B", "C"))) &
+  theme(plot.tag = element_text(size = 26))
 
+fig1
 ggsave('Fig1.png', fig1, height = 14, width = 40, scale = 1,  units = "cm")
 
 
@@ -625,6 +624,7 @@ mutation_dataset <- impact_dataset_all %>%
   count()
 
 
+  
 # Plot
 fig2A <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
   geom_segment(
@@ -710,14 +710,14 @@ fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
         plot.margin = unit(c(7,6,5,6), "mm")
   ) +
   scale_y_continuous(limits = c(0, 25), expand = c(0,0)) +
-  scale_x_continuous(limits = c(0, 1200), breaks=seq(0, 1200, 200), expand = c(0,0)) +
+  scale_x_continuous(limits = c(0, 1273), breaks=seq(0, 1200, 200), expand = c(0,0)) +
   ylab("Frequência de Mutações") +
   xlab("Resíduos")
 
 fig2B
 ggsave('Fig2B.png', fig2B, height = 7, width = 24, scale = 1,  units = "cm")
 
-
+mutation_dataset_spike
 ###################################################################################
 ################################### FIG 5 #########################################
 ###################################################################################
