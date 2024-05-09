@@ -330,11 +330,12 @@ impact_only_weakgain  <- impact_dataset_deduplicate %>%
 ###################################################################################
 
 lista_labels = list(
-  length = "k-mers")
+  length = "k-mers",
+  gene = 'Proteins')
 
 ##Collect between outcomes
-tab_stats <- template_table(data = peptides_deduplicate,
-                            div = "gene",
+tab_stats <- template_table(data = impact_dataset_deduplicate,
+                            div = "impact",
                             include_list = names(lista_labels),
                             translation = lista_labels)
 
@@ -343,11 +344,7 @@ summary_table_final <-
   gtsummary::modify_header(label = "") 
 
 summary_table_final
-#flextable::set_table_properties(width = 1, layout = "autofit")
-##Collect between years
-tab_statsYears <- template_table(data = data_final,
-                                 div = "SamplesGroupYear",
-                                 translation = lista_labels)
+
 
 
 ###################################################################################
@@ -671,6 +668,7 @@ mutation_dataset_spike <-  mutation_dataset %>%
   filter(gene == 'S') %>% 
   mutate(prot_pos = as.numeric(map(variant_protein_sorted, parse_number)))
 
+paste0(mutation_dataset_spike$prot_pos, collapse = ' resid ')
 fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
   geom_segment(
     aes(x=prot_pos, xend=prot_pos, y=0, yend=n), 
