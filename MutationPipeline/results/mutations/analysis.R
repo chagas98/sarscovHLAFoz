@@ -626,12 +626,12 @@ mutation_dataset <- impact_dataset_all %>%
 fig2A <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
   geom_segment(
     aes(x=pos, xend=pos, y=0, yend=n), 
-    color=ifelse(mutation_dataset$n > 10, "orange", "grey"), 
-    linewidth=ifelse(mutation_dataset$n > 10, 1, 0.7)
+    color=ifelse(mutation_dataset$n > 20, "orange", "grey"), 
+    linewidth=ifelse(mutation_dataset$n > 20, 1, 0.7)
   ) +
   geom_point(
-    color=ifelse(mutation_dataset$n > 10, "orange", "grey"), 
-    size=ifelse(mutation_dataset$n > 10, 4, 2)
+    color=ifelse(mutation_dataset$n > 20, "orange", "grey"), 
+    size=ifelse(mutation_dataset$n > 20, 4, 2)
   ) +
   geom_point(data=filter(mutation_dataset, variant_protein_sorted %in% impact_only_loss$variant_protein_sorted),
     color="red", 
@@ -656,7 +656,7 @@ fig2A <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
         axis.text.y = element_text(size=13), 
         axis.text.x=element_text(size=13),
         axis.ticks.y = element_blank(),) +
-  scale_y_continuous(limits = c(0, 25), expand = c(0,0)) +
+  scale_y_continuous(limits = c(0, 35), expand = c(0,0), breaks=seq(0, 35, 5)) +
   scale_x_continuous(breaks=seq(0, 30000, 5000)) +
   ylab("Frequência de Mutações") +
   xlab("Posição (Nucleotídeos)")
@@ -672,12 +672,12 @@ paste0(mutation_dataset_spike$prot_pos, collapse = ' resid ')
 fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
   geom_segment(
     aes(x=prot_pos, xend=prot_pos, y=0, yend=n), 
-    color=ifelse(mutation_dataset_spike$n > 10, "orange", "grey"), 
-    size=ifelse(mutation_dataset_spike$n > 10, 1, 0.7)
+    color=ifelse(mutation_dataset_spike$n > 20, "orange", "grey"), 
+    size=ifelse(mutation_dataset_spike$n > 20, 1, 0.7)
   ) +
   geom_point(
-    color=ifelse(mutation_dataset_spike$n > 10, "orange", "grey"), 
-    size=ifelse(mutation_dataset_spike$n > 10, 4, 2)
+    color=ifelse(mutation_dataset_spike$n > 20, "orange", "grey"), 
+    size=ifelse(mutation_dataset_spike$n > 20, 4, 2)
   ) +
   geom_point(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_loss$variant_protein_sorted),
              color="red", 
@@ -687,12 +687,12 @@ fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
              color="gray30", 
              size=2
   ) +
-  geom_text_repel(data=filter(mutation_dataset_spike, n>10 && !(variant_protein_sorted %in% impact_only_loss$variant_protein_sorted)), 
+  geom_text_repel(data=filter(mutation_dataset_spike, n>20 && !(variant_protein_sorted %in% impact_only_loss$variant_protein_sorted)), 
                   aes(label=variant_protein_sorted),
                   max.overlaps = Inf,
                   min.segment.length = 10, seed = 42, point.padding = 3,
-                  max.time = 1, max.iter = 1e5,
-                  direction = "x",
+                  max.time = 1, max.iter = 1e6,
+                  #direction = "x",
                   color='orange'
   ) +
   geom_text_repel(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_loss$variant_protein_sorted), 
@@ -707,13 +707,13 @@ fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
         axis.text.x=element_text(size=13),
         plot.margin = unit(c(7,6,5,6), "mm")
   ) +
-  scale_y_continuous(limits = c(0, 25), expand = c(0,0)) +
+  scale_y_continuous(limits = c(0, 35), expand = c(0,0), breaks=seq(0, 35, 5)) +
   scale_x_continuous(limits = c(0, 1273), breaks=seq(0, 1200, 200), expand = c(0,0)) +
   ylab("Frequência de Mutações") +
   xlab("Resíduos")
 
 fig2B
-ggsave('Fig2B.png', fig2B, height = 7, width = 24, scale = 1,  units = "cm")
+ggsave('Fig2B.png', fig2B, height = 7, width = 26, scale = 1,  units = "cm")
 
 mutation_dataset_spike
 ###################################################################################
