@@ -1,0 +1,12 @@
+[WARNING][1;31m '-N 0' reduces mapping accuracy. Please use '--secondary=no' instead.[0m
+[WARNING][1;31m changed '-N 0' to '-N 5 --secondary=no'.[0m
+[M::mm_idx_gen::0.004*0.99] collected minimizers
+[M::mm_idx_gen::0.007*0.98] sorted minimizers
+[M::main::0.007*0.98] loaded/built the index for 1 target sequence(s)
+[M::mm_mapopt_update::0.008*0.98] mid_occ = 10
+[M::mm_idx_stat] kmer size: 15; skip: 10; is_hpc: 0; #seq: 1
+[M::mm_idx_stat::0.008*0.98] distinct minimizers: 5587 (99.93% are singletons); average occurrences: 1.004; average spacing: 5.332; total length: 29903
+[M::worker_pipeline::0.062*1.46] mapped 6 sequences
+[M::main] Version: 2.26-r1175
+[M::main] CMD: minimap2 -a --secondary=no -N 0 ../NC_045512.2.fasta ../BA.1.17.fasta
+[M::main] Real time: 0.064 sec; CPU: 0.092 sec; Peak RSS: 0.007 GB

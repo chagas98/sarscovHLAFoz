@@ -1,0 +1,71 @@
+00:00:00 SnpEff version SnpEff 5.2 (build 2023-09-29 06:17), by Pablo Cingolani
+00:00:00 Command: 'ann'
+00:00:00 Reading configuration file 'snpEff.config'. Genome: 'NC_045512.2'
+00:00:00 Reading config file: /home/samuel/Documents/UNILA/sarscovHLAFoz/MutationPipeline/work/9b/eabf0f6040d401a41dc9b0e2941017/BE.9/snpEff.config
+00:00:00 Reading config file: /home/samuel/anaconda3/envs/epytope2/share/snpeff-5.2-0/snpEff.config
+00:00:02 done
+00:00:02 Reading database for genome version 'NC_045512.2' from file '/home/samuel/anaconda3/envs/epytope2/share/snpeff-5.2-0/./data/NC_045512.2/snpEffectPredictor.bin' (this might take a while)
+00:00:02 done
+00:00:02 Loading Motifs and PWMs
+00:00:02 Building interval forest
+00:00:02 done.
+00:00:02 Genome stats :
+#-----------------------------------------------
+# Genome name                : 'COVID19 Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1'
+# Genome version             : 'NC_045512.2'
+# Genome ID                  : 'NC_045512.2[0]'
+# Has protein coding info    : true
+# Has Tr. Support Level info : true
+# Genes                      : 11
+# Protein coding genes       : 11
+#-----------------------------------------------
+# Transcripts                : 38
+# Avg. transcripts per gene  : 3.45
+# TSL transcripts            : 0
+#-----------------------------------------------
+# Checked transcripts        : 
+#               AA sequences :     12 ( 31.58% )
+#              DNA sequences :      0 ( 0.00% )
+#-----------------------------------------------
+# Protein coding transcripts : 38
+#              Length errors :      0 ( 0.00% )
+#  STOP codons in CDS errors :      0 ( 0.00% )
+#         START codon errors :     24 ( 63.16% )
+#        STOP codon warnings :     26 ( 68.42% )
+#              UTR sequences :      0 ( 0.00% )
+#               Total Errors :     24 ( 63.16% )
+# WARNING                    : No protein coding transcript has UTR
+#-----------------------------------------------
+# Cds                        : 40
+# Exons                      : 40
+# Exons with sequence        : 40
+# Exons without sequence     : 0
+# Avg. exons per transcript  : 1.05
+#-----------------------------------------------
+# Number of chromosomes      : 1
+# Chromosomes                : Format 'chromo_name size codon_table'
+#		'NC_045512.2'	29903	Standard
+#-----------------------------------------------
+
+00:00:02 Predicting variants
+00:00:02 Creating sequences from exon information 'NC_045512.2'
+00:00:02 Building sequence tree for chromosome 'NC_045512.2'
+00:00:02 Building sequence tree for genome sequences
+00:00:02 Done.
+00:00:02 Done. Loaded 20 sequences.
+00:00:03 	10000 variants (7722 variants per second), 10000 VCF entries
+00:00:04 	20000 variants (8583 variants per second), 20000 VCF entries
+
+WARNINGS: Some warning were detected
+Warning type	Number of warnings
+WARNING_TRANSCRIPT_NO_START_CODON	431
+WARNING_TRANSCRIPT_NO_STOP_CODON	16
+
+
+00:00:05 Creating summary file: annotated_vcf_ann.csv
+00:00:06 Creating summary file: annotated_vcf_ann.html
+00:00:07 Creating genes file: ./annotated_vcf_ann.genes.txt
+00:00:07 done.
+00:00:07 Logging
+00:00:08 Checking for updates...
+00:00:11 Done.

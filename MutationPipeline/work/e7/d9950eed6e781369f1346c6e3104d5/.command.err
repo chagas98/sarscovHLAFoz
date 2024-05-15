@@ -1,0 +1,41 @@
+Loading required package: renv
+
+Attaching package: ‘renv’
+
+The following objects are masked from ‘package:stats’:
+
+    embed, update
+
+The following objects are masked from ‘package:utils’:
+
+    history, upgrade
+
+The following objects are masked from ‘package:base’:
+
+    autoload, load, remove
+
+Loading required package: devtools
+Loading required package: usethis
+
+Attaching package: ‘devtools’
+
+The following object is masked from ‘package:renv’:
+
+    install
+
+Loading required package: readr
+Loading required package: GISAIDR
+
+Attaching package: ‘GISAIDR’
+
+The following object is masked from ‘package:utils’:
+
+    timestamp
+
+Selecting all 655 accession_ids.
+Returning 0-655 of 655 accession_ids.
+Selecting entries...
+Compressing data. Please wait...
+Data ready.
+Downloading...
+tar: Removing leading `/' from member names

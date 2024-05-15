@@ -298,3 +298,18 @@
 2024-03-09 21:54:09	15m 52s	cheesy_nightingale	ERR	5c5397c4b07e37ccc80c3abe1e86327d	6b4da7e0-7436-4160-92e0-bbf851ae1c5a	nextflow run main.nf
 2024-03-09 22:20:09	34m 58s	hopeful_poisson	OK	5c5397c4b07e37ccc80c3abe1e86327d	b3407fb2-4cb7-4d06-8f63-f92900409311	nextflow run main.nf
 2024-03-14 21:00:10	5h 27m 53s	determined_pare	OK	75091f1339eb409bad054c36cbd6f141	5387e833-2809-4a96-a111-0f75976664b9	nextflow run main.nf
+2024-05-13 20:32:52	3s	gigantic_elion	ERR	47270736ba77adc49bdc296e8c2b5ae2	0b82bf34-d92e-4f23-b33a-c052bf7b60b2	nextflow run main.nf
+2024-05-13 20:33:07	2.7s	stupefied_poisson	ERR	f4655e2dfa179204c203fb10a101dc5d	5ba51822-f8c0-47be-9b2a-156e9ac87c6c	nextflow run main.nf
+2024-05-13 20:33:43	-	boring_curry	-	1c3359d717a003b3bbe20e42a14a759e	8f31f665-e519-4bda-b9d7-70fafdecb628	nextflow run main.nf
+2024-05-13 20:34:04	11.3s	angry_brown	ERR	66b39517f0d451e788e6d8c339c9f0a3	d6e16448-4140-4181-b74f-213451a833cc	nextflow run main.nf
+2024-05-13 20:34:52	1m 49s	nostalgic_rutherford	ERR	66b39517f0d451e788e6d8c339c9f0a3	35348daa-2150-46a2-8f6d-9e07adba7198	nextflow run main.nf
+2024-05-13 20:57:17	1m 18s	naughty_almeida	ERR	844f0d5286da8562065d98f0d92993f5	2628389d-085e-4fe7-a283-9fe4be9f04f6	nextflow run main.nf
+2024-05-13 21:03:22	8s	mad_kare	ERR	844f0d5286da8562065d98f0d92993f5	a6bbfd33-f1a1-4fbf-9ebd-41c0ada5820b	nextflow run main.nf
+2024-05-13 21:04:42	8.8s	sleepy_mcclintock	ERR	f0139a0d5b2767f83f7193bbdfe0feb8	3fba62f4-e1ef-415a-83f5-fed81fd31a71	nextflow run main.nf
+2024-05-13 21:11:09	8.9s	jovial_lamarr	ERR	7e8a442cb32143addd0ddc7ad5c9596f	e92a4c0c-81a6-4af7-b6fe-83add0831939	nextflow run main.nf
+2024-05-13 21:14:57	7.5s	marvelous_agnesi	ERR	844f0d5286da8562065d98f0d92993f5	1f9ee483-4646-4442-8afe-543381a1ffce	nextflow run main.nf
+2024-05-13 21:16:20	8.3s	grave_wiles	ERR	844f0d5286da8562065d98f0d92993f5	5ff4eef8-dd4a-4b31-b21a-b96b7ee8ac35	nextflow run main.nf
+2024-05-13 21:25:32	1m 9s	distraught_yalow	ERR	844f0d5286da8562065d98f0d92993f5	5514f5f8-93be-43ed-bf0b-b7625fdd573e	nextflow run main.nf
+2024-05-13 21:29:11	-	furious_goodall	-	7e8a442cb32143addd0ddc7ad5c9596f	b96fe98c-4d9a-4189-8199-8ba6ffdc0118	nextflow run main.nf
+2024-05-13 21:38:13	9h 47m 58s	goofy_plateau	ERR	d1f5907fc8a00b410dacc515775417f6	002e2fd4-a510-4e95-9faf-affe8d6783f1	nextflow run main.nf
+2024-05-14 19:46:43	1h 24s	gigantic_bose	OK	3f445c21eef85d1dbcfa53c547edbb7a	002e2fd4-a510-4e95-9faf-affe8d6783f1	nextflow run main.nf -resume

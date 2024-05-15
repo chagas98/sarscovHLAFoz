@@ -34,7 +34,7 @@ process GET_GISAID_SEQUENCES {
     """
     # Run the getvariants.R script using the provided renviron file, start-to-end date and city name
     
-    getvariants.R $renviron $start_date $end_date $city_name
+    getvariants.R --renviron=$renviron --start_collection=$start_date --end_collection=$end_date --location=$city_name
     """
 }
 
@@ -167,5 +167,22 @@ process RUN_EPYTOPE_PREDICTION {
 
     # Run epaa_mod.py to predict epitope for the input VCF file    
     epaa_mod.py --identifier \${variant} --alleles "$alleles" --tools "$tool" --max_length $max_length --min_length $min_length --versions ../$versions --variant_lineage \${variant} --somatic_mutation ../$input
+    """
+}
+
+// Get GISAID sequences
+process PLOTTING {
+
+    input:
+    path files
+
+    output:
+    path "**.png", emit: png
+
+    script:
+    """
+    # Run the getvariants.R script using the provided renviron file, start-to-end date and city name
+    
+    analysis.R $files
     """
 }

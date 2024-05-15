@@ -42,11 +42,26 @@ if (length(command_line_args) == 0) {
 }
 
 # Access the first argument (assuming it's the variable you want)
-renviron <- command_line_args[1]
-start_date <- command_line_args[2]
-end_date <- command_line_args[3]
-city_name <- command_line_args[4]
 
+# Extracting values from command-line arguments
+get_arg_value <- function(arg_name) {
+  arg_value <- grep(paste0('--', arg_name, '*'), command_line_args, value = TRUE)
+  if (length(arg_value) > 0) {
+    arg_value <- strsplit(arg_value, split = '=')[[1]][2]
+  } else {
+    arg_value <- NULL
+  }
+  return(arg_value)
+}
+
+# Extracting values for each parameter
+renviron <- get_arg_value('renviron')
+start_date <- get_arg_value('start_collection')
+end_date <- get_arg_value('end_collection')
+city_name <- get_arg_value('location')
+
+print('ok')
+print(renviron)
 # Credentials
 readRenviron(renviron)
 username = Sys.getenv("GISAIDR_USERNAME")
@@ -61,8 +76,8 @@ credentials <- login(username = username,
 gisaid_ids <- query(
   credentials = credentials,
   location = city_name,
-  from_subm = start_date,
-  to_subm = end_date,
+  from = start_date,
+  to = end_date,
   fast = TRUE
 )
 
