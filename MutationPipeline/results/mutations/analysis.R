@@ -26,6 +26,9 @@ library(viridis)
 library(ggnewscale)
 library(grid)
 library(ggrepel)
+library(ggpubr)
+library(rstatix)
+
 
 #sessioninfo::package_info()
 setwd('../../')
@@ -204,7 +207,8 @@ peptides_single  <-  peptides_dataset %>%
   dplyr::filter(multiple_mutation == "single") %>%
   tidyr::drop_na(pos)  %>% 
   dplyr::mutate(variant_protein_sorted = map(variant_protein, sort_string))  %>% 
-  dplyr::mutate(variant_protein_sorted = map(variant_protein, translate_mutation))
+  dplyr::mutate(variant_protein_sorted = map(variant_protein, translate_mutation)) %>% 
+  unnest(cols = c(variant_protein_sorted))
   
 peptides_deduplicate <- peptides_single %>% 
   deduplicating(data = ., 
@@ -290,19 +294,20 @@ impact_dataset_all <- peptides_single  %>%
 
 impact_dataset_deduplicate <- impact_dataset_all %>% 
   deduplicating(data = ., 
-                columns = c("sequence", "length",
-                            "pos", "gene", "alleles"))
+                columns = c("sequence", "length", "pos", "gene", "alleles"))
 
 
 impact_dataset_gain  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
-  dplyr::filter(impact %in% c('Gain', 'Weak Gain'))
+  dplyr::filter(impact %in% c('Gain', 'Weak Gain')) %>% 
+  deduplicating(c('gene', 'variant_protein_sorted'))
 
 impact_dataset_loss  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
-  dplyr::filter(impact %in% c('Loss', 'Weak Loss'))
+  dplyr::filter(impact %in% c('Loss', 'Weak Loss')) %>% 
+  deduplicating(c('gene', 'variant_protein_sorted'))
 
 impact_dataset_noeffect  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
@@ -311,18 +316,22 @@ impact_dataset_noeffect  <- impact_dataset_deduplicate %>%
 
 
 impact_only_loss  <- impact_dataset_deduplicate %>% 
-  dplyr::filter(impact == 'Loss')
+  dplyr::filter(impact == 'Loss') %>% 
+  deduplicating(c('gene', 'variant_protein_sorted'))
 
 
 impact_only_gain  <- impact_dataset_deduplicate %>% 
-  dplyr::filter(impact == 'Gain')
+  dplyr::filter(impact == 'Gain') %>% 
+  deduplicating(c('gene', 'variant_protein_sorted'))
 
 impact_only_weakloss  <- impact_dataset_deduplicate %>% 
-  dplyr::filter(impact == 'Weak Loss')
+  dplyr::filter(impact == 'Weak Loss')  %>% 
+  deduplicating(c('gene', 'variant_protein_sorted'))
 
 
 impact_only_weakgain  <- impact_dataset_deduplicate %>% 
-  dplyr::filter(impact == 'Weak Gain')
+  dplyr::filter(impact == 'Weak Gain')  %>% 
+  deduplicating(c('gene', 'variant_protein_sorted'))
 
 
 ###################################################################################
@@ -345,6 +354,176 @@ summary_table_final <-
 
 summary_table_final
 
+nrow(peptides_single)
+###################################################################################
+################################### FIG 1A ########################################
+###################################################################################
+
+unique_gene <- impact_dataset_all %>% 
+  select(gene) %>% 
+  distinct()
+
+g.mid2 <- ggplot(unique_gene,aes(x=1,y=factor(gene, genes_sorted))) +
+  geom_text(aes(label=gene, fontface='plain', family='sans'),
+            size=4.5)+
+  ggtitle("")+
+  ylab(NULL)+
+  scale_x_continuous(expand=c(0,0),limits=c(0.99,1.01))+
+  theme(axis.title=element_blank(),
+        panel.grid=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.background=element_blank(),
+        axis.text.x=element_text(color=NA),
+        axis.ticks.x=element_line(color=NA),
+        plot.margin = unit(c(-5,-1, 1,-1), "mm"))
+
+g4 <- ggplot(data = impact_only_gain, 
+             aes(x = factor(gene, genes_sorted), 
+             fill = impact)) +
+  geom_histogram(stat = "count") + 
+  scale_fill_manual(values = c("gray30", "gray80")) +
+  labs(x=NULL,
+       fill = 'Efeito') +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x=element_text(size=15),
+        axis.ticks.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.line.x.bottom = element_line(color = "black",
+                                          linewidth = 1.5,
+                                          linetype = 1),
+        panel.grid.major.x = element_line(color = "gray",
+                                          linewidth = 0.5,
+                                          linetype = 1),
+        plot.margin = unit(c(1,-1,1,0), "mm")) +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(#breaks = seq(0,100,20),
+                     trans = scales::reverse_trans()) +
+  coord_flip()
+
+g5 <- ggplot(data = impact_only_loss, aes(x = factor(gene, genes_sorted), fill = impact)) +xlab(NULL)+
+  geom_histogram(stat = "count") +
+  scale_fill_manual(values = c("red", "salmon")) +
+  labs(x=NULL,
+       fill = 'Efeito') +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(),
+        axis.text.x=element_text(size=15),
+        axis.ticks.y = element_blank(),
+        axis.line.y.left = element_blank(),
+        axis.line.x.bottom = element_line(color = "black",
+                                          linewidth = 1.5,
+                                          linetype = 1),
+        panel.grid.major.x = element_line(color = "gray",
+                                          linewidth = 0.5,
+                                          linetype = 1),
+        plot.margin = unit(c(1,0,1,-1), "mm")
+  ) +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(labels = scales::label_number(accuracy = 1),
+                     limits = c(0,4)) +
+  coord_flip()
+
+fig1A <- g4  + g.mid2 + g5 + plot_layout(ncol=3, widths = c(4,1.4,4))
+fig1A
+
+###################################################################################
+################################### FIG 1B ########################################
+###################################################################################
+
+
+impact_dataset_gain_all <- impact_dataset_all %>% 
+  dplyr::filter(impact %in% c('Gain')) %>% 
+  deduplicating(c('variant_lineage', 'gene', 'variant_protein_sorted'))
+
+impact_dataset_loss_all <- impact_dataset_all %>% 
+  dplyr::filter(impact %in% c('Loss'))  %>% 
+  deduplicating(c('variant_lineage', 'gene', 'variant_protein_sorted'))
+
+
+lineages_names  <- unique(peptides_single$variant_lineage)
+lineages_sorted  <- str_sort(lineages_names)
+
+unique_lineage <- impact_dataset_all %>% 
+  select(variant_lineage) %>% 
+  distinct()
+
+g.mid3 <- ggplot(unique_lineage,aes(x=1,y=factor(variant_lineage, detection_sorted))) +
+  geom_text(aes(label=variant_lineage, fontface='plain', family='sans'),
+            size=4.5)+
+  ggtitle("")+
+  ylab(NULL)+
+  scale_x_continuous(expand=c(0,0),limits=c(0.99,1.01))+
+  theme(axis.title=element_blank(),
+        panel.grid=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.background=element_blank(),
+        axis.text.x=element_text(color=NA),
+        axis.ticks.x=element_line(color=NA),
+        plot.margin = unit(c(-5,-1, 1,-1), "mm"))
+
+
+g6 <- ggplot(data = impact_dataset_gain_all, 
+             aes(x = factor(variant_lineage, detection_sorted), 
+             fill = impact)) +
+  geom_histogram(stat = "count") + 
+  scale_fill_manual(values = c("gray30", "gray80")) +
+  labs(x=NULL) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x=element_text(size=15),
+        axis.ticks.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.line.x.bottom = element_line(color = "black",
+                                          linewidth = 1.5,
+                                          linetype = 1),
+        panel.grid.major.x = element_line(color = "gray",
+                                          linewidth = 0.5,
+                                          linetype = 1),
+        plot.margin = unit(c(0,-0,0,0), "mm")) +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(#breaks = seq(0,85,20),
+                     trans = scales::reverse_trans()) +
+  coord_flip()
+
+g7 <- ggplot(data = impact_dataset_loss_all, aes(x = factor(variant_lineage, detection_sorted), fill = impact)) +
+  geom_histogram(stat = "count") +
+  scale_fill_manual(values = c("red", "salmon")) +
+  labs(x=NULL) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.text.x=element_text(size=15),
+        axis.ticks.y = element_blank(),
+        axis.line.y.left = element_blank(),
+        axis.line.x.bottom = element_line(color = "black",
+                                          linewidth = 1.5,
+                                          linetype = 1),
+        panel.grid.major.x = element_line(color = "gray",
+                                          linewidth = 0.5,
+                                          linetype = 1),
+        plot.margin = unit(c(0,0,0,0), "mm")
+  ) +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(labels = scales::label_number(accuracy = 1),
+                     limits = c(0,5)) +
+  coord_flip()
+
+fig1B <- g6  + g.mid3  + g7 + plot_layout(ncol=3, widths = c(4,1.4,4))
+fig1B
 
 
 ###################################################################################
@@ -363,7 +542,7 @@ unique_alleles <- impact_dataset_deduplicate %>%
 
 g.mid <- ggplot(unique_alleles,aes(x=1,y=factor(alleles, alleles_sorted)))+
   geom_text(aes(label=alleles, fontface='plain', family='sans'),
-            size=3.5)+
+            size=4.5)+
   ggtitle("")+
   ylab(NULL)+
   scale_x_continuous(expand=c(0,0),limits=c(0.99,1.01))+
@@ -376,21 +555,21 @@ g.mid <- ggplot(unique_alleles,aes(x=1,y=factor(alleles, alleles_sorted)))+
         axis.ticks.x=element_line(color=NA),
         plot.margin = unit(c(-5,-1, 1,-1), "mm"))
 
-g1 <- ggplot(data = impact_dataset_gain, 
+g1 <- ggplot(data = impact_only_gain, 
              aes(x = factor(alleles, alleles_sorted), 
-             fill = impact)) +
+                 fill = impact)) +
   geom_histogram(stat = "count") + 
   scale_fill_manual(values = c("gray30", "gray80")) +
   labs(x=NULL,
        fill = 'Efeito') +
   theme_classic() +
   theme(legend.position="left",
-        legend.title = element_text(face="bold", size=13),
-        legend.text =  element_text(face= "italic", size=12),
+        legend.title = element_text(face="bold", size=15),
+        legend.text =  element_text(face= "italic", size=14),
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         axis.text.y = element_blank(),
-        axis.text.x=element_text(size=13),
+        axis.text.x=element_text(size=15),
         axis.ticks.y = element_blank(),
         axis.line.y = element_blank(),
         axis.line.x.bottom = element_line(color = "black",
@@ -401,98 +580,24 @@ g1 <- ggplot(data = impact_dataset_gain,
                                           linetype = 1),
         plot.margin = unit(c(1,-1,1,0), "mm")) +
   scale_x_discrete(drop=FALSE) +
-  scale_y_reverse() + coord_flip()
+  scale_y_continuous(#breaks = seq(0,35,10),
+    trans = scales::reverse_trans()) +
+  coord_flip()
 
-g2 <- ggplot(data = impact_dataset_loss, 
+g2 <- ggplot(data = impact_only_loss, 
              aes(x = factor(alleles, alleles_sorted),
-             fill = impact)) +
+                 fill = impact)) +
   geom_histogram(stat = "count") +
   scale_fill_manual(values = c("red", "salmon")) +
   labs(x=NULL,
        fill = 'Efeito') +
   theme_classic() +
-  theme(legend.title = element_text(face="bold", size=13),
-        legend.text =  element_text(face= "italic", size=12),
+  theme(legend.title = element_blank(),
+        legend.text =  element_text(face= "italic", size=14),
         axis.title.x = element_blank(), 
         axis.title.y = element_blank(), 
         axis.text.y = element_blank(), 
-        axis.text.x=element_text(size=13),
-        axis.ticks.y = element_blank(),
-        axis.line.y.left = element_blank(),
-        axis.line.x.bottom = element_line(color = "black",
-                                          linewidth = 1.5,
-                                          linetype = 1),
-        panel.grid.major.x = element_line(color = "gray",
-                                          linewidth = 0.5,
-                                          linetype = 1),
-        plot.margin = unit(c(1,0,1,-1), "mm")
-        ) +
-  scale_x_discrete(drop=FALSE) +
-  coord_flip()
-
-
-fig1C <- (g1 + g.mid + g2)  + plot_layout(ncol=3, widths = c(4,1.4,4), guides = "collect")
-
-
-###################################################################################
-################################### FIG 1A ########################################
-###################################################################################
-
-unique_gene <- impact_dataset_deduplicate %>% 
-  select(gene) %>% 
-  distinct()
-
-g.mid2 <- ggplot(unique_gene,aes(x=1,y=factor(gene, genes_sorted))) +
-  geom_text(aes(label=gene, fontface='plain', family='sans'),
-            size=3.5)+
-  ggtitle("")+
-  ylab(NULL)+
-  scale_x_continuous(expand=c(0,0),limits=c(0.99,1.01))+
-  theme(axis.title=element_blank(),
-        panel.grid=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank(),
-        panel.background=element_blank(),
-        axis.text.x=element_text(color=NA),
-        axis.ticks.x=element_line(color=NA),
-        plot.margin = unit(c(-5,-1, 1,-1), "mm"))
-
-g4 <- ggplot(data = impact_dataset_gain, 
-             aes(x = factor(gene, genes_sorted), 
-             fill = impact)) +
-  geom_histogram(stat = "count") + 
-  scale_fill_manual(values = c("gray30", "gray80")) +
-  labs(x=NULL,
-       fill = 'Efeito') +
-  theme_classic() +
-  theme(legend.position = "none",
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank(),
-        axis.text.y = element_blank(),
-        axis.text.x=element_text(size=13),
-        axis.ticks.y = element_blank(),
-        axis.line.y = element_blank(),
-        axis.line.x.bottom = element_line(color = "black",
-                                          linewidth = 1.5,
-                                          linetype = 1),
-        panel.grid.major.x = element_line(color = "gray",
-                                          linewidth = 0.5,
-                                          linetype = 1),
-        plot.margin = unit(c(1,-1,1,0), "mm")) +
-  scale_x_discrete(drop=FALSE) +
-  scale_y_reverse() + coord_flip()
-
-g5 <- ggplot(data = impact_dataset_loss, aes(x = factor(gene, genes_sorted), fill = impact)) +xlab(NULL)+
-  geom_histogram(stat = "count") +
-  scale_fill_manual(values = c("red", "salmon")) +
-  labs(x=NULL,
-       fill = 'Efeito') +
-  theme_classic() +
-  theme(legend.position = "none",
-        axis.title.x = element_blank(), 
-        axis.title.y = element_blank(), 
-        axis.text.y = element_blank(),
-        axis.text.x=element_text(size=13),
+        axis.text.x=element_text(size=15),
         axis.ticks.y = element_blank(),
         axis.line.y.left = element_blank(),
         axis.line.x.bottom = element_line(color = "black",
@@ -504,38 +609,122 @@ g5 <- ggplot(data = impact_dataset_loss, aes(x = factor(gene, genes_sorted), fil
         plot.margin = unit(c(1,0,1,-1), "mm")
   ) +
   scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(labels = scales::label_number(accuracy = 1),
+                     limits = c(0,3)) +
   coord_flip()
 
-fig1A <- g4  + g.mid2 + g5 + plot_layout(ncol=3, widths = c(4,1.4,4))
+
+fig1C <- (g1 + g.mid + g2)  + plot_layout(ncol=3, widths = c(4,1.4,4), guides = "collect")
+fig1C
+
+
+fig1 <- (wrap_elements(fig1A) | plot_spacer() | wrap_elements(fig1B) | plot_spacer() | wrap_elements(fig1C))  + 
+  plot_layout(ncol=5, widths = c(1.3/5, 0.0005/5, 1.5/5, 0.0005/5, 1.7/5)) +
+  plot_annotation(tag_levels = list(c("A", "B", "C"))) &
+  theme(plot.tag = element_text(size = 26))
+
+
+### final plot
+fig1
+ggsave('Fig1.png', fig1, height = 25, width = 50, scale = 1,  units = "cm")
+
+impact_dataset_deduplicate %>% 
+  group_by(gene, impact) %>% 
+  tally() %>% 
+  print(n = 100)
 
 
 ###################################################################################
-################################### FIG 1B ########################################
+################################### FIG 1ASUP #####################################
+###################################################################################
+
+g.mid2_sup <- ggplot(unique_gene,aes(x=1,y=factor(gene, genes_sorted))) +
+  geom_text(aes(label=gene, fontface='plain', family='sans'),
+            size=4.5)+
+  ggtitle("")+
+  ylab(NULL)+
+  scale_x_continuous(expand=c(0,0),limits=c(0.99,1.01))+
+  theme(axis.title=element_blank(),
+        panel.grid=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.background=element_blank(),
+        axis.text.x=element_text(color=NA),
+        axis.ticks.x=element_line(color=NA),
+        plot.margin = unit(c(-5,-1, 1,-1), "mm"))
+
+g4_sup <- ggplot(data = impact_dataset_gain, 
+             aes(x = factor(gene, genes_sorted), 
+                 fill = impact)) +
+  geom_histogram(stat = "count") + 
+  scale_fill_manual(values = c("gray30", "gray80")) +
+  labs(x=NULL,
+       fill = 'Efeito') +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x=element_text(size=15),
+        axis.ticks.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.line.x.bottom = element_line(color = "black",
+                                          linewidth = 1.5,
+                                          linetype = 1),
+        panel.grid.major.x = element_line(color = "gray",
+                                          linewidth = 0.5,
+                                          linetype = 1),
+        plot.margin = unit(c(1,-1,1,0), "mm")) +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(#breaks = seq(0,100,20),
+    trans = scales::reverse_trans()) +
+  coord_flip()
+
+g5_sup <- ggplot(data = impact_dataset_loss, aes(x = factor(gene, genes_sorted), fill = impact)) +xlab(NULL)+
+  geom_histogram(stat = "count") +
+  scale_fill_manual(values = c("red", "salmon")) +
+  labs(x=NULL,
+       fill = 'Efeito') +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(),
+        axis.text.x=element_text(size=15),
+        axis.ticks.y = element_blank(),
+        axis.line.y.left = element_blank(),
+        axis.line.x.bottom = element_line(color = "black",
+                                          linewidth = 1.5,
+                                          linetype = 1),
+        panel.grid.major.x = element_line(color = "gray",
+                                          linewidth = 0.5,
+                                          linetype = 1),
+        plot.margin = unit(c(1,0,1,-1), "mm")
+  ) +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(labels = scales::label_number(accuracy = 1),
+                     limits = c(0,30)) +
+  coord_flip()
+
+fig1A_sup <- g4_sup  + g.mid2_sup + g5_sup + plot_layout(ncol=3, widths = c(4,1.4,4))
+fig1A_sup
+
+###################################################################################
+################################### FIG 1BSUP ########################################
 ###################################################################################
 
 
-impact_dataset_gain_all <- dplyr::semi_join(
-  impact_dataset_all, 
-  impact_dataset_gain, 
-  by = c("sequence", "alleles", "variant_protein")
-)
+impact_dataset_gain_all_sup <- impact_dataset_all %>% 
+  dplyr::filter(impact %in% c('Weak Gain', 'Gain')) %>% 
+  deduplicating(c('variant_lineage', 'gene', 'variant_protein_sorted'))
 
-impact_dataset_loss_all <- dplyr::semi_join(
-  impact_dataset_all, 
-  impact_dataset_loss, 
-  by = c("sequence", "alleles", "variant_protein")
-)
+impact_dataset_loss_all_sup <- impact_dataset_all %>% 
+  dplyr::filter(impact %in% c('Weak Loss', 'Loss')) %>% 
+  deduplicating(c('variant_lineage', 'gene', 'variant_protein_sorted'))
 
-lineages_names  <- unique(peptides_single$variant_lineage)
-lineages_sorted  <- str_sort(lineages_names)
-
-unique_lineage <- impact_dataset_all %>% 
-  select(variant_lineage) %>% 
-  distinct()
-
-g.mid3 <- ggplot(unique_lineage,aes(x=1,y=factor(variant_lineage, detection_sorted))) +
+g.mid3_sup <- ggplot(unique_lineage,aes(x=1,y=factor(variant_lineage, detection_sorted))) +
   geom_text(aes(label=variant_lineage, fontface='plain', family='sans'),
-            size=3.5)+
+            size=4.5)+
   ggtitle("")+
   ylab(NULL)+
   scale_x_continuous(expand=c(0,0),limits=c(0.99,1.01))+
@@ -549,9 +738,9 @@ g.mid3 <- ggplot(unique_lineage,aes(x=1,y=factor(variant_lineage, detection_sort
         plot.margin = unit(c(-5,-1, 1,-1), "mm"))
 
 
-g6 <- ggplot(data = impact_dataset_gain_all, 
-             aes(x = factor(variant_lineage, lineages_sorted), 
-             fill = impact)) +
+g6_sup <- ggplot(data = impact_dataset_gain_all_sup, 
+             aes(x = factor(variant_lineage, detection_sorted), 
+                 fill = impact)) +
   geom_histogram(stat = "count") + 
   scale_fill_manual(values = c("gray30", "gray80")) +
   labs(x=NULL) +
@@ -560,7 +749,7 @@ g6 <- ggplot(data = impact_dataset_gain_all,
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         axis.text.y = element_blank(),
-        axis.text.x=element_text(size=13),
+        axis.text.x=element_text(size=15),
         axis.ticks.y = element_blank(),
         axis.line.y = element_blank(),
         axis.line.x.bottom = element_line(color = "black",
@@ -571,9 +760,11 @@ g6 <- ggplot(data = impact_dataset_gain_all,
                                           linetype = 1),
         plot.margin = unit(c(0,-0,0,0), "mm")) +
   scale_x_discrete(drop=FALSE) +
-  scale_y_reverse() + coord_flip()
+  scale_y_continuous(#breaks = seq(0,85,20),
+    trans = scales::reverse_trans()) +
+  coord_flip()
 
-g7 <- ggplot(data = impact_dataset_loss_all, aes(x = factor(variant_lineage, lineages_sorted), fill = impact)) +xlab(NULL)+
+g7_sup <- ggplot(data = impact_dataset_loss_all_sup, aes(x = factor(variant_lineage, detection_sorted), fill = impact)) +
   geom_histogram(stat = "count") +
   scale_fill_manual(values = c("red", "salmon")) +
   labs(x=NULL) +
@@ -582,7 +773,7 @@ g7 <- ggplot(data = impact_dataset_loss_all, aes(x = factor(variant_lineage, lin
         axis.title.x = element_blank(), 
         axis.title.y = element_blank(), 
         axis.text.y = element_blank(), 
-        axis.text.x=element_text(size=13),
+        axis.text.x=element_text(size=15),
         axis.ticks.y = element_blank(),
         axis.line.y.left = element_blank(),
         axis.line.x.bottom = element_line(color = "black",
@@ -591,26 +782,105 @@ g7 <- ggplot(data = impact_dataset_loss_all, aes(x = factor(variant_lineage, lin
         panel.grid.major.x = element_line(color = "gray",
                                           linewidth = 0.5,
                                           linetype = 1),
-        plot.margin = unit(c(0,0,0,-0), "mm")
+        plot.margin = unit(c(0,0,0,0), "mm")
   ) +
   scale_x_discrete(drop=FALSE) +
-  scale_y_continuous(labels = scales::label_number(accuracy = 1)) +
+  scale_y_continuous(labels = scales::label_number(accuracy = 1),
+                     limits = c(0,33)) +
+  coord_flip()
+
+fig1B_sup <- g6_sup  + g.mid3_sup  + g7_sup + plot_layout(ncol=3, widths = c(4,1.4,4))
+
+
+
+###################################################################################
+################################### FIG 1CSUP #########################################
+###################################################################################
+
+g.mid_sup <- ggplot(unique_alleles,aes(x=1,y=factor(alleles, alleles_sorted)))+
+  geom_text(aes(label=alleles, fontface='plain', family='sans'),
+            size=4.5)+
+  ggtitle("")+
+  ylab(NULL)+
+  scale_x_continuous(expand=c(0,0),limits=c(0.99,1.01))+
+  theme(axis.title=element_blank(),
+        panel.grid=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.background=element_blank(),
+        axis.text.x=element_text(color=NA),
+        axis.ticks.x=element_line(color=NA),
+        plot.margin = unit(c(-5,-1, 1,-1), "mm"))
+
+g1_sup <- ggplot(data = impact_dataset_gain, 
+             aes(x = factor(alleles, alleles_sorted), 
+                 fill = impact)) +
+  geom_histogram(stat = "count") + 
+  scale_fill_manual(values = c("gray30", "gray80")) +
+  labs(x=NULL,
+       fill = 'Efeito') +
+  theme_classic() +
+  theme(legend.position="left",
+        legend.title = element_text(face="bold", size=15),
+        legend.text =  element_text(face= "italic", size=14),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x=element_text(size=15),
+        axis.ticks.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.line.x.bottom = element_line(color = "black",
+                                          linewidth = 1.5,
+                                          linetype = 1),
+        panel.grid.major.x = element_line(color = "gray",
+                                          linewidth = 0.5,
+                                          linetype = 1),
+        plot.margin = unit(c(1,-1,1,0), "mm")) +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(#breaks = seq(0,35,10),
+    trans = scales::reverse_trans()) +
+  coord_flip()
+
+g2_sup <- ggplot(data = impact_dataset_loss, 
+             aes(x = factor(alleles, alleles_sorted),
+                 fill = impact)) +
+  geom_histogram(stat = "count") +
+  scale_fill_manual(values = c("red", "salmon")) +
+  labs(x=NULL,
+       fill = 'Efeito') +
+  theme_classic() +
+  theme(legend.title = element_text(face="bold", size=15),
+        legend.text =  element_text(face= "italic", size=14),
+        axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.text.x=element_text(size=15),
+        axis.ticks.y = element_blank(),
+        axis.line.y.left = element_blank(),
+        axis.line.x.bottom = element_line(color = "black",
+                                          linewidth = 1.5,
+                                          linetype = 1),
+        panel.grid.major.x = element_line(color = "gray",
+                                          linewidth = 0.5,
+                                          linetype = 1),
+        plot.margin = unit(c(1,0,1,-1), "mm")
+  ) +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(labels = scales::label_number(accuracy = 1),
+                     limits = c(0,18)) +
   coord_flip()
 
 
-fig1B <- g6  + g.mid3  + g7 + plot_layout(ncol=3, widths = c(4,1.4,4))
+fig1C_sup <- (g1_sup + g.mid_sup + g2_sup)  + plot_layout(ncol=3, widths = c(4,1.4,4), guides = "collect")
 
-
-
-fig1 <- (wrap_elements(fig1A) | plot_spacer() | wrap_elements(fig1B) | plot_spacer() | wrap_elements(fig1C))  + 
+fig1_sup <- (wrap_elements(fig1A_sup) | plot_spacer() | wrap_elements(fig1B_sup) | plot_spacer() | wrap_elements(fig1C_sup))  + 
   plot_layout(ncol=5, widths = c(1.3/5, 0.0005/5, 1.5/5, 0.0005/5, 1.7/5)) +
   plot_annotation(tag_levels = list(c("A", "B", "C"))) &
   theme(plot.tag = element_text(size = 26))
 
-fig1
-ggsave('Fig1.png', fig1, height = 14, width = 40, scale = 1,  units = "cm")
-
-
+### final plot
+fig1_sup
+ggsave('Fig1_sup.png', fig1_sup, height = 25, width = 50, scale = 1,  units = "cm")
 ###################################################################################
 ################################### FIG 2 #########################################
 ###################################################################################
@@ -620,14 +890,12 @@ mutation_dataset <- impact_dataset_all %>%
   group_by(pos,gene,variant_protein_sorted) %>% 
   count()
 
-
-  
 # Plot
 fig2A <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
   geom_segment(
     aes(x=pos, xend=pos, y=0, yend=n), 
     color=ifelse(mutation_dataset$n > 20, "orange", "grey"), 
-    linewidth=ifelse(mutation_dataset$n > 20, 1, 0.7)
+    linewidth=ifelse(mutation_dataset$n > 10, 1, 0.7)
   ) +
   geom_point(
     color=ifelse(mutation_dataset$n > 20, "orange", "grey"), 
@@ -656,13 +924,13 @@ fig2A <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
         axis.text.y = element_text(size=13), 
         axis.text.x=element_text(size=13),
         axis.ticks.y = element_blank(),) +
-  scale_y_continuous(limits = c(0, 35), expand = c(0,0), breaks=seq(0, 35, 5)) +
+  scale_y_continuous(limits = c(0, 35), breaks=seq(0, 35, 5), expand = c(0,0)) +
   scale_x_continuous(breaks=seq(0, 30000, 5000)) +
   ylab("Frequência de Mutações") +
   xlab("Posição (Nucleotídeos)")
 
 fig2A
-ggsave('Fig2A.png', fig2A, height = 8, width = 26, scale = 1,  units = "cm")
+ggsave('Fig2A.png', fig2A, height = 10, width = 26, scale = 1,  units = "cm")
 
 mutation_dataset_spike <-  mutation_dataset %>% 
   filter(gene == 'S') %>% 
@@ -691,7 +959,7 @@ fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
                   aes(label=variant_protein_sorted),
                   max.overlaps = Inf,
                   min.segment.length = 10, seed = 42, point.padding = 3,
-                  max.time = 1, max.iter = 1e6,
+                  max.time = 2, max.iter = 1e5,
                   #direction = "x",
                   color='orange'
   ) +
@@ -707,13 +975,13 @@ fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
         axis.text.x=element_text(size=13),
         plot.margin = unit(c(7,6,5,6), "mm")
   ) +
-  scale_y_continuous(limits = c(0, 35), expand = c(0,0), breaks=seq(0, 35, 5)) +
+  scale_y_continuous(limits = c(0, 35), breaks=seq(0, 35, 5), expand = c(0,0)) +
   scale_x_continuous(limits = c(0, 1273), breaks=seq(0, 1200, 200), expand = c(0,0)) +
   ylab("Frequência de Mutações") +
   xlab("Resíduos")
 
 fig2B
-ggsave('Fig2B.png', fig2B, height = 7, width = 26, scale = 1,  units = "cm")
+ggsave('Fig2B.png', fig2B, height = 9, width = 30, scale = 1,  units = "cm")
 
 mutation_dataset_spike
 ###################################################################################
@@ -744,7 +1012,7 @@ patients_date <- patients %>%
   mutate(alleles = ifelse(alleles %in% alleles_binned$alleles, alleles, "Outros")) %>%
   count(alleles, month_year) %>%
   group_by(month_year) %>%          
-  mutate(prop = prop.table(n))
+  mutate(prop = prop.table(n)*100)
 
 # Get Colors
 colourCount_variants = length(unique(lineage_date$Lineage))
@@ -786,8 +1054,10 @@ plot_variants_month <-
   scale_y_continuous(expand = c(0.01, 0)) +
   theme_classic() +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
     axis.line.x = element_blank(),
+    axis.text.y = element_text(size = 12),
+    axis.title.y = element_text(size = 14),
     legend.title = element_text(face = "bold", size = 13),
     legend.text = element_text(size = 10),
     legend.title.align = 0.3,
@@ -799,8 +1069,8 @@ plot_variants_month <-
 colourCount_alleles = length(unique(patients_date$alleles))
 getPalette_alleles = colorRampPalette(brewer.pal(9, "BrBG"))
 # extend x axis based on variants
-break.vec <- range(as.Date("01-03-2020", format="%d-%m-%Y"), as.Date("01-06-2022", format="%d-%m-%Y"))
-
+break.vec <- range(as.Date("01-03-2020", format="%d-%m-%Y"), as.Date("01-12-2022", format="%d-%m-%Y"))
+patients_date
 
 plot_count_alleles <-
   ggplot(patients_date, aes(x = lubridate::my(month_year), y = n)) +
@@ -827,10 +1097,12 @@ plot_alleles_month <- ggplot(patients_date, aes(x = lubridate::my(month_year), y
   scale_fill_manual('Alelos', values = getPalette_alleles(colourCount_alleles)) +
   scale_y_continuous(expand = c(0.01,0)) +
   theme_classic() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
         axis.line.x = element_blank(),
-        legend.title = element_text(face = "bold", size = 13),
-        legend.text = element_text(size = 10),
+        axis.text.y = element_text(size = 12),
+        axis.title.y = element_text(size = 14),
+        legend.title = element_text(face = "bold", size = 11),
+        legend.text = element_text(size = 9),
         legend.title.align = 0.2,
         panel.grid=element_blank(),
         panel.background=element_blank())
@@ -839,12 +1111,12 @@ fig5 <- plot_count_variants +
   plot_variants_month + 
   plot_count_alleles +
   plot_alleles_month + 
-  plot_layout(ncol=1, heights = c(1.2, 4, 1.2, 4), guides = "auto") +
+  plot_layout(ncol=1, heights = c(1, 6, 1, 2.5), guides = "auto") +
   plot_annotation(tag_levels = list(c("A", "", "B", "")))
 
 fig5
 
-ggsave('Fig5.png', fig5, height = 22, width = 27, scale = 0.8,  units = "cm")
+ggsave('Fig5.png', fig5, height = 25, width = 36, scale = 0.8,  units = "cm")
 lineage_date
 
 ###################################################################################
@@ -861,11 +1133,11 @@ FC_loss_all <- impact_dataset_all %>%
   dplyr::filter(impact %in% c('Loss', 'Weak Loss'))
 
 muh_grob <- grid::rectGrob(
-  x=0, y=1:21, gp=gpar(
+  x=0, y=1:34, gp=gpar(
     color='white', fill= getPalette_variants(colourCount_variants), alpha=0.8))
 
 colourCount_alleles = length(unique(FC_loss_all$alleles))
-
+unique(FC_loss_all$variant_lineage)
 fig6 <- ggplot(FC_loss_all)+
   ggnewscale::new_scale_colour()+ 
   geom_point(aes(x = fold_change, y = factor(variant_lineage, detection_sorted), 
@@ -902,10 +1174,9 @@ ggsave('Fig6.png', fig6, height = 15, width = 27, scale = 1,  units = "cm")
 ###################################################################################
 ################################### FIG 7 ########################################
 ###################################################################################
-library(ggpubr)
-library(rstatix)
+
 impact_dataset_comparative <-  impact_dataset_deduplicate %>% 
-  dplyr::filter(str_detect(impact, 'Loss|Gain')) %>% 
+  dplyr::filter(str_detect(impact, 'Loss')) %>% 
   mutate(paired = row_number(),
          impact_geral = case_when(
            str_detect(impact, 'Loss') ~ 'Total Loss',
@@ -936,7 +1207,7 @@ fig7 <- ggplot(impact_dataset_comparative, aes(x=rank_type, y=log2value)) +
             color = "black",
             alpha = 0.5
   ) +
-  scale_fill_manual(values = c("gray30", "red")) +
+  scale_fill_manual(values = "red") +
   labs(y = expression(phantom()*Log[2]*('Afinidade de Ligação')),
        fill = 'Efeito') +
   theme_bw()+
@@ -952,6 +1223,7 @@ fig7 <- ggplot(impact_dataset_comparative, aes(x=rank_type, y=log2value)) +
   ylim(NA, 10) +
   facet_wrap(~alleles)
 
+fig7
 ggsave('Fig7.png', fig7, height = 17, width = 25, scale = 1,  units = "cm")
 
 
@@ -963,6 +1235,30 @@ ggsave('Fig7.png', fig7, height = 17, width = 25, scale = 1,  units = "cm")
 ###################################################################################
 ################################### TABLES ########################################
 ###################################################################################
+
+
+#intro
+impact_dataset_deduplicate %>% 
+  group_by(gene) %>% 
+  tally() %>% 
+  print(n = 200)
+
+#fig1
+
+impact_dataset_all %>% 
+  group_by(variant_lineage, impact) %>% 
+  tally() %>% 
+  print(n = 200)
+
+impact_dataset_deduplicate %>% 
+  group_by(alleles, impact) %>% 
+  tally() %>% 
+  print(n = 100)
+
+impact_dataset_deduplicate %>% 
+  group_by(gene, impact) %>% 
+  tally() %>% 
+  print(n = 100)
 
 # Fig5
 patients_date
