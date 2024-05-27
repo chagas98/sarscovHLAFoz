@@ -215,9 +215,10 @@ peptides_deduplicate <- peptides_single %>%
                 columns = c("sequence", 
                             "length", 
                             "pos", 
-                            "gene")
+                            "gene",
+                            "variant_protein_sorted")
   ) #variant_protein possui grupos de variantes iguais
-
+nrow(peptides_deduplicate)
 ###################################################################################
 ################################### METADATA ######################################
 ###################################################################################
@@ -301,13 +302,13 @@ impact_dataset_gain  <- impact_dataset_deduplicate %>%
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
   dplyr::filter(impact %in% c('Gain', 'Weak Gain')) %>% 
-  deduplicating(c('gene', 'variant_protein_sorted'))
+  deduplicating(c('gene', 'variant_protein_sorted', 'alleles'))
 
 impact_dataset_loss  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
   dplyr::filter(impact %in% c('Loss', 'Weak Loss')) %>% 
-  deduplicating(c('gene', 'variant_protein_sorted'))
+  deduplicating(c('gene', 'variant_protein_sorted', 'alleles'))
 
 impact_dataset_noeffect  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
@@ -317,21 +318,21 @@ impact_dataset_noeffect  <- impact_dataset_deduplicate %>%
 
 impact_only_loss  <- impact_dataset_deduplicate %>% 
   dplyr::filter(impact == 'Loss') %>% 
-  deduplicating(c('gene', 'variant_protein_sorted'))
+  deduplicating(c('gene', 'variant_protein_sorted', 'alleles'))
 
 
 impact_only_gain  <- impact_dataset_deduplicate %>% 
   dplyr::filter(impact == 'Gain') %>% 
-  deduplicating(c('gene', 'variant_protein_sorted'))
+  deduplicating(c('gene', 'variant_protein_sorted','alleles'))
 
 impact_only_weakloss  <- impact_dataset_deduplicate %>% 
   dplyr::filter(impact == 'Weak Loss')  %>% 
-  deduplicating(c('gene', 'variant_protein_sorted'))
+  deduplicating(c('gene', 'variant_protein_sorted', 'alleles'))
 
 
 impact_only_weakgain  <- impact_dataset_deduplicate %>% 
   dplyr::filter(impact == 'Weak Gain')  %>% 
-  deduplicating(c('gene', 'variant_protein_sorted'))
+  deduplicating(c('gene', 'variant_protein_sorted','alleles'))
 
 
 ###################################################################################
@@ -716,11 +717,11 @@ fig1A_sup
 
 impact_dataset_gain_all_sup <- impact_dataset_all %>% 
   dplyr::filter(impact %in% c('Weak Gain', 'Gain')) %>% 
-  deduplicating(c('variant_lineage', 'gene', 'variant_protein_sorted'))
+  deduplicating(c('variant_lineage', 'gene', 'variant_protein_sorted', "alleles"))
 
 impact_dataset_loss_all_sup <- impact_dataset_all %>% 
   dplyr::filter(impact %in% c('Weak Loss', 'Loss')) %>% 
-  deduplicating(c('variant_lineage', 'gene', 'variant_protein_sorted'))
+  deduplicating(c('variant_lineage', 'gene', 'variant_protein_sorted', 'alleles'))
 
 g.mid3_sup <- ggplot(unique_lineage,aes(x=1,y=factor(variant_lineage, detection_sorted))) +
   geom_text(aes(label=variant_lineage, fontface='plain', family='sans'),
@@ -791,7 +792,7 @@ g7_sup <- ggplot(data = impact_dataset_loss_all_sup, aes(x = factor(variant_line
 
 fig1B_sup <- g6_sup  + g.mid3_sup  + g7_sup + plot_layout(ncol=3, widths = c(4,1.4,4))
 
-
+fig1B_sup
 
 ###################################################################################
 ################################### FIG 1CSUP #########################################
@@ -872,7 +873,7 @@ g2_sup <- ggplot(data = impact_dataset_loss,
 
 
 fig1C_sup <- (g1_sup + g.mid_sup + g2_sup)  + plot_layout(ncol=3, widths = c(4,1.4,4), guides = "collect")
-
+fig1C_sup
 fig1_sup <- (wrap_elements(fig1A_sup) | plot_spacer() | wrap_elements(fig1B_sup) | plot_spacer() | wrap_elements(fig1C_sup))  + 
   plot_layout(ncol=5, widths = c(1.3/5, 0.0005/5, 1.5/5, 0.0005/5, 1.7/5)) +
   plot_annotation(tag_levels = list(c("A", "B", "C"))) &
@@ -904,6 +905,10 @@ fig2A <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
   geom_point(data=filter(mutation_dataset, variant_protein_sorted %in% impact_only_loss$variant_protein_sorted),
     color="red", 
     size=2
+  ) +
+  geom_point(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_weakloss$variant_protein_sorted),
+             color="salmon", 
+             size=2
   ) +
   geom_point(data=filter(mutation_dataset, variant_protein_sorted %in% impact_only_gain$variant_protein_sorted),
     color="gray30", 
@@ -951,6 +956,10 @@ fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
              color="red", 
              size=2
   ) +
+  geom_point(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_weakloss$variant_protein_sorted),
+             color="salmon", 
+             size=2
+  ) +
   geom_point(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_gain$variant_protein_sorted),
              color="gray30", 
              size=2
@@ -961,18 +970,25 @@ fig2B <- ggplot(mutation_dataset_spike, aes(x=prot_pos, y=n)) +
                   min.segment.length = 10, seed = 42, point.padding = 3,
                   max.time = 2, max.iter = 1e5,
                   #direction = "x",
+                  size = 5,
                   color='orange'
   ) +
   geom_text_repel(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_loss$variant_protein_sorted), 
                   aes(label=variant_protein_sorted),
+                  size = 5,
                   color="red"
+  ) + 
+  geom_text_repel(data=filter(mutation_dataset_spike, variant_protein_sorted %in% impact_only_weakloss$variant_protein_sorted), 
+                  aes(label=variant_protein_sorted),
+                  size=5,
+                  color="salmon"
   ) + 
   theme_classic() +
   theme(legend.position = "none",
-        axis.title.x = element_text(size=16), 
-        axis.title.y = element_text(size=13), 
-        axis.text.y = element_text(size=13), 
-        axis.text.x=element_text(size=13),
+        axis.title.x = element_text(size=17), 
+        axis.title.y = element_text(size=14), 
+        axis.text.y = element_text(size=14), 
+        axis.text.x=element_text(size=14),
         plot.margin = unit(c(7,6,5,6), "mm")
   ) +
   scale_y_continuous(limits = c(0, 35), breaks=seq(0, 35, 5), expand = c(0,0)) +
@@ -1136,15 +1152,21 @@ muh_grob <- grid::rectGrob(
   x=0, y=1:34, gp=gpar(
     color='white', fill= getPalette_variants(colourCount_variants), alpha=0.8))
 
-colourCount_alleles = length(unique(FC_loss_all$alleles))
-unique(FC_loss_all$variant_lineage)
+colourCount_alleles = length(unique(impact_dataset_all$alleles))
+getPalette_alleles = colorRampPalette(brewer.pal(11, "BrBG"))
+
 fig6 <- ggplot(FC_loss_all)+
   ggnewscale::new_scale_colour()+ 
   geom_point(aes(x = fold_change, y = factor(variant_lineage, detection_sorted), 
                  colour = alleles, shape=factor(length)), 
-            size = 3, 
+            size = 4, 
             fill = NA, 
-            stroke=1)+ 
+            stroke=1) +
+  geom_text_repel(data=distinct(FC_loss_all, variant_protein_sorted,  .keep_all = TRUE), aes(x=fold_change, y= factor(variant_lineage, detection_sorted), label=variant_protein_sorted, fontface='plain', family='sans'),
+            size=3,   max.overlaps = Inf,
+            min.segment.length = 10, seed = 42, point.padding = 3,
+            max.time = 2, max.iter = 1e5,
+            direction = "x")+
   labs(x=expression(phantom()*Log[2]*FC), 
        y = '',
        shape="K-mers") +
@@ -1162,14 +1184,14 @@ fig6 <- ggplot(FC_loss_all)+
     panel.grid = element_line(color = "grey70")
   ) +
   scale_colour_manual('Alelos', values = getPalette_alleles(colourCount_alleles)) +
-  scale_shape_manual(values = c(15, 18, 16, 17)) +
+  scale_shape_manual(values = c(0, 1, 2, 5)) +
   annotation_custom(
     grob=muh_grob, ymin = 0, ymax = 1, xmin = -0.55, xmax=0.25
   ) +
   scale_y_discrete(drop = FALSE)
 
 fig6
-ggsave('Fig6.png', fig6, height = 15, width = 27, scale = 1,  units = "cm")
+ggsave('Fig6.png', fig6, height = 20, width =35, scale = 1,  units = "cm")
 
 ###################################################################################
 ################################### FIG 7 ########################################
@@ -1230,13 +1252,73 @@ ggsave('Fig7.png', fig7, height = 17, width = 25, scale = 1,  units = "cm")
 ###################################################################################
 ################################### FIG 8 ########################################
 ###################################################################################
+#devtools::install_github("outbreak-info/R-outbreak-info")
+outbreakinfo::authenticateUser()
+library(outbreakinfo)
+#  Provide GISAID credentials using authenticateUser()
+# Get the prevalence of mutation P681R in the Spike protein in Kansas over time.
+P681R_br = getPrevalence(mutations = c("S:P681R"), location = "Brazil", logInfo = TRUE)
 
+P681R_py = getPrevalence(mutations = c("S:P681R"), location = "Paraguay", logInfo = TRUE)
+P681R_pr = getPrevalence(mutations = c("S:P681R"), location = "Paraná", logInfo = TRUE)
+P681R_igu = getPrevalence(mutations = c("S:P681R"), location = "Foz do Iguaçu", logInfo = TRUE)
+P681R_ARG = getPrevalence(mutations = c("S:P681R"), location = "Argentina", logInfo = TRUE)
+P681R_RS = getPrevalence(mutations = c("S:P681R"), location = "Rio Grande do Sul", logInfo = TRUE)
+P681R_URU = getPrevalence(mutations = c("S:P681R"), location = "Uruguay", logInfo = TRUE)
 
+?getPrevalence
+plotPrevalenceOverTime(P681R_igu, title = "Prevalence of S:P681R in Kansas")
+
+concat <- bind_rows(P681R_br, P681R_pr, P681R_py, P681R_ARG, P681R_RS, P681R_URU) %>% 
+  filter(date > '2020-01-01' & date < '2023-01-01')
+plotAllLineagesByLocation(location = "Foz do Iguaçu", ndays = 4000)
+ggplot(concat, aes(x = date, y = proportion, colour = location)) +
+  geom_ribbon(aes(ymin = proportion_ci_lower, ymax = proportion_ci_upper), alpha = 0.35, size = 0) +
+  geom_line(size = 1.25) +
+  scale_x_date(date_labels = "%b %Y", expand = c(0,0)) +
+  scale_y_continuous(labels = scales::percent, expand = c(0,0)) +
+  #scale_colour_manual(values = COLORPALETTE[-1]) +
+  #scale_fill_manual(values = COLORPALETTE[-1]) +
+  theme_minimal() +
+  labs(caption="Enabled by data from GISAID (https://gisaid.org/)")
+theme(legend.position = "bottom", axis.title = element_blank(), plot.caption = element_text(size = 18))
 ###################################################################################
 ################################### TABLES ########################################
 ###################################################################################
 
+length(unique(impact_dataset_all$))
 
+
+# quantas mutações por região?
+Q1 <- peptides_single %>% 
+  deduplicating(data = ., 
+                columns = c("pos", "gene", "variant_protein_sorted")) %>% 
+  group_by(gene) %>% 
+  tally()
+Q1
+# quais mutações por região?
+Q2 <- impact_dataset_all %>% 
+  deduplicating(data = ., 
+                columns = c("pos", "gene", "variant_lineage", "variant_protein_sorted")) %>% 
+  group_by(gene,pos,variant_protein_sorted,variant_lineage, impact) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  print(n=200)
+
+# quais mutações sao Loss?
+
+Q3 <- impact_dataset_loss_all_sup %>% 
+  group_by(gene,pos,variant_protein_sorted, impact, alleles, variant_lineage) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  print(n=200)
+
+spike_mutations <-  test %>% 
+  filter(gene == 'S') %>% 
+  mutate(spike_mutations = paste0('S:', variant_protein_sorted)) %>% 
+  select(spike_mutations)
+
+paste0(spike_mutations$spike_mutations, collapse = ', ')
 #intro
 impact_dataset_deduplicate %>% 
   group_by(gene) %>% 
@@ -1245,7 +1327,7 @@ impact_dataset_deduplicate %>%
 
 #fig1
 
-impact_dataset_all %>% 
+impact_dataset_loss_all_sup %>% 
   group_by(variant_lineage, impact) %>% 
   tally() %>% 
   print(n = 200)
