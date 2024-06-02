@@ -295,8 +295,7 @@ impact_dataset_all <- peptides_single  %>%
 
 impact_dataset_deduplicate <- impact_dataset_all %>% 
   deduplicating(data = ., 
-                columns = c("sequence", "length", "pos", "gene", "alleles"))
-
+                columns = c("sequence", "length", "pos", "gene", "alleles", "impact"))
 
 impact_dataset_gain  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
@@ -355,7 +354,6 @@ summary_table_final <-
 
 summary_table_final
 
-nrow(peptides_single)
 ###################################################################################
 ################################### FIG 1A ########################################
 ###################################################################################
@@ -937,6 +935,7 @@ fig2A <- ggplot(mutation_dataset, aes(x=pos, y=n)) +
 fig2A
 ggsave('Fig2A.png', fig2A, height = 10, width = 26, scale = 1,  units = "cm")
 
+
 mutation_dataset_spike <-  mutation_dataset %>% 
   filter(gene == 'S') %>% 
   mutate(prot_pos = as.numeric(map(variant_protein_sorted, parse_number)))
@@ -1252,41 +1251,11 @@ ggsave('Fig7.png', fig7, height = 17, width = 25, scale = 1,  units = "cm")
 ###################################################################################
 ################################### FIG 8 ########################################
 ###################################################################################
-#devtools::install_github("outbreak-info/R-outbreak-info")
-outbreakinfo::authenticateUser()
-library(outbreakinfo)
-#  Provide GISAID credentials using authenticateUser()
-# Get the prevalence of mutation P681R in the Spike protein in Kansas over time.
-P681R_br = getPrevalence(mutations = c("S:P681R"), location = "Brazil", logInfo = TRUE)
-
-P681R_py = getPrevalence(mutations = c("S:P681R"), location = "Paraguay", logInfo = TRUE)
-P681R_pr = getPrevalence(mutations = c("S:P681R"), location = "Paraná", logInfo = TRUE)
-P681R_igu = getPrevalence(mutations = c("S:P681R"), location = "Foz do Iguaçu", logInfo = TRUE)
-P681R_ARG = getPrevalence(mutations = c("S:P681R"), location = "Argentina", logInfo = TRUE)
-P681R_RS = getPrevalence(mutations = c("S:P681R"), location = "Rio Grande do Sul", logInfo = TRUE)
-P681R_URU = getPrevalence(mutations = c("S:P681R"), location = "Uruguay", logInfo = TRUE)
-
-?getPrevalence
-plotPrevalenceOverTime(P681R_igu, title = "Prevalence of S:P681R in Kansas")
-
-concat <- bind_rows(P681R_br, P681R_pr, P681R_py, P681R_ARG, P681R_RS, P681R_URU) %>% 
-  filter(date > '2020-01-01' & date < '2023-01-01')
-plotAllLineagesByLocation(location = "Foz do Iguaçu", ndays = 4000)
-ggplot(concat, aes(x = date, y = proportion, colour = location)) +
-  geom_ribbon(aes(ymin = proportion_ci_lower, ymax = proportion_ci_upper), alpha = 0.35, size = 0) +
-  geom_line(size = 1.25) +
-  scale_x_date(date_labels = "%b %Y", expand = c(0,0)) +
-  scale_y_continuous(labels = scales::percent, expand = c(0,0)) +
-  #scale_colour_manual(values = COLORPALETTE[-1]) +
-  #scale_fill_manual(values = COLORPALETTE[-1]) +
-  theme_minimal() +
-  labs(caption="Enabled by data from GISAID (https://gisaid.org/)")
-theme(legend.position = "bottom", axis.title = element_blank(), plot.caption = element_text(size = 18))
+#
 ###################################################################################
 ################################### TABLES ########################################
 ###################################################################################
 
-length(unique(impact_dataset_all$))
 
 
 # quantas mutações por região?
@@ -1313,12 +1282,46 @@ Q3 <- impact_dataset_loss_all_sup %>%
   ungroup() %>% 
   print(n=200)
 
-spike_mutations <-  test %>% 
-  filter(gene == 'S') %>% 
-  mutate(spike_mutations = paste0('S:', variant_protein_sorted)) %>% 
-  select(spike_mutations)
+mutation_dataset <- impact_dataset_all %>% 
+  deduplicating(data = ., columns = c("variant_protein_sorted", "gene", "variant_lineage")) %>% 
+  group_by(pos,gene,variant_protein_sorted) %>% 
+  count()
 
-paste0(spike_mutations$spike_mutations, collapse = ', ')
+Q4_1 <-  impact_dataset_all %>% 
+  deduplicating(data = ., columns = c("variant_protein_sorted", "gene", "variant_lineage")) %>%
+  filter(gene == 'S') %>% 
+  group_by(pos,gene,variant_protein_sorted) %>% 
+  count() %>% 
+  filter(n > 20)
+
+Q4_2 <-  impact_dataset_all %>% 
+  deduplicating(data = ., columns = c("variant_protein_sorted", "gene", "variant_lineage")) %>%
+  filter(gene == 'S') %>% 
+  group_by(pos,gene,variant_protein_sorted, variant_lineage) %>% 
+  filter(variant_protein_sorted %in% Q4_1$variant_protein_sorted) %>% 
+  count()
+
+patients
+Q5 <- patients %>% 
+  filter(HospitalPeriod_days < 65)
+
+myfunc <- function(x,y){IBOV_RET[IBOV_RET$DATE >= x & IBOV_RET$DATE <= y,]}
+Q6 <- metadata_date %>% 
+  mutate( wave = case_when(
+    Date >= as.Date("2020-02-01") & Date <= as.Date("2020-10-31") ~ '1W',
+    Date > as.Date("2020-10-31") & Date <= as.Date("2021-12-31") ~ '2W',
+    Date > as.Date("2021-12-31") & Date <= as.Date("2022-05-31") ~ '3W',
+    Date > as.Date("2020-05-31") & Date <= as.Date("2022-12-31") ~ '4W'))
+
+Q6_1 <-  Q6 %>%
+  count(Lineage, wave) %>%
+  group_by(wave) %>%         
+  mutate(prop = prop.table(n)*100)
+
+Q6_2 <-  Q6 %>%
+  count(wave) %>%
+  mutate(prop = prop.table(n)*100)
+
 #intro
 impact_dataset_deduplicate %>% 
   group_by(gene) %>% 
@@ -1351,3 +1354,4 @@ FC_loss_all
 
 # Fig7
 impact_dataset_comparative
+
