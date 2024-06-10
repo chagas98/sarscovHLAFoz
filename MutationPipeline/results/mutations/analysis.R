@@ -295,7 +295,7 @@ impact_dataset_all <- peptides_single  %>%
 
 impact_dataset_deduplicate <- impact_dataset_all %>% 
   deduplicating(data = ., 
-                columns = c("sequence", "length", "pos", "gene", "alleles", "impact"))
+                columns = c("sequence", "length", "pos", "gene", "alleles", "variant_protein_sorted", "impact"))
 
 impact_dataset_gain  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
@@ -307,7 +307,7 @@ impact_dataset_loss  <- impact_dataset_deduplicate %>%
   #dplyr::filter(
   #  if_any(contains("impact"), ~ . != 'No Effect'))
   dplyr::filter(impact %in% c('Loss', 'Weak Loss')) %>% 
-  deduplicating(c('gene', 'variant_protein_sorted', 'alleles'))
+  deduplicating(c('gene', 'length', 'variant_protein_sorted', 'alleles'))
 
 impact_dataset_noeffect  <- impact_dataset_deduplicate %>% 
   #dplyr::filter(
@@ -1145,8 +1145,14 @@ impact_dataset_all$fold_change <- log2(impact_dataset_all$rank_values_mutant / i
 
 FC_loss_all <- impact_dataset_all %>%
   dplyr::mutate(fold_change = log2(rank_values_mutant / rank_values_refseq)) %>% 
-  dplyr::filter(impact %in% c('Loss', 'Weak Loss'))
+  dplyr::filter(impact %in% c('Loss', 'Weak Loss')) 
 
+
+FC_loss <- impact_dataset_loss %>%
+  dplyr::mutate(fold_change = log2(rank_values_mutant / rank_values_refseq)) %>% 
+  dplyr::filter(impact %in% c('Loss', 'Weak Loss')) 
+
+length(unique(impact_dataset_loss$variant_protein_sorted))
 muh_grob <- grid::rectGrob(
   x=0, y=1:34, gp=gpar(
     color='white', fill= getPalette_variants(colourCount_variants), alpha=0.8))
@@ -1154,22 +1160,18 @@ muh_grob <- grid::rectGrob(
 colourCount_alleles = length(unique(impact_dataset_all$alleles))
 getPalette_alleles = colorRampPalette(brewer.pal(11, "BrBG"))
 
-fig6 <- ggplot(FC_loss_all)+
+fig6a <- ggplot(FC_loss_all)+
   ggnewscale::new_scale_colour()+ 
   geom_point(aes(x = fold_change, y = factor(variant_lineage, detection_sorted), 
                  colour = alleles, shape=factor(length)), 
-            size = 4, 
+            size = 2, 
             fill = NA, 
             stroke=1) +
-  geom_text_repel(data=distinct(FC_loss_all, variant_protein_sorted,  .keep_all = TRUE), aes(x=fold_change, y= factor(variant_lineage, detection_sorted), label=variant_protein_sorted, fontface='plain', family='sans'),
-            size=3,   max.overlaps = Inf,
-            min.segment.length = 10, seed = 42, point.padding = 3,
-            max.time = 2, max.iter = 1e5,
-            direction = "x")+
   labs(x=expression(phantom()*Log[2]*FC), 
        y = '',
        shape="K-mers") +
   coord_cartesian(clip='off') +
+  theme_bw() +
   theme(
     plot.title = element_text(size=14, face= "bold", colour= "black" ),
     axis.title.x = element_text(size=14, face="bold", colour = "black"),    
@@ -1183,15 +1185,46 @@ fig6 <- ggplot(FC_loss_all)+
     panel.grid = element_line(color = "grey70")
   ) +
   scale_colour_manual('Alelos', values = getPalette_alleles(colourCount_alleles)) +
-  scale_shape_manual(values = c(0, 1, 2, 5)) +
+  scale_shape_manual(values = c(15, 16, 17, 18)) +
   annotation_custom(
     grob=muh_grob, ymin = 0, ymax = 1, xmin = -0.55, xmax=0.25
   ) +
   scale_y_discrete(drop = FALSE)
 
-fig6
-ggsave('Fig6.png', fig6, height = 20, width =35, scale = 1,  units = "cm")
+fig6b <- ggplot(data = FC_loss, aes(x = fold_change, y = gene)) +
+  geom_point( aes(colour = impact), size = 2) +
+  geom_label_repel(data=subset(FC_loss, impact == 'Loss'), aes(x=fold_change, y= gene, label=paste0(alleles,':',variant_protein_sorted,  ':', length), fontface='plain', family='sans'),
+              size=3.2,   max.overlaps = Inf, min.segment.length = 0.2, seed = 42, 
+              max.time = 2, max.iter = 1e6)+
+  theme_bw() +
+  labs(x=expression(phantom()*Log[2]*FC), 
+       y = '',
+       shape="K-mers") +
+  coord_cartesian(clip='off') +
+  theme_bw() +
+  theme(
+    plot.title = element_text(size=14, face= "bold", colour= "black" ),
+    axis.title.x = element_text(size=14, face="bold", colour = "black"),    
+    axis.title.y = element_text(size=14, face="bold", colour = "black"),    
+    axis.text.x = element_text(size=15, face="bold", colour = "black"), 
+    axis.text.y = element_text(size=13, face="bold", colour = "black"),
+    legend.title = element_text(face = "bold", size=13),
+    legend.text =  element_text(size=12),
+    legend.title.align = 0.4,
+    panel.background = element_rect(fill = "white"),
+    panel.grid = element_line(color = "grey70"),
+    panel.grid.major.y = element_line(color = "black",
+                                      linewidth = 1)) +
+  scale_colour_manual('Impacto', values=c("red", "salmon"))
 
+fig6a
+fig6 <- fig6a + fig6b +
+  plot_layout(ncol=1, heights = c(0.7, 0.3), guides = "auto") +
+  plot_annotation(tag_levels = list(c("A", "B")))  &
+  theme(plot.tag = element_text(size = 20))
+  
+fig6
+ggsave('Fig6.png', fig6, height = 25, width =30, scale = 1,  units = "cm")
 ###################################################################################
 ################################### FIG 7 ########################################
 ###################################################################################
