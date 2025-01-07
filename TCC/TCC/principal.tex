@@ -1,0 +1,378 @@
+% Este template foi desenvolvido por Prof. Luis Fernando de Oliveira IF/UERJ
+% e adaptado para uso na UNILA pelo Prof. Joylan N. Maciel em 07/06/2023
+% Todos os crédito são do Prof. Luis Fernando de Oliveira IF/UERJ
+% Este template/modelo serve para fazer TCC, Dissertação ou Tese de Doutorado
+
+\documentclass[a4paper,12pt,oneside,onecolumn,final,fleqn]{repUERJ}
+% Pacotes fundamentais 
+\usepackage[english,brazil]{babel}  % adequação para o português Brasil
+\usepackage[utf8]{inputenc} % Determina a codificação utilizada
+                            % (conversão automática dos acentos)
+\usepackage{makeidx}        % Cria o índice
+\usepackage{hyperref}       % Controla a formação do índice
+\usepackage{indentfirst}    % Endenta o primeiro paragrafo de
+                            % cada seção.
+\usepackage{graphicx}       % Inclusão de gráficos
+\usepackage{subfig}
+\usepackage{amsmath}        % pacote matemático
+\usepackage{bm}             % pacote de fontes matematicas
+\usepackage{lscape}         % pacote para colocar páginas em landscape
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{wrapfig}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{placeins}
+
+
+% ---
+% Pacote auxiliar para as normas da UERJ
+% ---
+\usepackage[frame=no,font=default]{repUERJformat}
+\usepackage[line=yes]{repUERJpseudocode}
+% ---
+% Pacotes de citacoes
+% ---
+\usepackage[alf,abnt-repeated-author-omit=no]{abntex2cite}
+
+
+\selectlanguage{brazil} % setando o idioma global para português
+
+
+
+% ********************************************************************
+% ********************************************************************
+% Área Reservada para incluir os novos comandos
+% ********************************************************************
+% ********************************************************************
+
+% Comandos de comentários
+\definecolor{green}{rgb}{0.1, 0.4, 0.1}
+\newcommand\red[1]{{\color{red}#1}}
+\newcommand\sred[1]{{\color{red}\uline{#1}}}
+\newcommand\blue[1]{{\color{blue}#1}}
+\newcommand\sblue[1]{{\color{blue}\uline{#1}}}
+\newcommand\green[1]{{\color{green}#1}}
+\newcommand\sgreen[1]{{\color{green}\uline{#1}}}
+\newcommand\orange[1]{{\color{orange}#1}}
+\newcommand\sorange[1]{{\color{orange}\uline{#1}}}
+%o comando \sout funciona para riscar o texto
+
+% % Abaixo tem-se alguns exemplos de definição de comandos
+
+% \newcommand\dd{\mathrm{d}} % d de derivada
+% \newcommand\DD{\mathrm{D}} % D de derivada
+% \newcommand\ee{\mathrm{e}} % número natural: e
+% \newcommand\ii{\mathrm{i}} % número complexo: i
+
+% \newcommand\Vol{\mathcal{V}} % Simbolo de volume
+
+% \newcommand\Vector[1]{\mbox{\boldmath$#1$}} % comando para colocar vetores
+% \newcommand\Tensor[1]{\mbox{\boldmath$\mathrm{#1}$}} % comando para colocar tensores/matrizes
+
+% %Alguns exemplos de definição de vetores, tensores e matrizes
+% \newcommand\vvec{\Vector{v}} % vetor
+% \newcommand\Tten{\Tensor{T}} % Tensor
+% \newcommand\Mmat{\Tensor{M}} % Matriz
+
+% % Alguns parâmetros adimensionais
+% \newcommand\Bi{\mathrm{Bi}} % Número de Biot
+% \newcommand\Rey{\mathrm{Re}} % Número de Reynolds
+% \newcommand\Ma{\mathrm{Ma}} % Número de Mach
+% \newcommand\Pe{\mathrm{Pe}} % Número de Péclet
+
+% \newcommand\Dh{D_H} % Diâmetro hidráulico
+
+% % Alguns índices máximos 
+% \newcommand\nmax{n_{\text{max}}}
+% \newcommand\mmax{m_{\text{max}}}
+% \newcommand\imax{i_{\text{max}}}
+% \newcommand\jmax{j_{\text{max}}}
+
+
+
+
+
+
+
+
+% ********************************************************************
+% ********************************************************************
+% Informações de autoria e institucionais
+% ********************************************************************
+% ********************************************************************
+
+%---------------------------------------------------------------------
+% Imagens pretextuais (precisam estar no mesmo diretório deste arquivo .tex)
+%---------------------------------------------------------------------
+
+\logo{Figuras/logo_UNILA.jpg}
+% \marcadagua{marcadagua_uerj_cinza.png}{1}{160}{255}
+
+%---------------------------------------------------------------------
+% Informações da instituição
+%---------------------------------------------------------------------
+\instituicao{Instituto Latino Americano de Ciências da Vida e da Natureza (ILACVN)}  %Instituto
+            {Biotecnologia}  %Curso
+            {} %Unidade (DEIXAR EM BRANCO)
+            {} %Departamento (DEIXAR EM BRANCO)
+
+%---------------------------------------------------------------------
+% Informações da autoria do documento
+%---------------------------------------------------------------------
+
+\autor{Samuel}
+      {Chagas de Assis}
+      {S.C.A.} % iniciais do nome
+
+\titulo{Análise genômica das variantes de SARS-CoV-2 detectadas em Foz do Iguaçu - Paraná/BR e o impacto das mutações \textit{missense} nas vias dependentes de HLA-B } %Título do trabalho acadêmico em português
+%\title{ProjetoTCC} %Título do trabalho acadêmico em inglês
+
+
+
+\orientador{Profa.} %cargo, ex.: Prof., Profa., Eng. , etc...
+		   {Maria Cláudia}{Gross, Ph.D.} %Nome sobrenome com a titulação ao final. Exemplo: D.Sc., Ph.D., M.Sc., B.Sc., etc.
+           {Universidade Federal da Integração Latino Americana (UNILA) - ILACVN} % Instituição e Departamento ou PPG
+
+
+%Opcional, Comente as linhas de coorientador caso não tenha
+%\coorientador{Prof.}  %cargo, ex.: Prof., Profa., Eng. , etc...
+%           {Astrogildo}{Silva, Me.}  %Nome sobrenome com a titulação ao final. Exemplo: D.Sc., Ph.D., M.Sc., B.Sc., etc.
+%           {Universidade Federal da Integração Latino Americana (UNILA) - ILACVN} % Departamento ou PPG e Instituição 
+
+%---------------------------------------------------------------------
+% Grau pretendido (Doutor, Mestre, Bacharel, Licenciado) e Curso
+%---------------------------------------------------------------------
+%Descomente as sua opções
+
+%\newcommand\artigo{à}%Projeto de graduação
+% \newcommand\artigo{ao}%Pós Graduação
+
+
+\grau{Graduação}
+%\grau{Mestre} 
+%\grau{Doutor}
+
+
+\curso{Bacharelado em Biotecnologia}
+\newcommand\grauTitulo{Bacharel em Biotecnologia}  
+
+
+%\areadeconcentracao{} %Projeto de Graduação
+%\areadeconcentracao{Área de Concentração} %Pós Graduação
+%\areadeconcentracao{Mecânica dos Sólidos} %Pós Graduação
+
+
+
+%---------------------------------------------------------------------
+% Informações adicionais (local, data e paginas)
+%---------------------------------------------------------------------
+
+\local{Foz do Igua\c{c}u} 
+\data{10}{Novembro}{2024} % Exemplo: \data{21}{Março}{2016}
+
+% ********************************************************************
+% ********************************************************************
+% Configurações de aparência do PDF final
+% ********************************************************************
+% ********************************************************************
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+%\definecolor{apricot}{RGB}{251,206,177}
+
+% informações do PDF
+\hypersetup{
+  unicode=false,
+  pdftitle={\UERJtitulo},
+  pdfauthor={\UERJautor},
+  pdfsubject={\UERJpreambulo},
+  pdfkeywords={PALAVRAS}{CHAVES}{\chaveA}{\chaveB}{\chaveC}{\chaveD},
+  pdfproducer={\packagename}, % producer of the document
+  pdfcreator={\UERJautor},
+  colorlinks=true,            % false: boxed links; true: colored links
+  linkcolor=black,            % color of internal links blue
+  citecolor=black,            % color of links to bibliography blue
+  filecolor=black,            % color of file links magenta
+  urlcolor=black,
+  bookmarksdepth=4
+  %backref=true,
+  %pagebackref=true,
+  %bookmarks=true,
+}
+
+% ********************************************************************
+% ********************************************************************
+% Início do documento
+% ********************************************************************
+% ********************************************************************
+% ---
+% compila o índice; se não for usar, comentar
+% ---
+\makeindex
+% ********************************************************************
+% ********************************************************************
+\begin{document}
+% ----------------------------------------------------------
+%% ELEMENTOS PRE-TEXTUAIS
+% ----------------------------------------------------------
+\frontmatter
+% ----------------------------------------------------------
+% Capa e a folha de rosto
+% ----------------------------------------------------------
+\capa
+\folhaderosto
+% ----------------------------------------------------------
+% Inserir a ficha catalográfica
+% ----------------------------------------------------------
+% ---
+% A biblioteca deverá providenciar a ficha catalográfica. Salve a ficha no
+% formato PDF. Use o nome do arquivo PDF como argumento do comando. 
+% Exemplo: ficha catalográfica é o arquivo 'Ficha.pdf' na pasta "B.PreTextual"
+%     \fichacatalografica{B.PreTextual/Ficha.pdf}
+%
+% Enquanto não possuir a ficha catalográfica, use o comando sem argumentos.
+% ---
+%\fichacatalografica{B.PreTextual/Ficha.pdf}
+
+
+
+% ----------------------------------------------------------
+% Folha de aprovação
+% ----------------------------------------------------------
+
+%Após obter a assinatura dos membros da banca, comente as linhas a baixos e insira o pdf com as assinaturas na pasta "B.PreTextual"
+
+
+% Ajustar o espaço entre as assinaturas abaixo
+\newcommand{\spc}{0.25cm}
+
+\begin{folhadeaprovacao}
+	\vspace{\spc} % Espaço entre assinaturas
+	\assinatura{Prof. Kelvinson Fernandes Viana, Ph.D.}{UNILA}
+	\vspace{\spc} % Espaço entre assinaturas
+        \assinatura{Profa. Maria Leandra Terencio, Ph.D.}{UNILA}
+	\vspace{\spc} % Espaço entre assinaturas
+
+\end{folhadeaprovacao}
+
+
+% Após colocar o pdf com as assinaturas na pasta "B.PreTextual", comente todo o ambiente "folhadeaprovacao" acima, descomente a linha abaixo e insira o nome correto do arquivo pdf:
+%\includepdf[pages=1]{B.PreTextual/ficha.pdf} %exemplo
+
+
+% ----------------------------------------------------------
+% Dedicatória
+\include{B.PreTextual/01.Dedicatoria}
+
+% ----------------------------------------------------------
+% Agradecimentos
+\include{B.PreTextual/02.Agradecimento}
+
+% ----------------------------------------------------------
+% Epigrafe (opcional)
+\include{B.PreTextual/03.Epigrafe}
+
+% ----------------------------------------------------------
+%% RESUMO
+\include{B.PreTextual/04.Resumo_pt}
+
+% ----------------------------------------------------------
+% Abstract
+\begin{otherlanguage}{english}
+\include{B.PreTextual/05.Resumo_en}
+\end{otherlanguage}
+
+% Abstract
+%\begin{otherlanguage}{spanish}
+%\include{B.PreTextual/06.Resumo_es}
+%\end{otherlanguage}
+
+
+% ----------------------------------------------------------
+% Listas de ilustrações e tabelas
+% ----------------------------------------------------------
+\listadefiguras
+\listadetabelas
+% ----------------------------------------------------------
+% Outras listas
+% ----------------------------------------------------------
+%\listadealgoritmos
+
+
+% ----------------------------------------------------------
+% Lista de abreviaturas e siglas
+\include{B.PreTextual/07.ListaAbreviacoes}
+
+% ----------------------------------------------------------
+% Lista de simbolos
+%\include{B.PreTextual/08.ListaSimbolos}
+
+% ----------------------------------------------------------
+% Sumario
+\sumario
+
+% ----------------------------------------------------------
+%% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\mainmatter
+
+
+
+\include{C.Capitulos/01.Introducao}
+\include{C.Capitulos/02.Revisao}
+\include{C.Capitulos/03.Objetivos}
+\include{C.Capitulos/04.MaterialMetodo}
+\include{C.Capitulos/05.Resultados}
+%\include{C.Capitulos/06.Discussao}
+\include{C.Capitulos/07.Conclusao}
+
+
+
+
+% ----------------------------------------------------------
+%% ELEMENTOS POS-TEXTUAIS
+% ----------------------------------------------------------
+\backmatter
+%=====================================================================
+% Referencias via BibTeX
+%=====================================================================
+\citeoption{abnt-options4}
+\bibliography{A.Bibliografia/TCC}
+%=====================================================================
+
+
+
+%=====================================================================
+%% Glossário
+%=====================================================================
+%\include{D.PostTextual/01.Glossario}
+
+
+
+% ----------------------------------------------------------
+% Apêndices (opcionais)
+% ----------------------------------------------------------
+% ---
+% Inicia os apêndices
+% ---
+\appendix
+
+\include{D.PostTextual/02.Appendice-A}
+
+
+% ----------------------------------------------------------
+% Anexos (opcionais)
+% ----------------------------------------------------------
+% ---
+% Inicia os anexos
+% ---
+%\annex
+
+%\include{D.PostTextual/03.Anexo-A}
+
+% %---------------------------------------------------------------------
+% %% INDICE REMISSIVO (relativo ao makeindex)
+% %---------------------------------------------------------------------
+% \printindex
+% %=====================================================================
+\end{document}
